@@ -27,6 +27,15 @@ jobs:
           AccessTokenString: ${{secrets.ACCESS_TOKEN_STRING}}
           EmailPassword: ${{secrets.EMAIL_PASSWORD}}
           FromEmail: ${{secrets.FROM_EMAIL}}
+       
+      - name: Replace placeholders with secrets V2
+        uses: cschleiden/replace-tokens@v1.1
+        with:
+          tokenPrefix: '#{'
+          tokenSuffix: '}#'
+          files: '["./AI/settings.json"]'
+        env:
+          GptToken: ${{secrets.GPT_TOKEN}}
           
       - name: Replace csproj placeholder
         uses: cschleiden/replace-tokens@v1.1
