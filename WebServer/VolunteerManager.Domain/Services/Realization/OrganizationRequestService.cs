@@ -1,6 +1,9 @@
 ﻿using AutoMapper;
 using EntityFrameworkCore.RepositoryInfrastructure;
+using Microsoft.EntityFrameworkCore;
 using VolunteerManager.Data.Entities;
+using VolunteerManager.Data.Enums.RichEnums;
+using VolunteerManager.Domain.Models.ViewModels;
 using VolunteerManager.Domain.Services.Abstraction;
 using VolunteerManager.Models.Create;
 
@@ -10,29 +13,46 @@ public class OrganizationRequestService : IOrganizationRequestService
 {
     private readonly IRepository<OrganizationRequest> _organizationRequestRepository;
     private readonly IRepository<Organization> _organizationRepository;
+    private readonly IEmailService _emailService;
     private readonly IMapper _mapper;
 
     public OrganizationRequestService(
         IRepository<OrganizationRequest> organizationRequestRepository,
         IMapper mapper,
-        IRepository<Organization> organizationRepository
+        IRepository<Organization> organizationRepository,
+        IEmailService emailService
     )
     {
         _organizationRequestRepository = organizationRequestRepository;
         _mapper = mapper;
         _organizationRepository = organizationRepository;
+        _emailService = emailService;
     }
 
     public async Task CreateOrganizationRequestAsync(
         CreateOrganizationRequestModel model,
-        CancellationToken cancellationToken = default) 
+        CancellationToken cancellationToken = default)
     {
+        var aaa = _mapper.Map<OrganizationRequest>(model);
         await _organizationRequestRepository.AddAsync(
-            _mapper.Map<OrganizationRequest>(model),
+          aaa,
             cancellationToken
         );
 
         await _organizationRequestRepository.SaveChangesAsync(cancellationToken);
-        
+
+        var organization = await _organizationRepository.Query().FirstOrDefaultAsync(x=>x.Id == aaa.OrganizationId, cancellationToken: cancellationToken);
+
+        if (organization == null)
+        {
+            throw new ArgumentException();
+        }
+
+        await _emailService.SendEmailAsync(
+            organization.GoogleEmail,
+            EmailSubject.CreateAccount,
+            new NewApplicantEmailViewModel("https://volunteer-manager.azurewebsites.net"),
+            cancellationToken: cancellationToken
+        );
     }
 }
