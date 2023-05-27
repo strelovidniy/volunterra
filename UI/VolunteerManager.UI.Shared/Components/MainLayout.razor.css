@@ -124,3 +124,7 @@ main {
     max-width: 300px;
     width: 100%
 }
+
+.main-content {
+    margin-top: 110px;
+}
