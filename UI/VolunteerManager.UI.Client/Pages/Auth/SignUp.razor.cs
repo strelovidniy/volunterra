@@ -31,6 +31,9 @@ public partial class SignUp : IDisposable
     private IUserService UserService { get; set; } = null!;
 
     [Inject]
+    private IOrganizationService OrganizationService { get; set; } = null!;
+
+    [Inject]
     private NavigationManager NavigationManager { get; set; } = null!;
 
     [Inject]
@@ -244,8 +247,8 @@ public partial class SignUp : IDisposable
                 return;
             }
 
-            await UserService.CreateUserAsync(
-                new CreateUserModel
+            await OrganizationService.CreateOrganizationAsync(
+                new CreateOrganizationModel
                 {
                     Password = _model.Password,
                     ConfirmPassword = _model.ConfirmPassword,
