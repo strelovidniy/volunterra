@@ -35,7 +35,8 @@ public static class DomainDependencyInjectionExtension
         .AddTransient<IValidationService, ValidationService>()
         .AddTransient<IUserService, UserService>()
         .AddTransient<IAuthService, AuthService>()
-        .AddTransient<IOrganizationService, OrganizationService>();
+        .AddTransient<IOrganizationService, OrganizationService>()
+        .AddTransient<IOrganizationRequestService, OrganizationRequestService>();
 
     private static IServiceCollection AddValidators(
         this IServiceCollection services
