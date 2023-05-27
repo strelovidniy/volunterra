@@ -4,15 +4,15 @@ using VolunteerManager.Models.Views;
 
 namespace VolunteerManager.UI.Domain.Services.Abstraction;
 
-public interface IRequestService
+public interface IOrganizationRequestService
 {
     public Task CreateRequestAsync(
-        CreateRequestModel model,
+        CreateOrganizationRequestModel model,
         CancellationToken cancellationToken = default
     );
 
     public Task UpdateRequestAsync(
-        UpdateRequestModel model,
+        UpdateOrganizationRequestModel model,
         CancellationToken cancellationToken = default
     );
 
@@ -26,7 +26,7 @@ public interface IRequestService
         CancellationToken cancellationToken = default
     );
 
-    public Task<IEnumerable<RequestView>?> GetRequestsAsync(
+    public Task<IEnumerable<OrganizationRequestView>?> GetRequestsAsync(
         CancellationToken cancellationToken = default
     );
 }

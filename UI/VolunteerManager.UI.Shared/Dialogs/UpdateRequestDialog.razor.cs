@@ -58,7 +58,7 @@ public partial class UpdateRequestDialog
         HttpClient.OnError += OnError;
         HttpClient.OnValidationError += OnValidationError;
 
-        _model.RequestId = SelectedRequest.Id;
+        // _model.RequestId = SelectedRequest.Id;
 
         _isDialogLoading = false;
 

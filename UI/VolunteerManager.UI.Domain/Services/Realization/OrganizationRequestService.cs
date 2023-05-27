@@ -6,16 +6,16 @@ using VolunteerManager.UI.Domain.Services.Abstraction;
 
 namespace VolunteerManager.UI.Domain.Services.Realization;
 
-internal class RequestService : IRequestService
+internal class OrganizationRequestService : IOrganizationRequestService
 {
     private readonly IVolunteerManagerHttpClient _httpClient;
 
-    public RequestService(
+    public OrganizationRequestService(
         IVolunteerManagerHttpClient httpClient
     ) => _httpClient = httpClient;
 
     public Task CreateRequestAsync(
-        CreateRequestModel model,
+        CreateOrganizationRequestModel model,
         CancellationToken cancellationToken = default
     ) => _httpClient
         .PostAsync(
@@ -24,8 +24,9 @@ internal class RequestService : IRequestService
             cancellationToken
         );
 
+
     public Task UpdateRequestAsync(
-        UpdateRequestModel model,
+        UpdateOrganizationRequestModel model,
         CancellationToken cancellationToken = default
     ) => _httpClient
         .PutAsync(
@@ -53,10 +54,10 @@ internal class RequestService : IRequestService
             cancellationToken
         );
 
-    public Task<IEnumerable<RequestView>?> GetRequestsAsync(
+    public Task<IEnumerable<OrganizationRequestView>?> GetRequestsAsync(
         CancellationToken cancellationToken = default
     ) => _httpClient
-        .GetAsync<IEnumerable<RequestView>>(
+        .GetAsync<IEnumerable<OrganizationRequestView>>(
             "api/v1/requests",
             cancellationToken
         );

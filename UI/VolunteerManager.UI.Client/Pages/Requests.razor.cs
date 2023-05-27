@@ -43,7 +43,7 @@ public partial class Requests : IDisposable
     private IDialogService DialogService { get; set; } = null!;
 
     [Inject]
-    private IOrganizationRequestService RequestService { get; set; } = null!;
+    private IOrganizationRequestService OrganizationRequestService { get; set; } = null!;
 
     [Inject]
     private IAuthService AuthService { get; set; } = null!;
@@ -136,7 +136,7 @@ public partial class Requests : IDisposable
             HttpClient.OnError += OnError;
             HttpClient.OnValidationError += OnValidationError;
 
-            await RequestService.DeleteRequestAsync(request.Id, cancellationToken);
+            await OrganizationRequestService.DeleteRequestAsync(request.Id, cancellationToken);
 
             if (!isSuccess)
             {
@@ -171,7 +171,6 @@ public partial class Requests : IDisposable
             {
                 "Description" => builder.OrderBy(o => o.Description),
                 "RequestDate" => builder.OrderBy(o => o.RequestDate),
-                "Amount" => builder.OrderBy(o => o.TotalAmount),
                 "RequestUpdatedAt" => builder.OrderBy(o => o.RequestUpdatedAt),
                 _ => builder
             },
@@ -179,7 +178,6 @@ public partial class Requests : IDisposable
             {
                 "Description" => builder.OrderByDescending(o => o.Description),
                 "RequestDate" => builder.OrderByDescending(o => o.RequestDate),
-                "Amount" => builder.OrderByDescending(o => o.TotalAmount),
                 "RequestUpdatedAt" => builder.OrderByDescending(o => o.RequestUpdatedAt),
                 _ => builder
             },

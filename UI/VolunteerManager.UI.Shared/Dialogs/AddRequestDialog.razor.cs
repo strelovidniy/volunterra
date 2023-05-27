@@ -12,7 +12,7 @@ public partial class AddRequestDialog : IDisposable
 {
     private readonly CancellationTokenSource _cts = new();
 
-    private readonly CreateOrganizationInvocationReplyModel _model = new();
+    private readonly CreateOrganizationRequestModel _model = new();
 
     private bool _isDialogLoading = true;
 

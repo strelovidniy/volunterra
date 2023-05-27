@@ -17,34 +17,12 @@
                  @ref="_form">
                 <MudGrid>
                     <MudItem xs="12">
-                        <MudNumericField T="decimal"
-                                     Label="Amount"
-                                     Variant="Variant.Outlined"
-                                     id="amount"
-                                     Name="amount"
-                                     @bind-Value="@_model.TotalAmount"
-                                     For="@(() => _model.TotalAmount)"
-                                     Validation="@ValidateAmountField" />
+                        
                     </MudItem>
                     <MudItem xs="12">
-                        <MudTextField T="string"
-                                  Label="Name"
-                                  Variant="Variant.Outlined"
-                                  id="name"
-                                  Name="name"
-                                  @bind-Value="@_model.Name"
-                                  For="@(() => _model.Name)"
-                                  Validation="@ValidateNameField"/>
+                    
                     </MudItem><MudItem xs="12">
-                        <MudTextField T="string"
-                                  Label="Description"
-                                  Variant="Variant.Outlined"
-                                  id="description"
-                                  Name="description"
-                                  @bind-Value="@_model.Description"
-                                  For="@(() => _model.Description)"
-                                  Validation="@ValidateDescriptionField"
-                                  Lines="6"/>
+                 
                     </MudItem>
 
                     <MudItem Class="d-flex justify-center"

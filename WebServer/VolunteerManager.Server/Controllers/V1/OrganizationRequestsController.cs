@@ -7,5 +7,7 @@ namespace VolunteerManager.Server.Controllers.V1;
 [ApiExplorerSettings(GroupName = "V1")]
 public class OrganizationRequestsController : BaseController
 {
-
+    public OrganizationRequestsController(IServiceProvider services) : base(services)
+    {
+    }
 }
