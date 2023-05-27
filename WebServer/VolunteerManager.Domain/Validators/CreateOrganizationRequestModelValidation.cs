@@ -10,14 +10,6 @@ internal class CreateOrganizationRequestModelValidation : AbstractValidator<Crea
 {
     public CreateOrganizationRequestModelValidation(IValidationService validationService)
     {
-        RuleFor(createOrganizationRequestModel => createOrganizationRequestModel.RequestId)
-            .Cascade(CascadeMode.Stop)
-            .MustAsync(validationService.IsRequestExistAsync)
-            .WithStatusCode(StatusCode.RequestNotFound);
-
-        RuleFor(createOrganizationRequestModel => createOrganizationRequestModel.ServedCount)
-            .Cascade(CascadeMode.Stop)
-            .GreaterThanOrEqualTo(0)
-            .WithStatusCode(StatusCode.ServedCountMustBeGreaterThanOrEqualToZero);
+        //add validation for new entity  
     }
 }

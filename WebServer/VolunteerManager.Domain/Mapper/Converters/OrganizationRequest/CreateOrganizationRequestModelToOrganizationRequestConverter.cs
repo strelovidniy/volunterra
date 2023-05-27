@@ -12,7 +12,6 @@ internal class CreateOrganizationRequestModelToOrganizationRequestConverter
         ResolutionContext context
     ) => new()
     {
-        ServedCount = createOrganizationRequestModel.ServedCount,
         RequestId = createOrganizationRequestModel.RequestId
     };
 }

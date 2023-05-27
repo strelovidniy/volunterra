@@ -35,8 +35,7 @@ public static class DomainDependencyInjectionExtension
         .AddTransient<IValidationService, ValidationService>()
         .AddTransient<IUserService, UserService>()
         .AddTransient<IAuthService, AuthService>()
-        .AddTransient<IOrganizationService, OrganizationService>()
-        .AddTransient<IRequestService, RequestService>();
+        .AddTransient<IOrganizationService, OrganizationService>();
 
     private static IServiceCollection AddValidators(
         this IServiceCollection services
@@ -60,7 +59,6 @@ public static class DomainDependencyInjectionExtension
         {
             new UserMapperProfile(),
             new OrganizationMapperProfile(),
-            new RequestMapperProfile(),
             new OrganizationRequestMapperProfile()
         }));
 

@@ -12,7 +12,5 @@ internal class OrganizationRequestToOrganizationRequestViewConverter
         ResolutionContext context
     ) => new()
     {
-        ServedCount = organizationRequest.ServedCount,
-        Request = context.Mapper.Map<RequestView>(organizationRequest.Request)
     };
 }
