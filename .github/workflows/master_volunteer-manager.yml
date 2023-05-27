@@ -35,7 +35,7 @@ jobs:
           tokenSuffix: ' -->'
           files: '["./UI/VolunteerManager.UI.Client/VolunteerManager.UI.Client.csproj"]'
         env:
-          RunAOTCompilation: "./WebServer/VolunteerManager.Server/appsettings.json"
+          RunAOTCompilation: ${{'<RunAOTCompilation>true</RunAOTCompilation>'}}
 
       - name: Set up .NET Core
         uses: actions/setup-dotnet@v1
