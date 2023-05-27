@@ -1,4 +1,6 @@
-﻿namespace VolunteerManager.Models.Views;
+﻿using VolunteerManager.Data.Enums;
+
+namespace VolunteerManager.Models.Views;
 
 public class OrganizationRequestView
 {
@@ -7,6 +9,7 @@ public class OrganizationRequestView
     public string Title { get; set; } = null!;
 
     public string Description { get; set; } = null!;
+    public OrganizationRequestCategory Category { get; set; }
 
     public string ImageDataUrl { get; set; } = null!;
 

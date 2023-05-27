@@ -13,7 +13,7 @@ public class OrganizationRequestsController : BaseController
     public OrganizationRequestsController(IServiceProvider services, IOrganizationRequestService organizationRequestService) : base(services) => _organizationRequestService = organizationRequestService;
 
     [HttpPost("create")]
-    public async Task<IActionResult> SignUpAsOrganizationAsync(
+    public async Task<IActionResult> CreateOrganizationRequestAsyncAsync(
         [FromBody] CreateOrganizationRequestModel createUserModel,
         CancellationToken cancellationToken = default)
     {

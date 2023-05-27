@@ -8,9 +8,9 @@ public class OrganizationInvocationReply : Entity, IEntity
 
     public User? User { get; set; }
 
-    public Guid? OrganizationId { get; set; }
+    public Guid? OrganizationRequestId { get; set; }
 
-    public Organization? Organization { get; set; }
+    public OrganizationRequest? OrganizationRequest { get; set; }
 
     public UserStatus Status { get; set; }
 }
