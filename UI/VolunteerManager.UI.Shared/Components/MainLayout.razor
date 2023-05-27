@@ -25,7 +25,7 @@ else
                           background-color: var(--mud-palette-background);
                           padding-top: 20px">
         
-        <MudImage Src="images/logo.svg"
+        <MudImage Src="@(_isDarkMode ? "images/logo-black.svg" : "images/logo.svg")"
                   Height="90"/>
 
         <MudSpacer />
@@ -96,7 +96,9 @@ else
                               color: var(--mud-palette-text-primary);"/>
         
     </MudAppBar>
-        @Body
+        <div class="main-content">
+            @Body
+        </div>
     </MudLayout>
 
     <MudScrollToTop>

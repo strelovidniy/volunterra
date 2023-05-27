@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using MudBlazor;
+using VolunteerManager.Models.Views;
 using VolunteerManager.UI.Domain.Http.VolunteerManagerHttpClient;
+using VolunteerManager.UI.Domain.Services.Abstraction;
 
 namespace VolunteerManager.UI.Client.Pages;
 
@@ -27,11 +29,13 @@ public partial class Index : IDisposable
         }
     };
 
-    private int _selectedIndex = -1;
+    private int _selectedIndex;
 
     private bool _processing;
 
     private bool _isPageLoading = true;
+
+    private UserView? _currentUser;
 
     //private List<SpendingView> _spendings = new();
     //private List<IncomingView> _incomings = new();
@@ -53,6 +57,9 @@ public partial class Index : IDisposable
     [Inject]
     private ISnackbar Snackbar { get; set; } = null!;
 
+    [Inject]
+    private IAuthService AuthService { get; set; } = null!;
+
     //[Inject]
     //private ISpendingService SpendingService { get; set; } = null!;
 
@@ -73,6 +80,8 @@ public partial class Index : IDisposable
         _isPageLoading = true;
 
         //await LoadSpendingsAndIncomingsAsync(_cts.Token);
+
+        _currentUser = await AuthService.GetCurrentUserAsync(_cts.Token);
 
         _isPageLoading = false;
     }

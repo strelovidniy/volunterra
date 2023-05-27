@@ -8,3 +8,25 @@
     -webkit-align-items: center;
     align-items: center;
 }
+
+.tabs ::deep .mud-tabs-toolbar {
+    background-color: transparent !important;
+}
+
+.filters ::deep .mud-expand-panel {
+    background-color: transparent !important;
+}
+
+.filters ::deep .mud-expand-panel-text {
+    font-weight: 700;
+    font-size: 24px;
+}
+
+.filters ::deep .mud-expand-panel-header {
+    width: fit-content !important;
+}
+
+.filters ::deep .mud-icon-root {
+    font-weight: 700;
+    font-size: 24px;
+}
