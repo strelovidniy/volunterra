@@ -45,6 +45,9 @@ jobs:
 
       - name: Setup WASM workload
         run: dotnet workload install wasm-tools
+        
+      - name: See UI Client .CSPROJ
+        run: cat ./UI/VolunteerManager.UI.Client/VolunteerManager.UI.Client.csproj
 
       - name: Build with dotnet
         run: dotnet build --configuration Release
