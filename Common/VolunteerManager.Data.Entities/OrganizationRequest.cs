@@ -9,8 +9,8 @@ public class OrganizationRequest : Entity, IEntity
     public Organization? Organization { get; set; }
 
     public Guid RequestId { get; set; }
+    public string Title { get; set; }
+    public string Description { get; set; }
+    public string Location { get; set; }
 
-    public Request? Request { get; set; }
-
-    public decimal ServedCount { get; set; }
 }

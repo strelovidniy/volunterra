@@ -10,11 +10,6 @@ internal class UpdateRequestModelValidator : AbstractValidator<UpdateRequestMode
 {
     public UpdateRequestModelValidator(IValidationService validationService)
     {
-        RuleFor(updateRequestModel => updateRequestModel.RequestId)
-            .Cascade(CascadeMode.Stop)
-            .MustAsync(validationService.IsRequestExistAsync)
-            .WithStatusCode(StatusCode.RequestNotFound);
-
         RuleFor(updateRequestModel => updateRequestModel.Description)
             .Cascade(CascadeMode.Stop)
             .NotEmpty()

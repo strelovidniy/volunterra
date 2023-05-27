@@ -13,6 +13,7 @@ public class Organization : Entity, IEntity
     public string GoogleEmail { get; set; } = null!;
 
     public IEnumerable<User>? Users { get; set; }
-
+    public Guid? ContactInfoId { get; set; }
+    public ContactInfo? ContactInfo { get; set; }
     public IEnumerable<OrganizationRequest>? OrganizationRequests { get; set; }
 }

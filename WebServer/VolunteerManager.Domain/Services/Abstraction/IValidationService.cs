@@ -45,9 +45,4 @@ public interface IValidationService
         Guid organizationId,
         CancellationToken cancellationToken = default
     );
-
-    public Task<bool> IsRequestExistAsync(
-        Guid requestId,
-        CancellationToken cancellationToken = default
-    );
 }

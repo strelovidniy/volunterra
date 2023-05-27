@@ -12,20 +12,17 @@ internal class ValidationService : IValidationService
 {
     private readonly IRepository<User> _userRepository;
     private readonly IRepository<Organization> _organizationRepository;
-    private readonly IRepository<Request> _requestRepository;
     private readonly IHttpContextAccessor _httpContextAccessor;
 
     public ValidationService(
         IRepository<User> userRepository,
         IHttpContextAccessor httpContextAccessor,
-        IRepository<Organization> organizationRepository,
-        IRepository<Request> requestRepository
+        IRepository<Organization> organizationRepository
     )
     {
         _userRepository = userRepository;
         _httpContextAccessor = httpContextAccessor;
         _organizationRepository = organizationRepository;
-        _requestRepository = requestRepository;
     }
 
     public Task<bool> IsUserExistsAsync(
@@ -111,16 +108,6 @@ internal class ValidationService : IValidationService
         .Query()
         .AnyAsync(
             organization => organization.Id == organizationId,
-            cancellationToken
-        );
-
-    public Task<bool> IsRequestExistAsync(
-        Guid requestId,
-        CancellationToken cancellationToken = default
-    ) => _requestRepository
-        .Query()
-        .AnyAsync(
-            request => request.Id == requestId,
             cancellationToken
         );
 }

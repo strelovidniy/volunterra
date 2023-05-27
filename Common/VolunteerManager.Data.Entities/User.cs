@@ -28,12 +28,11 @@ public class User : Entity, IEntity
     public string? ImageDataUrl { get; set; }
 
     public Organization? Organization { get; set; }
-
+    public ContactInfo? ContactInfo { get; set; }
     public Guid? OrganizationId { get; set; }
+    public Guid? ContactInfoId { get; set; }
 
     public bool IsOrganizationOwner { get; set; }
 
     public bool IsOrganizationAdmin { get; set; }
-
-    public IEnumerable<Request>? CreatedRequests { get; set; }
 }

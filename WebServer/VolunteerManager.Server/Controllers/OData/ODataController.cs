@@ -57,20 +57,20 @@ public class ODataController : ODataControllerBase
         ));
     }
 
-    [HttpGet("requests")]
+    [HttpGet("organizationRequests")]
     public IActionResult GetRequests(
-        ODataQueryOptions<Request> options,
-        [FromServices] IRepository<Request> repository
-    ) => Ok(new ODataResponse<RequestView>(
+        ODataQueryOptions<OrganizationRequest> options,
+        [FromServices] IRepository<OrganizationRequest> repository
+    ) => Ok(new ODataResponse<OrganizationRequestView>(
         options.Context.ToString() ?? string.Empty,
         _mapper
-            .Map<List<RequestView>>(
+            .Map<List<OrganizationRequestView>>(
                 options
                     .ApplyTo(
                         repository
                             .Query()
                     )
-                    .Cast<Request>()
+                    .Cast<OrganizationRequest>()
                     .ToList()
             ),
         (int) (options.Request.ODataFeature().TotalCount ?? 0)

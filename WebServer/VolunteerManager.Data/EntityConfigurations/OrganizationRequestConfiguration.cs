@@ -32,9 +32,5 @@ internal class OrganizationRequestConfiguration : IEntityTypeConfiguration<Organ
         builder
             .Property(organizationRequest => organizationRequest.OrganizationId)
             .IsRequired();
-
-        builder
-            .Property(organizationRequest => organizationRequest.ServedCount)
-            .IsRequired();
     }
 }
