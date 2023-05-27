@@ -1,23 +1,21 @@
-import os
 import openai
-from flask import Flask
+import os
 
-openai.api_key = os.getenv('GptToken')
+from flask import Flask, render_template
+from routes.chat_gpt_bp import chat_gpt_bp
+#from routes.image_generation_bp import image_generation_bp
 
-completion = openai.ChatCompletion.create(
-  model="gpt-3.5-turbo",
-  temperature=0.7,
-  messages=[
-    {"role": "user", "content": "Say Hello"}
-  ]
-)
+openai.api_key = os.getenv('OPENAI_API_KEY')
 
 app = Flask(__name__)
 
-@app.route('/')
-def hello_world():
-    return completion.choices[0].message.content
+app.register_blueprint(chat_gpt_bp, url_prefix='/chat_gpt')
+#app.register_blueprint(image_generation_bp, url_prefix='image_generation')
 
-@app.route('/generate_description')
-def generate_description():
-    return completion.choices[0].message.content
+@app.route('/')
+def index():
+    return '<h1>Hello World</h1>'
+
+if __name__ == '__main__':
+    app.debug = True
+    app.run()
