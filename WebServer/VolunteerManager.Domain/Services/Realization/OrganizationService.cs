@@ -1,4 +1,5 @@
-﻿using EntityFrameworkCore.RepositoryInfrastructure;
+﻿using AutoMapper;
+using EntityFrameworkCore.RepositoryInfrastructure;
 using VolunteerManager.Data.Entities;
 using VolunteerManager.Domain.Services.Abstraction;
 using VolunteerManager.Models;
@@ -7,13 +8,19 @@ using VolunteerManager.Models.Update;
 
 namespace VolunteerManager.Domain.Services.Realization;
 
-internal class OrganizationService : IOrganizationService
+public class OrganizationService : IOrganizationService
 {
     private readonly IRepository<Organization> _organizationRepository;
+    private readonly IMapper _mapper;
 
     public OrganizationService(
-        IRepository<Organization> organizationRepository
-    ) => _organizationRepository = organizationRepository;
+        IRepository<Organization> organizationRepository,
+        IMapper mapper
+    )
+    {
+        _organizationRepository = organizationRepository;
+        _mapper = mapper;
+    }
 
     public Task UpdateOrganizationAsync(
         UpdateOrganizationModel model,
@@ -35,10 +42,17 @@ internal class OrganizationService : IOrganizationService
         CancellationToken cancellationToken = default
     ) => throw new NotImplementedException();
 
-    public Task CreateOrganizationAsync(
+    public async Task CreateOrganizationAsync(
         CreateOrganizationModel model,
-        CancellationToken cancellationToken = default
-    ) => throw new NotImplementedException();
+        CancellationToken cancellationToken = default) 
+    {
+        await _organizationRepository.AddAsync(
+            _mapper.Map<Organization>(model),
+            cancellationToken
+        );
+
+        await _organizationRepository.SaveChangesAsync(cancellationToken);
+    }
 
     public Task InviteUserToOrganizationAsync(
         InviteUserToOrganizationModel model,
