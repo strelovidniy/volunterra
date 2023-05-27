@@ -19,7 +19,7 @@ internal class OrganizationService : IOrganizationService
         CancellationToken cancellationToken = default
     ) => _httpClient
         .PostAsync(
-            "api/v1/organizations",
+            "api/v1/organizations/organization-sign-up",
             _httpClient.CreateJsonContent(model),
             cancellationToken
         );

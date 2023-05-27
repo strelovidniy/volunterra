@@ -20,202 +20,83 @@ else if (IsAuth)
 else
 {
     <MudLayout>
-    <MudAppBar Elevation="0">
-        <MudIconButton Color="Color.Inherit"
-                       Edge="Edge.Start"
-                       Icon="@Icons.Material.Filled.Menu"
-                       OnClick="@(() => _drawerOpen = !_drawerOpen)"/>
+        <MudAppBar Elevation="0"
+                   Style="height: 110px;
+                          background-color: var(--mud-palette-background);
+                          padding-top: 20px">
         
-        <div class="currencies-container">
-            <MudCarousel Class="mud-width-full"
-                         ShowArrows="true"
-                         ShowBullets="false"
-                         EnableSwipeGesture="true"
-                         AutoCycle="true"
-                         TData="object">
-                @foreach (var request in _requests)
-                {
-                    <MudCarouselItem Transition="Transition.Slide"
-                                     Color="@Color.Transparent">
-                        <div class="d-flex align-items-center justify-content-center flex-row"
-                             style="height: 100%">
-                            <MudText>
-                                "@request.Title" &nbsp;
-                            </MudText>
-                        </div>
-                    </MudCarouselItem>
-                }
-            </MudCarousel>
-        </div>
-        
-            <MudSpacer />
+        <MudImage Src="images/logo.svg"
+                  Height="90"/>
 
-        <MudDivider Vertical="true"/>
+        <MudSpacer />
+        
+        <MudCheckBox T="bool?"
+                     TriState="true"
+                     CheckedIcon="@Icons.Material.Filled.LightMode"
+                     UnCheckedColor="Color.Surface"
+                     Color="Color.Info"
+                     IndeterminateIcon="@Icons.Material.Filled.AutoAwesome"
+                     UncheckedIcon="@Icons.Material.Filled.DarkMode"
+                     Checked="_themeState"
+                     CheckedChanged="OnThemeChangedAsync"
+                     Style="margin-right: 15px;">
+
+        </MudCheckBox>
+
+        
+        <MudIconButton Icon="@Icons.Material.Outlined.Notifications"
+                       Color="Color.Info"
+                       Size="Size.Large"
+                       Style="margin-right: 15px;"/>
 
         <MudMenu Direction="Direction.Left"
-                 OffsetX="true"
-                 Dense="true">
-            <ActivatorContent>
-                <MudAvatar Color="Color.Success"
-                           Rounded="true"
-                           Style="background-color: #FFD580 !important; 
-                                  color: black !important; 
-                                  font-size: 15px !important;
-                                  height: 40px !important;
-                                  width: fit-content;
-                                  padding: 0 15px">
-                    <strong>
-                        @_fullName
-                    </strong>
-                </MudAvatar>
-            </ActivatorContent>
-            <ChildContent>
-                <UserCard Class="mt-n2"
-                          CurrentUser="@_currentUser"/>
-                <MudDivider Class="mb-2"/>
-
-                <MudButton ButtonType="ButtonType.Submit"
-                           Variant="Variant.Filled"
-                           Color="Color.Error"
-                           Style="margin-left: 5%; width: 90%;"
-                           Size="Size.Small"
-                           OnClick="@LogoutAsync">
-                    Logout
-                </MudButton>
-
-            </ChildContent>
-        </MudMenu>
-    </MudAppBar>
-
-    <MudDrawer @bind-Open="@_drawerOpen"
-               Elevation="0"
-               Breakpoint="Breakpoint.Lg"
-               Style="background-color: var(--mud-palette-background-grey)">
-        <MudDrawerHeader>
-            <div class="d-flex flex-row align-items-center justify-content-center w-100">
-                <div class="drawer-logo">
-                    <Logo Class="img-fluid" />
-                    <MudText>
-                        Volunteer Manager
-                    </MudText>
-                </div>
-            </div>
-        </MudDrawerHeader>
-
-        <MudNavMenu>
-            <MudNavLink Href="/"
-                        Match="NavLinkMatch.All"
-                        Icon="@Icons.Material.Filled.Dashboard">
-                Home
-            </MudNavLink>
-
-            <MudNavLink Href="/account"
-                        Match="NavLinkMatch.All"
-                        Icon="@Icons.Material.Outlined.AccountCircle">
-                Account
-            </MudNavLink>
-
-
-            <MudNavLink Href="/spending"
-                        Match="NavLinkMatch.All"
-                        Icon="@Icons.Material.Outlined.ShoppingCart">
-                Spending
-            </MudNavLink>
-
-            <MudNavLink Href="/incoming"
-                        Match="NavLinkMatch.All"
-                        Icon="@Icons.Material.Outlined.Payments">
-                Incoming
-            </MudNavLink>
-
-            <MudNavLink Href="/credits"
-                        Match="NavLinkMatch.All"
-                        Icon="@Icons.Material.Outlined.AccountBalance">
-                Credits
-            </MudNavLink>
-
-            <MudNavLink Href="/deposits"
-                        Match="NavLinkMatch.All"
-                        Icon="@Icons.Material.Outlined.AttachMoney">
-                Deposits
-            </MudNavLink>
-            
-            <MudNavGroup Title="Settings"
-                         @bind-Expanded="@_settingsExpanded"
-                         Icon="@Icons.Material.Filled.Settings">
-
-                <MudNavGroup Title="Theme"
-                             Icon="@Icons.Material.Filled.InvertColors">
-
-                    <MudNavLink Icon="@Icons.Material.TwoTone.AutoAwesome"
-                                IconColor="Color.Default"
-                                OnClick="@(() => OnThemeChangedAsync("System Default"))"
-                                Style="@(_theme == "System Default" ? "background-color: #1f58731c !important; color: var(--mud-palette-primary);" : null)">
-                        System Default
-                    </MudNavLink>
-
-                    <MudNavLink Icon="@Icons.Material.Filled.LightMode"
-                                IconColor="Color.Default"
-                                OnClick="@(() => OnThemeChangedAsync("Light"))"
-                                Style="@(_theme == "Light" ? "background-color: #1f58731c !important; color: var(--mud-palette-primary);" : null)">
-                        Light
-                    </MudNavLink>
-
-                    <MudNavLink Icon="@Icons.Material.Filled.DarkMode"
-                                IconColor="Color.Default"
-                                OnClick="@(() => OnThemeChangedAsync("Dark"))"
-                                Style="@(_theme == "Dark" ? "background-color: #1f58731c !important; color: var(--mud-palette-primary); font-weight: 500 !important" : null)">
-                        Dark
-                    </MudNavLink>
-                    
-                </MudNavGroup>
-            </MudNavGroup>
-        </MudNavMenu>
-    </MudDrawer>
-
-    <MudMainContent Class="h-100">
+                     OffsetX="true"
+                     Dense="true">
+                <ActivatorContent>
+                    <div class="d-flex flex-row align-center justify-center">
+                        @if (string.IsNullOrEmpty(_currentUser?.ImageDataUrl))
+                        {
+                            <MudAvatar Color="Color.Info">
+                                @_currentUser.FirstName.FirstOrDefault()
+                            </MudAvatar>
+                        }
+                        else
+                        {
+                            <MudAvatar Image="@_currentUser?.ImageDataUrl"
+                                       Style="height: 50px; width: 50px;">
+                            </MudAvatar>
+                        }
         
-        <AnimatedBackground/>
+                        <MudText Style="font-size: 18px;
+                                        color: var(--mud-palette-text-primary);
+                                        margin-left: 20px">
+                            @_currentUser?.FullName
+                        </MudText>
+                    </div>
+                </ActivatorContent>
+                <ChildContent>
+                    <UserCard Class="mt-n2"
+                              CurrentUser="@_currentUser" />
+                    <MudDivider Class="mb-2" />
 
-        <MudContainer MaxWidth="MaxWidth.False"
-                      Style="min-height: calc(100% - calc(var(--mud-appbar-min-height) - 16px)); 
-                             padding-bottom: 72px;
-                             padding-top: 24px;"
-                      Class="position-relative">
-            @Body
-        </MudContainer>
+                    <MudButton ButtonType="ButtonType.Submit"
+                               Variant="Variant.Filled"
+                               Color="Color.Error"
+                               Style="margin-left: 5%; width: 90%;"
+                               Size="Size.Small"
+                               OnClick="@LogoutAsync">
+                        Logout
+                    </MudButton>
 
-        <MudAppBar Elevation="0"
-                   Fixed="false"
-                   Dense="true"
-                   Class="ml-0 w-100"
-                   Bottom="true"
-                   Style="bottom: 0; 
-                          position: fixed;
-                          background-color: var(--mud-palette-background-grey)">
-            <MudText Style="color: var(--mud-palette-text-primary)">
-                Copyright © 2023
-                <MudLink Href="#"
-                         Underline="@Underline.Always">
-                    Volunteer Manager
-                </MudLink>
-                The Disclaimer Team
-            </MudText>
-            <MudSpacer/>
-            <MudText Style="@("transition: all 225ms cubic-bezier(0, 0, 0.2, 1);" + (_drawerOpen ? "margin-right:240px" : "margin-right: 0"))">
-                <MudLink Href="#"
-                         Underline="@Underline.Always"
-                         Class="mr-3">
-                    Privacy Policy
-                </MudLink>
-                <MudLink Href="#"
-                         Underline="@Underline.Always">
-                    Contact Us
-                </MudLink>
-            </MudText>
-        </MudAppBar>
-    </MudMainContent>
-
+                </ChildContent>
+            </MudMenu>
+        <MudIconButton Icon="@Icons.Material.Outlined.Menu"
+                       Size="Size.Large"
+                       Style="margin-left: 50px;
+                              color: var(--mud-palette-text-primary);"/>
+        
+    </MudAppBar>
+        @Body
     </MudLayout>
 
     <MudScrollToTop>

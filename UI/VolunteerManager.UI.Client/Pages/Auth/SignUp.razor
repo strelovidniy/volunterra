@@ -32,13 +32,13 @@
                     <MudSpacer />
 
                     <MudButton ButtonType="ButtonType.Button"
-                               Variant="Variant.Filled"
-                               Color="Color.Success"
+                               Variant="Variant.Outlined"
                                Size="Size.Large"
                                Disabled="@_processing"
                                class="w-100"
                                OnClick="@(() => step = 2)"
-                               Style="height: 50px;">
+                               Style="border-color: var(--mud-palette-success);
+                                      height: 50px;">
                         Volunteer
                     </MudButton>
                     <MudButton ButtonType="ButtonType.Button"
@@ -101,7 +101,7 @@ else if (step == 2)
                                               Variant="Variant.Outlined"
                                               id="email"
                                               Name="email"
-                                @bind-Value="@_model.Email"
+                                              @bind-Value="@_model.Email"
                                               For="@(() => _model.Email)"
                                               Validation="@ValidateEmailField" />
 
@@ -113,7 +113,7 @@ else if (step == 2)
                                               Variant="Variant.Outlined"
                                               id="firstName"
                                               Name="firstName"
-                                @bind-Value="@_model.FirstName"
+                                              @bind-Value="@_model.FirstName"
                                               For="@(() => _model.FirstName)"
                                               Required="true"
                                               RequiredError="First Name is required" />
@@ -126,7 +126,7 @@ else if (step == 2)
                                               Variant="Variant.Outlined"
                                               id="lastName"
                                               Name="lastName"
-                                @bind-Value="@_model.LastName"
+                                              @bind-Value="@_model.LastName"
                                               For="@(() => _model.LastName)"
                                               Required="true"
                                               RequiredError="Last Name is required" />
@@ -136,7 +136,7 @@ else if (step == 2)
                             <MudItem xs="12">
                                 <MudTextField Label="Password"
                                               Variant="Variant.Outlined"
-                                @bind-Value="_model.Password"
+                                              @bind-Value="_model.Password"
                                               For="@(() => _model.Password)"
                                               id="password"
                                               Name="password"
@@ -150,14 +150,14 @@ else if (step == 2)
                             <MudItem xs="12">
                                 <MudTextField Label="Confirm Password"
                                               Variant="Variant.Outlined"
-                                @bind-Value="_model.ConfirmPassword"
+                                              @bind-Value="_model.ConfirmPassword"
                                               For="@(() => _model.ConfirmPassword)"
                                               id="confirmPassword"
                                               Name="confirmPassword"
                                               InputType="@_passwordInput"
                                               Validation="ValidateConfirmPassword" />
                             </MudItem>
-                            
+
                             <MudItem xs="12"
                                      Class="d-flex flex-row">
                                 <MudSpacer/>
@@ -222,8 +222,8 @@ else if (step == 2)
                         enter credentials to register an account
                     </MudText>
 
-                    <MudForm @onsubmit="OnSubmitAsync"
-                    @ref="_form">
+                    <MudForm @onsubmit="OnSubmitExtendedAsync"
+                             @ref="_extendedForm">
 
                         <MudGrid>
 
@@ -233,8 +233,8 @@ else if (step == 2)
                                               Variant="Variant.Outlined"
                                               id="email"
                                               Name="email"
-                                @bind-Value="@_model.Email"
-                                              For="@(() => _model.Email)"
+                                              @bind-Value="@_extendedModel.Email"
+                                              For="@(() => _extendedModel.Email)"
                                               Validation="@ValidateEmailField" />
 
                             </MudItem>
@@ -245,8 +245,8 @@ else if (step == 2)
                                               Variant="Variant.Outlined"
                                               id="firstName"
                                               Name="firstName"
-                                @bind-Value="@_model.FirstName"
-                                              For="@(() => _model.FirstName)"
+                                              @bind-Value="@_extendedModel.FirstName"
+                                              For="@(() => _extendedModel.FirstName)"
                                               Required="true"
                                               RequiredError="First Name is required" />
 
@@ -258,8 +258,8 @@ else if (step == 2)
                                               Variant="Variant.Outlined"
                                               id="lastName"
                                               Name="lastName"
-                                @bind-Value="@_model.LastName"
-                                              For="@(() => _model.LastName)"
+                                              @bind-Value="@_extendedModel.LastName"
+                                              For="@(() => _extendedModel.LastName)"
                                               Required="true"
                                               RequiredError="Last Name is required" />
 
@@ -268,8 +268,8 @@ else if (step == 2)
                             <MudItem xs="12">
                                 <MudTextField Label="Password"
                                               Variant="Variant.Outlined"
-                                @bind-Value="_model.Password"
-                                              For="@(() => _model.Password)"
+                                @bind-Value="_extendedModel.Password"
+                                              For="@(() => _extendedModel.Password)"
                                               id="password"
                                               Name="password"
                                               InputType="@_passwordInput"
@@ -282,12 +282,33 @@ else if (step == 2)
                             <MudItem xs="12">
                                 <MudTextField Label="Confirm Password"
                                               Variant="Variant.Outlined"
-                                @bind-Value="_model.ConfirmPassword"
-                                              For="@(() => _model.ConfirmPassword)"
+                                              @bind-Value="_extendedModel.ConfirmPassword"
+                                              For="@(() => _extendedModel.ConfirmPassword)"
                                               id="confirmPassword"
                                               Name="confirmPassword"
                                               InputType="@_passwordInput"
-                                              Validation="ValidateConfirmPassword" />
+                                              Validation="ValidateConfirmPasswordExtended" />
+                            </MudItem>
+                            
+                            <MudItem xs="12">
+                                <MudTextField Label="Organization Name"
+                                              Variant="Variant.Outlined"
+                                              @bind-Value="_extendedModel.OrganizationName"
+                                              For="@(() => _extendedModel.OrganizationName)"
+                                              id="organizationName"
+                                              Name="organizationName"
+                                              Validation="ValidateOrganizationName" />
+                            </MudItem>
+
+                            <MudItem xs="12">
+                                <MudTextField Label="Organization Description"
+                                              Variant="Variant.Outlined"
+                                              @bind-Value="_extendedModel.OrganizationDescription"
+                                              For="@(() => _extendedModel.OrganizationDescription)"
+                                              id="organizationDescription"
+                                              Name="organizationDescription"
+                                              Lines="4"
+                                              Validation="ValidateOrganizationDescription" />
                             </MudItem>
 
                             <MudItem xs="12"
