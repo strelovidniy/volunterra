@@ -13,6 +13,7 @@ public partial class SignUp : IDisposable
     private readonly CancellationTokenSource _cts = new();
 
     private readonly CreateUserModel _model = new();
+    private readonly CreateOrganizationModel _extendedModel = new();
     private int step = 1;
 
     private bool _passwordVisibility;
@@ -24,6 +25,7 @@ public partial class SignUp : IDisposable
     private bool _processing;
 
     private MudForm _form = null!;
+    private MudForm _extendedForm = null!;
 
     [Inject]
     private IUserService UserService { get; set; } = null!;
@@ -54,7 +56,8 @@ public partial class SignUp : IDisposable
 
         _cts.Cancel();
         _cts.Dispose();
-        _form.Dispose();
+        _form?.Dispose();
+        _extendedForm?.Dispose();
         Snackbar.Dispose();
     }
 
@@ -148,6 +151,36 @@ public partial class SignUp : IDisposable
         return _model.Password != value ? "Passwords do not match" : null;
     }
 
+    private string? ValidateConfirmPasswordExtended(string? value)
+    {
+        if (string.IsNullOrWhiteSpace(value))
+        {
+            return "Password confirmation is required";
+        }
+
+        return _extendedModel.Password != value ? "Passwords do not match" : null;
+    }
+
+    private static string? ValidateOrganizationName(string? value)
+    {
+        if (string.IsNullOrWhiteSpace(value))
+        {
+            return "Organization name is required";
+        }
+
+        return value.Length > 250 ? "Organization name too long" : null;
+    }
+
+    private static string? ValidateOrganizationDescription(string? value)
+    {
+        if (string.IsNullOrWhiteSpace(value))
+        {
+            return null;
+        }
+
+        return value.Length > 2000 ? "Organization description too long" : null;
+    }
+
     private async Task OnSubmitAsync()
     {
         try
@@ -159,6 +192,52 @@ public partial class SignUp : IDisposable
             if (!_form.IsValid)
             {
                 Snackbar.Add(_form.Errors.FirstOrDefault(), Severity.Error);
+
+                _processing = false;
+
+                return;
+            }
+
+            await UserService.CreateUserAsync(
+                new CreateUserModel
+                {
+                    Password = _model.Password,
+                    ConfirmPassword = _model.ConfirmPassword,
+                    FirstName = _model.FirstName,
+                    LastName = _model.LastName,
+                    Email = _model.Email
+                },
+                _cts.Token
+            );
+
+            if (_isSuccessSubmit)
+            {
+                NavigationManager.NavigateTo("/auth/login");
+            }
+            else
+            {
+                _isSuccessSubmit = true;
+            }
+
+            _processing = false;
+        }
+        catch
+        {
+            _processing = false;
+        }
+    }
+
+    private async Task OnSubmitExtendedAsync()
+    {
+        try
+        {
+            _processing = true;
+
+            await _extendedForm.Validate();
+
+            if (!_extendedForm.IsValid)
+            {
+                Snackbar.Add(_extendedForm.Errors.FirstOrDefault(), Severity.Error);
 
                 _processing = false;
 

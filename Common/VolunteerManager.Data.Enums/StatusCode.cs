@@ -12,6 +12,7 @@ public enum StatusCode
     RequestNotFound = 104,
 
     DescriptionTooLong = 201,
+    OrganizationNameTooLong = 202,
 
     EmailSendingError = 301,
 
