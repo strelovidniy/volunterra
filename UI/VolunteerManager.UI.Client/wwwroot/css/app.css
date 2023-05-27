@@ -1,8 +1,24 @@
 @import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
 
+@font-face {
+    font-family: 'Noah Head';
+    src: url('./noah-head/font/fonts/Noah Head Regular.otf') format('truetype');
+    src: url('./noah-head/font/fonts/Noah Head Heavy.otf') format('truetype');
+    src: url('./noah-head/font/fonts/Noah Head Medium.otf') format('truetype');
+    src: url('./noah-head/font/fonts/Noah Head Bold.otf') format('truetype');
+    src: url('./noah-head/font/fonts/Noah Head Thin.otf') format('truetype');
+    src: url('./noah-head/font/fonts/Noah Head UltraLight.otf') format('truetype');
+    src: url('./noah-head/font/fonts/Noah Head Black.otf') format('truetype');
+    src: url('./noah-head/font/fonts/Noah Head ExtraBold.otf') format('truetype');
+    src: url('./noah-head/font/fonts/Noah Head Regular.otf') format('truetype');
+    src: url('./noah-head/font/fonts/Noah Head Regular.otf') format('truetype');
+    src: url('./noah-head/font/fonts/Noah Head Regular.otf') format('truetype');
+    src: url('./noah-head/font/fonts/Noah Head Regular.otf') format('truetype');
+}
+
 html,
 body {
-    font-family: Montserrat !important;
+    font-family: Noah Head !important;
     height: 100%;
 }
 

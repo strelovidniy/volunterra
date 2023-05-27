@@ -15,16 +15,32 @@
     justify-content: inherit;
 }
 
-{
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    border-width: 0;
-    border-style: solid;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+.login-part {
+    flex: 55;
+    padding: 10px;
 }
 
-.logo {
-    width: 230px;
+.login-part-inner {
+    margin: 154px auto 50px;
+    min-width: 380px;
+    width: min-content;
+}
+
+.picture-part {
+    flex: 73;
+    height: 100vh;
+    background-color: var(--mud-palette-info)
+}
+
+@media(max-width: 959px) {
+    .login-part {
+        flex: 1;
+        width: 100vw;
+    }
+
+    .login-part-inner {
+        margin: 10px;
+        min-width: 0;
+        width: auto;
+    }
 }
