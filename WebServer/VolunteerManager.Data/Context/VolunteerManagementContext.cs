@@ -14,6 +14,8 @@ internal class VolunteerManagerContext : DbContext
 
     public virtual DbSet<OrganizationRequest> OrganizationRequests { get; set; } = null!;
 
+    public virtual DbSet<ContactInfo> ContactInfos { get; set; } = null!;
+
     public VolunteerManagerContext(DbContextOptions<VolunteerManagerContext> options)
         : base(options)
     {
@@ -28,6 +30,7 @@ internal class VolunteerManagerContext : DbContext
         modelBuilder.ApplyConfiguration(new UserConfiguration());
         modelBuilder.ApplyConfiguration(new OrganizationConfiguration());
         modelBuilder.ApplyConfiguration(new OrganizationRequestConfiguration());
+        modelBuilder.ApplyConfiguration(new ContactInfoConfiguration());
 
         base.OnModelCreating(modelBuilder);
     }
