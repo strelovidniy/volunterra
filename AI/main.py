@@ -2,13 +2,13 @@ import os
 import openai
 from flask import Flask
 
-openai.api_key = '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'
+openai.api_key = os.getenv('GptToken')
 
 completion = openai.ChatCompletion.create(
   model="gpt-3.5-turbo",
   temperature=0.7,
   messages=[
-    {"role": "user", "content": "Generate the description to the volunteering post about opened fundraising for armor"}
+    {"role": "user", "content": "Say Hello"}
   ]
 )
 
