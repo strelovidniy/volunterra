@@ -6,7 +6,7 @@ using VolunteerManager.Models.Update;
 
 namespace VolunteerManager.Domain.Validators;
 
-internal class UpdateRequestModelValidator : AbstractValidator<UpdateRequestModel>
+internal class UpdateRequestModelValidator : AbstractValidator<UpdateOrganizationRequestModel>
 {
     public UpdateRequestModelValidator(IValidationService validationService)
     {

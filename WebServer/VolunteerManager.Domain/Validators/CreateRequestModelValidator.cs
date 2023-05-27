@@ -5,7 +5,7 @@ using VolunteerManager.Models.Create;
 
 namespace VolunteerManager.Domain.Validators;
 
-internal class CreateRequestModelValidator : AbstractValidator<CreateRequestModel>
+internal class CreateRequestModelValidator : AbstractValidator<CreateOrganizationInvocationReplyModel>
 {
     public CreateRequestModelValidator()
     {

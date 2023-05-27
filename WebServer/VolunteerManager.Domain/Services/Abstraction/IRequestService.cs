@@ -7,12 +7,12 @@ namespace VolunteerManager.Domain.Services.Abstraction;
 public interface IRequestService
 {
     public Task CreateRequestAsync(
-        CreateRequestModel model,
+        CreateOrganizationInvocationReplyModel model,
         CancellationToken cancellationToken = default
     );
 
     public Task UpdateRequestAsync(
-        UpdateRequestModel model,
+        UpdateOrganizationRequestModel model,
         CancellationToken cancellationToken = default
     );
 
@@ -26,7 +26,7 @@ public interface IRequestService
         CancellationToken cancellationToken = default
     );
 
-    public Task<IEnumerable<RequestView>?> GetRequestsAsync(
+    public Task<IEnumerable<OrganizationRequestView>?> GetRequestsAsync(
         CancellationToken cancellationToken = default
     );
 }

@@ -28,7 +28,7 @@ public partial class MainLayout : IDisposable
 
     private string? _fullName;
 
-    private IEnumerable<RequestView> _requests = new List<RequestView>();
+    private IEnumerable<OrganizationRequestView> _requests = new List<OrganizationRequestView>();
 
     private bool IsAuth => NavManager.Uri.Contains("/auth/");
 
@@ -48,7 +48,7 @@ public partial class MainLayout : IDisposable
     private ILocalStorageService LocalStorageService { get; set; } = null!;
 
     [Inject]
-    private IRequestService RequestService { get; set; } = null!;
+    private IOrganizationRequestService RequestService { get; set; } = null!;
 
     public void Dispose()
     {
@@ -113,7 +113,7 @@ public partial class MainLayout : IDisposable
             return;
         }
 
-        _requests = await RequestService.GetRequestsAsync(_cts.Token) ?? new List<RequestView>();
+        _requests = await RequestService.GetRequestsAsync(_cts.Token) ?? new List<OrganizationRequestView>();
 
         _currentUser = await AuthService.GetCurrentUserAsync();
 

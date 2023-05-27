@@ -49,8 +49,8 @@ public static class DomainDependencyInjectionExtension
         .AddTransient<IValidator<CreateOrganizationModel>, CreateOrganizationModelValidator>()
         .AddTransient<IValidator<UpdateOrganizationModel>, UpdateOrganizationModelValidator>()
         .AddTransient<IValidator<InviteUserToOrganizationModel>, InviteUserToOrganizationModelValidator>()
-        .AddTransient<IValidator<CreateRequestModel>, CreateRequestModelValidator>()
-        .AddTransient<IValidator<UpdateRequestModel>, UpdateRequestModelValidator>()
+        .AddTransient<IValidator<CreateOrganizationInvocationReplyModel>, CreateRequestModelValidator>()
+        .AddTransient<IValidator<UpdateOrganizationRequestModel>, UpdateRequestModelValidator>()
         .AddTransient<IValidator<CreateOrganizationRequestModel>, CreateOrganizationRequestModelValidation>();
 
     private static IServiceCollection AddMapper(

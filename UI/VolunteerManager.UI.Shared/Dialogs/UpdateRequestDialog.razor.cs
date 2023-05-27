@@ -12,7 +12,7 @@ public partial class UpdateRequestDialog
 {
     private readonly CancellationTokenSource _cts = new();
 
-    private readonly UpdateRequestModel _model = new();
+    private readonly UpdateOrganizationRequestModel _model = new();
 
     private bool _isDialogLoading = true;
 
@@ -26,13 +26,13 @@ public partial class UpdateRequestDialog
     private MudDialogInstance MudDialog { get; set; } = null!;
 
     [Parameter]
-    public RequestView SelectedRequest { get; set; } = null!;
+    public OrganizationRequestView SelectedRequest { get; set; } = null!;
 
     [Inject]
     private IVolunteerManagerHttpClient HttpClient { get; set; } = null!;
 
     [Inject]
-    private IRequestService RequestService { get; set; } = null!;
+    private IOrganizationRequestService RequestService { get; set; } = null!;
 
     [Inject]
     private ISnackbar Snackbar { get; set; } = null!;

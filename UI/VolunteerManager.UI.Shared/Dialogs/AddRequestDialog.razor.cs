@@ -12,7 +12,7 @@ public partial class AddRequestDialog : IDisposable
 {
     private readonly CancellationTokenSource _cts = new();
 
-    private readonly CreateRequestModel _model = new();
+    private readonly CreateOrganizationInvocationReplyModel _model = new();
 
     private bool _isDialogLoading = true;
 
@@ -32,7 +32,7 @@ public partial class AddRequestDialog : IDisposable
     private IVolunteerManagerHttpClient HttpClient { get; set; } = null!;
 
     [Inject]
-    private IRequestService RequestService { get; set; } = null!;
+    private IOrganizationRequestService RequestService { get; set; } = null!;
 
     [Inject]
     private ISnackbar Snackbar { get; set; } = null!;
