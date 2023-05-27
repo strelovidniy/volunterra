@@ -12,5 +12,9 @@ internal class CreateOrganizationRequestModelToOrganizationRequestConverter
         ResolutionContext context
     ) => new()
     {
+        OrganizationId = createOrganizationRequestModel.OrganizationId,
+        Description = createOrganizationRequestModel.Description,
+        Location = createOrganizationRequestModel.Location,
+        Title = createOrganizationRequestModel.Title
     };
 }

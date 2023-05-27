@@ -58,7 +58,7 @@ internal class OrganizationConfiguration : IEntityTypeConfiguration<Organization
         builder
             .HasOne(organization => organization.ContactInfo)
             .WithOne(cf => cf.Organization)
-            .HasForeignKey<ContactInfo>(cf => cf.OrganizationId)
+            .HasForeignKey<ContactInfo>(cf => cf.Id)
             .OnDelete(DeleteBehavior.Restrict);
         
         builder

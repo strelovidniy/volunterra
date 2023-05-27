@@ -10,6 +10,4 @@ public class ContactInfo: Entity, IEntity
     public string LinkedInUrl { get; set; }
     public User? Users { get; set; }
     public Organization? Organization { get; set; }
-    public Guid? OrganizationId { get; set; }
-    public Guid? UserId { get; set; }
 }

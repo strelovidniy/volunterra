@@ -14,6 +14,5 @@ public class OrganizationRequest : Entity, IEntity
 
     public string Location { get; set; } = null!;
 
-    public string ImageData { get; set; } = null!;
-
+   // public string ImageData { get; set; } = null!;
 }

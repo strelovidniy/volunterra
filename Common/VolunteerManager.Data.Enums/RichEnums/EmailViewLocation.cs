@@ -9,6 +9,9 @@ public class EmailViewLocation : RichEnum<string>
     public static EmailViewLocation ResetPasswordEmail =>
         new($"{Base}ResetPasswordEmail/ResetPasswordEmail.cshtml");
 
+    public static EmailViewLocation NewApplicantEmail =>
+        new($"{Base}NewApplicantEmail/NewApplicantEmail.cshtml");
+
     private EmailViewLocation(string value) : base(value)
     {
     }
