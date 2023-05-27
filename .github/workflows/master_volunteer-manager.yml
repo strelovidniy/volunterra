@@ -16,11 +16,26 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Replace placeholders with secrets
+        uses: cschleiden/replace-tokens@v1.1
+        with:
+          tokenPrefix: '#{'
+          tokenSuffix: '}#'
+          files: '["./WebServer/HomeAccounting.Server/appsettings.json"]'
+        env:
+          ConnectionString: ${{secrets.CONNECTION_STRING}}
+          AccessTokenString: ${{secrets.ACCESS_TOKEN_STRING}}
+          EmailPassword: ${{secrets.EMAIL_PASSWORD}}
+          FromEmail: ${{secrets.FROM_EMAIL}}
+
       - name: Set up .NET Core
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: '7.x'
           include-prerelease: true
+
+      - name: Setup WASM workload
+        run: dotnet workload install wasm-tools
 
       - name: Build with dotnet
         run: dotnet build --configuration Release
