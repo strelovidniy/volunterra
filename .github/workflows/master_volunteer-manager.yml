@@ -21,12 +21,21 @@ jobs:
         with:
           tokenPrefix: '#{'
           tokenSuffix: '}#'
-          files: '["./WebServer/HomeAccounting.Server/appsettings.json"]'
+          files: '["./WebServer/VolunteerManager.Server/appsettings.json"]'
         env:
           ConnectionString: ${{secrets.CONNECTION_STRING}}
           AccessTokenString: ${{secrets.ACCESS_TOKEN_STRING}}
           EmailPassword: ${{secrets.EMAIL_PASSWORD}}
           FromEmail: ${{secrets.FROM_EMAIL}}
+          
+      - name: Replace csproj placeholder
+        uses: cschleiden/replace-tokens@v1.1
+        with:
+          tokenPrefix: '<!-- '
+          tokenSuffix: ' -->'
+          files: '["./UI/VolunteerManager.UI.Client/VolunteerManager.UI.Client.csproj"]'
+        env:
+          RunAOTCompilation: ${{secrets.AOT}}
 
       - name: Set up .NET Core
         uses: actions/setup-dotnet@v1
@@ -36,6 +45,9 @@ jobs:
 
       - name: Setup WASM workload
         run: dotnet workload install wasm-tools
+        
+      - name: See UI Client .CSPROJ
+        run: cat ./UI/VolunteerManager.UI.Client/VolunteerManager.UI.Client.csproj
 
       - name: Build with dotnet
         run: dotnet build --configuration Release
