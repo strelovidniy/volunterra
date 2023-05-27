@@ -1,0 +1,157 @@
+﻿@page "/requests"
+
+@using VolunteerManager.Models.Views
+@using Microsoft.AspNetCore.Components.Web
+@using MudBlazor
+
+<PageTitle>
+    Requests
+</PageTitle>
+
+@if (_isPageLoading)
+{
+    <div class="loader-container">
+        <MudProgressCircular Color="Color.Primary" 
+                             Style="height: 10%; width: 10%;" 
+                             Indeterminate="true"/>
+    </div>
+}
+else
+{
+    <div style="padding: 5px;"></div>
+    <MudPaper Elevation="0"
+              Class="border">
+        <MudText Typo="Typo.h6"
+                 Class="px-4 py-2">
+            Request
+        </MudText>
+        <MudTable @ref="_table"
+                  Dense="@false"
+                  Elevation="0"
+                  Hover="@true"
+                  ServerData="@ServerReloadAsync"
+                  FixedHeader="true"
+                  FixedFooter="true"
+                  Height="calc(100vh - 340px)">
+            <ToolBarContent>
+                <div class="justify-center mud-text-align-center px-1 no-nested-margin">
+                    <MudButton OnClick="@AddRequestsDialogAsync"
+                               StartIcon="@Icons.Material.Filled.PersonAdd"
+                               Variant="Variant.Filled"
+                               Color="Color.Primary"
+                               Class="mr-2 mb-2"
+                               Disabled="_currentUser.Organization != null">
+                        Add Request
+                    </MudButton>
+                </div>
+                <MudSpacer/>
+                <MudTextField T="string"
+                              Value="_searchString"
+                              ValueChanged="value => { _searchString = value; return _table.ReloadServerData(); }"
+                              Placeholder="Search"
+                              Variant="@Variant.Outlined"
+                              Adornment="Adornment.Start"
+                              AdornmentIcon="@Icons.Material.Filled.Search"
+                              Margin="@Margin.Dense"
+                              IconSize="Size.Medium"
+                              Class="mt-0">
+                </MudTextField>
+            </ToolBarContent>
+
+            <RowTemplate>
+                <MudTd DataLabel="Actions"
+                       Style="text-align: left">
+                    @if (_currentUser.Id == context.CreatedBy?.Id)
+                    {
+                        <MudMenu Label="Actions"
+                                 Variant="Variant.Filled"
+                                 DisableElevation="true"
+                                 EndIcon="@Icons.Material.Filled.KeyboardArrowDown"
+                                 IconColor="Color.Secondary"
+                                 Direction="Direction.Left"
+                                 OffsetX="true">
+                            <MudMenuItem OnClick="@(() => UpdateRequestDialogAsync(context))"
+                                         OnTouch="@(() => UpdateRequestDialogAsync(context))">
+                                Update
+                            </MudMenuItem>
+                            <MudMenuItem OnClick="@(() => DeleteRequestAsync(context))"
+                                         OnTouch="@(() => DeleteRequestAsync(context))">
+                                Delete
+                            </MudMenuItem>
+                        </MudMenu>
+                    }
+                    else
+                    {
+                        <MudButton Variant="Variant.Filled"
+                                   DisableElevation="true"
+                                   StartIcon="@Icons.Material.Filled.DoNotTouch"
+                                   IconColor="Color.Secondary"
+                                   Size="Size.Small"
+                                   Color="Color.Surface">
+                            No Allowed Actions
+                        </MudButton>
+                    }
+                </MudTd>
+                <MudTd DataLabel="Amount">
+                    @context.TotalAmount
+                </MudTd>
+                <MudTd DataLabel="Description">
+                    @context.Description
+                </MudTd>
+                <MudTd DataLabel="RequestDate">
+                    @context.RequestDate
+                </MudTd>
+                <MudTd DataLabel="RequestUpdatedAt">
+                    @context.RequestUpdatedAt
+                </MudTd>
+            </RowTemplate>
+
+            <NoRecordsContent>
+                <MudText>
+                    No records found.
+                </MudText>
+            </NoRecordsContent>
+
+            <LoadingContent>
+                <MudText>
+                    Loading...
+                </MudText>
+            </LoadingContent>
+
+            <HeaderContent>
+                <MudTh>
+                    Action
+                </MudTh>
+                <MudTh>
+                    <MudTableSortLabel SortLabel="Amount"
+                                       T="RequestView">
+                        Amount
+                    </MudTableSortLabel>
+
+                </MudTh>
+                <MudTh>
+                    <MudTableSortLabel SortLabel="Description"
+                                       T="RequestView">
+                        Description
+                    </MudTableSortLabel>
+                </MudTh>
+                <MudTh>
+                    <MudTableSortLabel SortLabel="RequestDate"
+                                       T="RequestView">
+                        Request Date
+                    </MudTableSortLabel>
+                </MudTh>
+                <MudTh>
+                    <MudTableSortLabel SortLabel="RequestUpdatedAt"
+                                       T="RequestView">
+                        Request Updated At
+                    </MudTableSortLabel>
+                </MudTh>
+            </HeaderContent>
+
+            <PagerContent>
+                <MudTablePager/>
+            </PagerContent>
+        </MudTable>
+    </MudPaper>
+}

@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Volunteer Manager</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        .ident {
+            margin-bottom: 1em;
+            margin-top: 1em;
+            padding-left: 40px;
+        }
+
+        .basic-information-paragraph {
+            color: #6F7681 !important;
+            font-family: Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            font-size: 18px;
+            line-height: 21px;
+        }
+
+        .basic-information-button {
+            -webkit-text-size-adjust: none;
+            background-color: #673ab7 !important;
+            -ms-border-radius: 10px;
+            border-radius: 10px;
+            color: #ffffff !important;
+            cursor: pointer;
+            font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, 'sans-serif';
+            font-size: 20px;
+            font-weight: bold;
+            line-height: 40px;
+            margin: 0;
+            margin-top: 0;
+            padding: 9px 22px;
+            text-align: center;
+            text-decoration: none;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
+        .footer-paragraph {
+            color: #6F7681 !important;
+            font-family: Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: normal;
+            line-height: 16px;
+        }
+
+        .no-underline { text-decoration: none; }
+
+        #message {
+            border: 1px solid #C8CBD0;
+            -ms-border-radius: 10px;
+            border-radius: 10px;
+            color: #6F7681 !important;
+            font-family: Roboto, -apple-system, BlinkMacSystemFont, 'Segoe UI', Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: normal;
+            line-height: 18px;
+            padding: 6px 12px;
+        }
+
+        #message td {
+            padding: 6px;
+            vertical-align: top;
+        }
+
+        #message img {
+            -ms-border-radius: 100%;
+            border-radius: 100%;
+            height: 54px;
+            -webkit-object-fit: cover;
+            object-fit: cover;
+            width: 54px;
+        }
+
+        #message #sender {
+            color: #12244A !important;
+            font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, 'sans-serif';
+            font-size: 18px;
+        }
+
+        #message #sender-logo {
+            background: #FAD8D3;
+            -ms-border-radius: 100%;
+            border-radius: 100%;
+            color: white;
+            font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, 'sans-serif';
+            font-size: 22px;
+            font-weight: bold;
+            height: 54px;
+            line-height: 54px;
+            text-align: center;
+            width: 54px;
+        }
+
+        .logo-image { height: 100px; }
+    </style>
+</head>
+
+<body>
+<table background="@ViewData["WhiteBackgroundUrl"]" width="100%" height="100%" cellpadding="0" cellspacing="0" border="0">
+    <tr>
+        <td align="center">
+            <table cellpadding="0" cellspacing="0" border="0" width="600px">
+                <tr>
+                    <td>
+                        <span style="line-height: 24px;">
+                            &nbsp;
+                        </span>
+                        <!--[if mso]>
+                            <span>
+                                <br>&nbsp;
+                            </span>
+                        <![endif]-->
+                    </td>
+                </tr>
+                <tr>
+                    <th align="left" width="600px">
+                        <img class="logo-image" src="@ViewData["IconUrl"]">
+                    </th>
+                </tr>
+                <tr>
+                    <td>
+                        <span style="line-height: 24px;">
+                            &nbsp;
+                        </span>
+                        <!--[if mso]>
+                            <span>
+                                <br>&nbsp;
+                            </span>
+                        <![endif]-->
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <img src="@ViewData["DividerUrl"]">
+                        <span style="line-height: 48px;">
+                            &nbsp;
+                        </span>
+                        <!--[if mso]>
+                            <span>
+                                <br>&nbsp;
+                            </span>
+                            <span>
+                                <br>&nbsp;
+                            </span>
+                            <span>
+                                <br>&nbsp;
+                            </span>
+                        <![endif]-->
+                    </td>
+                </tr>
+                @RenderBody()
+                <tr>
+                    <td>
+                        <img src="@ViewData["DividerUrl"]">
+                        <table cellpadding="0" cellspacing="0" border="0">
+                            <tr>
+                                <td>
+                                    <span style="line-height: 7px;">
+                                        &nbsp;
+                                    </span>
+                                </td>
+                                <td width="100px" valign="top" align="right" rowspan="2" style="padding: 10px 0 0 0">
+                                    <!--[if mso]>
+                                        &nbsp;&nbsp;&nbsp;
+                                    <![endif]-->
+                                    <a class="no-underline" href="@ViewData["TwitterUrl"]">
+                                        <img src="@ViewData["TwitterIconUrl"]">
+                                    </a>
+                                    <a class="no-underline" href="@ViewData["InstagramUrl"]">
+                                        <img src="@ViewData["InstagramIconUrl"]">
+                                    </a>
+                                    <a class="no-underline" href="@ViewData["FacebookUrl"]">
+                                        <img src="@ViewData["FacebookIconUrl"]">
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="left" width="500px">
+                                    <p class="footer-paragraph">
+                                        Volunteer Manager
+                                        <br>
+                                        <br>
+                                        This is an automatically generated email. Please do not reply.
+                                    </p>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+</body>
+
+</html>

@@ -1,0 +1,203 @@
+﻿@page "/account"
+
+@using Microsoft.AspNetCore.Components.Web
+@using MudBlazor
+@using Microsoft.AspNetCore.Components.Forms
+
+<PageTitle>Account</PageTitle>
+
+<MudGrid>
+    @*<MudItem xs="12"
+             md="6"
+             lg="4">
+        <MudContainer Style="background-color: var(--mud-palette-surface);
+                             -ms-border-radius: 10px;
+                             border-radius: 10px;
+                             box-shadow: 0px 0px 30px 0px rgb(0 0 0 / 50%);
+                             height: fit-content;
+                             padding: 30px;">
+            <MudGrid>
+                <MudItem xs="12">
+                    <MudText>
+                        Press <strong>Generate Token</strong> button then authenticate via Monobank, copy key and paste into <strong>Monobank Token</strong> field
+                    </MudText>
+                </MudItem>
+                <MudItem xs="8"
+                         Style="display: flex; 
+                                -ms-align-items: center; 
+                                -o-align-items: center; 
+                                -webkit-align-items: center;
+                                align-items: center;
+                                -o-justify-content: center;
+                                -webkit-justify-content: center; 
+                                justify-content: center;">
+                    <MudForm @ref="_monobankTokenForm"
+                             Class="w-100">
+                        <MudTextField T="string"
+                                      InputType="InputType.Text"
+                                      Label="Monobank Token"
+                                      Variant="Variant.Outlined"
+                                      Class="w-100"
+                                      @bind-Value="_monobankToken"
+                                      Validation="ValidateMonobankTokenInput"/>
+                    </MudForm>
+                    
+                </MudItem>
+                <MudItem xs="4">
+                    <MudGrid>
+                        <MudItem xs="12">
+                            <MudButton Variant="Variant.Filled"
+                                       Color="Color.Primary"
+                                       Href="https://api.monobank.ua/"
+                                       Target="_blank">
+                                Generate Token
+                            </MudButton>
+                        </MudItem>
+                        <MudItem xs="12">
+                            <MudButton Variant="Variant.Filled"
+                                       Color="Color.Success"
+                                       Disabled="@(_processingMonobankToken || _initialMonobankToken == _monobankToken)"
+                                       OnClick="@(() => SubmitMonobankTokenAsync(_cts.Token))">
+                                @if (_processingMonobankToken)
+                                {
+                                    <MudProgressCircular Class="ms-n1"
+                                                         Size="Size.Small"
+                                                         Indeterminate="true" />
+                                    <MudText Class="ms-2">
+                                        Submitting
+                                    </MudText>
+                                }
+                                else
+                                {
+                                    <MudText>
+                                        Submit
+                                    </MudText>
+                                }
+                            </MudButton>
+                        </MudItem>
+                    </MudGrid>
+                </MudItem>
+            </MudGrid>
+        </MudContainer>
+    </MudItem>*@
+    <MudItem xs="12"
+             md="4">
+        <MudContainer Style="background-color: var(--mud-palette-surface);
+                             -ms-border-radius: 10px;
+                             border-radius: 10px; 
+                             box-shadow: 0px 0px 30px 0px rgb(0 0 0 / 50%);
+                             height: fit-content;
+                             padding: 30px;">
+            <MudGrid>
+                <MudItem xs="12">
+                    <div class="square">
+                        <div class="square-inner">
+                            @if (string.IsNullOrEmpty(_user?.ImageDataUrl))
+                            {
+                                <MudAvatar Color="Color.Primary"
+                                           Style="height: 100%; width: 100%">
+                                    Your Avatar Will Appear Here
+                                </MudAvatar>
+                            }
+                            else
+                            {
+                                <MudAvatar Image="@_user.ImageDataUrl"
+                                           Style="height: 100%; width: 100%">
+                                </MudAvatar>
+                            }
+                        </div>
+                    </div>
+                </MudItem>
+                <MudItem xs="12"
+                         Style="display: flex">
+                    <MudSpacer/>
+                    <MudFileUpload T="IBrowserFile"
+                                   FilesChanged="UploadFilesAsync">
+                        <ButtonTemplate>
+                            <MudFab HtmlTag="label"
+                                    Color="Color.Secondary"
+                                    Icon="@Icons.Material.Filled.Image"
+                                    Label="@(_user?.ImageDataUrl == null ? "Upload Avatar" : "Change Avatar")"
+                                    for="@context"/>
+                        </ButtonTemplate>
+                    </MudFileUpload>
+                    <MudSpacer/>
+                </MudItem>
+            </MudGrid>
+        </MudContainer>
+    </MudItem>
+    <MudItem xs="12"
+             md="4">
+        <MudContainer Style="background-color: var(--mud-palette-surface); 
+                             -ms-border-radius: 10px; 
+                             border-radius: 10px;
+                             box-shadow: 0px 0px 30px 0px rgb(0 0 0 / 50%);
+                             height: fit-content;
+                             padding: 30px;">
+            <MudForm @ref="_changePasswordForm">
+                <MudGrid>
+                    <MudItem xs="12">
+                        <MudTextField T="string"
+                                      InputType="InputType.Text"
+                                      Label="Old Password"
+                                      Variant="Variant.Outlined"
+                                      Class="w-100"
+                                      id="oldPassword"
+                                      name="oldPassword"
+                                      @bind-Value="_oldPassword"
+                                      Validation="ValidateOldPasswordInput"/>
+                    </MudItem>
+                    <MudItem xs="12">
+                        <MudTextField T="string"
+                                      InputType="InputType.Text"
+                                      Label="New Password"
+                                      Variant="Variant.Outlined"
+                                      Class="w-100"
+                                      id="newPassword"
+                                      name="newPassword"
+                                      @bind-Value="_newPassword"
+                                      Validation="ValidateNewPasswordInput" />
+                    </MudItem>
+                    <MudItem xs="12">
+                        <MudTextField T="string"
+                                      InputType="InputType.Text"
+                                      Label="Confirm New Password"
+                                      Variant="Variant.Outlined"
+                                      Class="w-100"
+                                      id="confirmNewPassword"
+                                      name="confirmNewPassword"
+                                      @bind-Value="_confirmNewPassword"
+                                      Validation="ValidateConfirmNewPasswordInput" />
+                    </MudItem>
+                </MudGrid>
+            </MudForm>
+            <MudItem xs="12">
+                <MudContainer Class="d-flex">
+                    <MudSpacer/>
+                    <MudButton Variant="Variant.Filled"
+                               Color="Color.Success"
+                               Disabled="@(_processingChangePassword || string.IsNullOrWhiteSpace(_oldPassword) || string.IsNullOrWhiteSpace(_newPassword) || string.IsNullOrWhiteSpace(_confirmNewPassword))"
+                               OnClick="@(() => ChangePasswordAsync(_cts.Token))"
+                               Class="mt-5">
+                               @if (_processingChangePassword)
+                        {
+                            <MudProgressCircular Class="ms-n1"
+                                                 Size="Size.Small"
+                                                 Indeterminate="true" />
+                            <MudText Class="ms-2">
+                                Submitting
+                            </MudText>
+                        }
+                        else
+                        {
+                            <MudText>
+                                Submit
+                            </MudText>
+                        }
+                    </MudButton>
+                    <MudSpacer/>
+                </MudContainer>
+            </MudItem>
+        </MudContainer>
+    </MudItem>
+</MudGrid>

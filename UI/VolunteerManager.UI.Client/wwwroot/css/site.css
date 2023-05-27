@@ -1,0 +1,179 @@
+@import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
+
+html, body {
+    font-family: Montserrat !important;
+}
+
+.pac-container {
+    z-index: 999999 !important;
+}
+
+a, .btn-link {
+    color: #0366d6;
+}
+
+.incoming-call-icon::after {
+    content: '\F5B7';
+    display: block;
+    font-size: 12px;
+    color: #fff;
+}
+
+.outgoing-call-icon::after {
+    content: '\F5BB';
+    display: block;
+    font-size: 12px;
+    color: #fff;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
+}
+
+.content {
+    padding-top: 1.1rem;
+}
+
+.valid.modified:not([type=checkbox]) {
+    outline: 1px solid #26b050;
+}
+
+.invalid {
+    outline: 1px solid red;
+}
+
+.validation-message {
+    color: red;
+}
+
+#blazor-error-ui {
+    background: lightyellow;
+    bottom: 0;
+    box-shadow: 0 -1px 2px #000000;
+    box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.2);
+    display: none;
+    left: 0;
+    padding: 0.6rem 1.25rem 0.7rem 1.25rem;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+}
+
+#blazor-error-ui .dismiss {
+        cursor: pointer;
+        position: absolute;
+        right: 0.75rem;
+        top: 0.5rem;
+    }
+
+.spinner {
+    border: 16px solid silver;
+    border-top: 16px solid #337AB7;
+    -ms-border-radius: 50%;
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    animation: spin 700ms linear infinite;
+    top: 40%;
+    left: 55%;
+    position: absolute;
+}
+
+.badge {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    padding: 5px 10px;
+    -ms-border-radius: 50%;
+    border-radius: 50%;
+    background: #fe4a4a !important;
+    color: white !important;
+}
+
+.color-green {
+    background-color: #26b050;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg)
+    }
+
+    100% {
+        transform: rotate(360deg)
+    }
+}
+
+.icon-button-xxs {
+    width: 10px;
+    height: 10px;
+}
+
+.mud-chip-filled.mud-chip-color-error {
+    top: -2px !important;
+    right: 0px !important;
+    padding: 10px 8px !important;
+    -ms-border-radius: 50% !important;
+    border-radius: 50% !important;
+    background: #fe4a4a !important;
+    color: white !important;
+    font-size: 11px !important;
+    height: 0px !important;
+}
+
+.mud-nav-link.active:not(.mud-nav-link-disabled) .mud-nav-link-text {
+    font-weight: bold !important;
+    color: #1f5873ff !important;
+}
+
+.mud-nav-link.active:not(.mud-nav-link-disabled) {
+    background-color: #1f58731c !important;
+}
+
+@media screen and (min-width: 992px) {
+    html, body {
+        font-size: 13px !important;
+    }
+}
+
+@media screen and (max-width: 991px) {
+    html, body {
+        font-size: 14px !important;
+    }
+}
+
+.mud-container > .mud-grid > .mud-grid-backgroung {
+    margin: -12px;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.font-12px {
+    font-size: 12px;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.clickable {
+    cursor: pointer;
+}
+
+.copyToClipboard {
+    cursor: copy;
+    font-size: 12px !important;
+}
+
+.copyToClipboard:hover {
+    text-decoration: underline;
+}
+
+.mud-scroll-to-top.visible
+{
+    bottom: 52px !important;
+    z-index: 999999 !important;
+}

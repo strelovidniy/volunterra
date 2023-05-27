@@ -1,0 +1,24 @@
+﻿.square {
+    position: relative;
+    width: 100%;
+    padding-top: 100%;
+}
+
+.square-inner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.loader-container {
+    display: flex;
+    -o-justify-content: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -ms-align-items: center;
+    -o-align-items: center;
+    -webkit-align-items: center;
+    align-items: center;
+}

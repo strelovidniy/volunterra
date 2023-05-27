@@ -1,0 +1,129 @@
+﻿@page "/organizations"
+
+@using VolunteerManager.Models.Views
+@using Microsoft.AspNetCore.Components.Web
+@using MudBlazor
+@using BlazorPro.Spinkit
+
+<PageTitle>
+    Organizations
+</PageTitle>
+
+@if (_isPageLoading)
+{
+    <div class="loader-container">
+        <MudProgressCircular Color="Color.Primary" 
+                             Style="height: 10%; width: 10%;" 
+                             Indeterminate="true"/>
+    </div>
+}
+else
+{
+    <div style="padding: 5px;"></div>
+    <MudPaper Elevation="0"
+              Class="border">
+        <MudText Typo="Typo.h6"
+                 Class="px-4 py-2">
+            Organization
+        </MudText>
+        <MudTable @ref="_table"
+                  Dense="@false"
+                  Elevation="0"
+                  Hover="@true"
+                  ServerData="@ServerReloadAsync"
+                  FixedHeader="true"
+                  FixedFooter="true"
+                  Height="calc(100vh - 340px)">
+            <ToolBarContent>
+                <SpinLoader IsLoading="_isLoading" 
+                            Spinner="SpinnerType.Wave" 
+                            Class="ml-2"/>
+                <MudSpacer/>
+                <MudTextField T="string"
+                              Value="_searchString"
+                              ValueChanged="value => { _searchString = value; return _table.ReloadServerData(); }"
+                              Placeholder="Search"
+                              Variant="@Variant.Outlined"
+                              Adornment="Adornment.Start"
+                              AdornmentIcon="@Icons.Material.Filled.Search"
+                              Margin="@Margin.Dense"
+                              IconSize="Size.Medium"
+                              Class="mt-0">
+                </MudTextField>
+                <SpinLoader IsLoading="_isLoading"
+                            Spinner="SpinnerType.Wave"/>
+            </ToolBarContent>
+
+            <RowTemplate>
+                <MudTd DataLabel="Name">
+                    @context.Name
+                </MudTd>
+                <MudTd DataLabel="Description">
+                    @context.Description
+                </MudTd>
+                <MudTd DataLabel="CreatedAt">
+                    @context.CreatedAt
+                </MudTd>
+                <MudTd DataLabel="HelpsCount">
+                    @context.OrganizationRequests?.Count()
+                </MudTd>
+                <MudTd DataLabel="Logo">
+                    @if (context.ImageDataUrl is not null)
+                    {
+                        <MudImage Src="@context.ImageDataUrl"/>
+                    }
+                    else
+                    {
+                        <MudText>
+                            No Image
+                        </MudText>
+                    }
+                </MudTd>
+            </RowTemplate>
+
+            <NoRecordsContent>
+                <MudText>
+                    No records found.
+                </MudText>
+            </NoRecordsContent>
+
+            <LoadingContent>
+                <MudText>
+                    Loading...
+                </MudText>
+            </LoadingContent>
+
+            <HeaderContent>
+                <MudTh>
+                    <MudTableSortLabel SortLabel="Name"
+                                       T="OrganizationView">
+                        Name
+                    </MudTableSortLabel>
+
+                </MudTh>
+                <MudTh>
+                    <MudTableSortLabel SortLabel="Description"
+                                       T="OrganizationView">
+                        Description
+                    </MudTableSortLabel>
+                </MudTh>
+                <MudTh>
+                    <MudTableSortLabel SortLabel="CreatedAt"
+                                       T="OrganizationView">
+                        Joined
+                    </MudTableSortLabel>
+                </MudTh>
+                <MudTh>
+                    Helped Times
+                </MudTh>
+                <MudTh>
+                    Logo
+                </MudTh>
+            </HeaderContent>
+
+            <PagerContent>
+                <MudTablePager/>
+            </PagerContent>
+        </MudTable>
+    </MudPaper>
+}

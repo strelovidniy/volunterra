@@ -1,0 +1,38 @@
+﻿@using MudBlazor
+
+<MudCard Elevation="0"
+         Square="true"
+         Class="@Class">
+    <MudCardHeader>
+        <CardHeaderAvatar>
+            @if (string.IsNullOrEmpty(ImageDataUrl))
+            {
+                <MudAvatar Color="Color.Secondary">
+                    @FirstLetterOfName
+                </MudAvatar>
+            }
+            else
+            {
+                <MudAvatar Image="@ImageDataUrl"
+                           Style="height: 50px; width: 50px;">
+                </MudAvatar>
+            }
+        </CardHeaderAvatar>
+        <CardHeaderContent>
+            <MudText Typo="Typo.body2">
+                Name
+            </MudText>
+            <MudText Typo="Typo.body2">
+                <strong>
+                    @FirstName @SecondName
+                </strong>
+            </MudText>
+            <MudText Typo="Typo.body2">
+                Email
+            </MudText>
+            <MudText Typo="Typo.caption">
+                @Email
+            </MudText>
+        </CardHeaderContent>
+    </MudCardHeader>
+</MudCard>

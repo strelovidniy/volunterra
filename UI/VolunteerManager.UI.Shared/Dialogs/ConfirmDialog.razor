@@ -1,0 +1,18 @@
+﻿@inject ISnackbar Snackbar
+
+@using MudBlazor
+
+<MudDialog Style="width: 360px;">
+    <DialogContent>
+        <div class="d-flex justify-center">
+            <MudText Typo="Typo.body1">
+                @Text
+            </MudText>
+
+        </div>
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="Cancel" Variant="Variant.Outlined">Cancel</MudButton>
+        <MudButton Color="Color.Error" OnClick="Confirm" Variant="Variant.Outlined">Yes</MudButton>
+    </DialogActions>
+</MudDialog>

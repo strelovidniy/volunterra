@@ -1,0 +1,79 @@
+﻿@using MudBlazor
+
+<MudDialog Style="width: 800px; overflow: hidden">
+    <DialogContent>
+        @if (_isDialogLoading)
+        {
+            <div class="loader-container">
+                <MudProgressCircular Color="Color.Primary"
+                                 Style="height: 10%; width: 10%;"
+                                 Indeterminate="true" />
+            </div>
+        }
+        else
+        {
+            <MudForm onsubmit="@OnSubmitAsync"
+                 Style="padding-bottom: 10px"
+                 @ref="_form">
+                <MudGrid>
+                    <MudItem xs="12">
+                        <MudTextField T="string"
+                                  Label="Name"
+                                  Variant="Variant.Outlined"
+                                  id="name"
+                                  Name="name"
+                                  @bind-Value="@_model.Name"
+                                  For="@(() => _model.Name)"
+                                  Validation="@ValidateNameField" />
+                    </MudItem>
+                    <MudItem xs="12">
+                        <MudTextField T="string"
+                                  Label="Description"
+                                  Variant="Variant.Outlined"
+                                  id="description"
+                                  Name="description"
+                                  @bind-Value="@_model.Description"
+                                  For="@(() => _model.Description)"
+                                  Validation="@ValidateDescriptionField"
+                                  Lines="6"/>
+                    </MudItem>
+                    <MudItem xs="12">
+                        <MudNumericField T="int?"
+                                  Label="Total Amount"
+                                  Variant="Variant.Outlined"
+                                  id="amount"
+                                  Name="amount"
+                                  @bind-Value="@_model.TotalAmount"
+                                         For="@(() => _model.TotalAmount)"
+                                  Validation="@ValidateTotalAmountField" />
+                    </MudItem>
+
+                    <MudItem Class="d-flex justify-center"
+                         xs="12">
+                        <MudButton ButtonType="ButtonType.Submit"
+                               Variant="Variant.Filled"
+                               Color="Color.Primary"
+                               Size="Size.Large"
+                               Disabled="_processing">
+                            @if (_processing)
+                            {
+                                <MudProgressCircular Class="ms-n1"
+                                             Size="Size.Small"
+                                             Indeterminate="true" />
+                                <MudText Class="ms-2">
+                                    Updating Incoming
+                                </MudText>
+                            }
+                            else
+                            {
+                                <MudText>
+                                    Update Incoming
+                                </MudText>
+                            }
+                        </MudButton>
+                    </MudItem>
+                </MudGrid>
+            </MudForm>
+        }
+    </DialogContent>
+</MudDialog>

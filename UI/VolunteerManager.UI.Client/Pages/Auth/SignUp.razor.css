@@ -1,0 +1,30 @@
+.mud-button-filled.mud-button-filled-error {
+    color: var(--mud-palette-error-text);
+    background-color: var(--mud-palette-error);
+}
+
+.mud-button-label {
+    width: 100%;
+    display: inherit;
+    -ms-align-items: inherit;
+    -o-align-items: inherit;
+    -webkit-align-items: inherit;
+    align-items: inherit;
+    -o-justify-content: inherit;
+    -webkit-justify-content: inherit;
+    justify-content: inherit;
+}
+
+{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border-width: 0;
+    border-style: solid;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.logo {
+    width: 230px;
+}

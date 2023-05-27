@@ -1,0 +1,125 @@
+﻿@page "/"
+
+@using Microsoft.AspNetCore.Components.Web
+@using MudBlazor
+
+<PageTitle>
+    Volunteer Manager
+</PageTitle>
+
+@if (_isPageLoading)
+{
+    <div class="loader-container">
+        <MudProgressCircular Color="Color.Primary" 
+                             Style="height: 10%; width: 10%;" 
+                             Indeterminate="true"/>
+    </div>
+}
+else
+{
+    @*<MudGrid>
+        <MudItem xs="12"
+                 md="6">
+            <MudGrid>
+                <MudItem xs="12">
+                    <MudContainer Style="background-color: var(--mud-palette-surface);
+                                         -ms-border-radius: 10px;
+                                         border-radius: 10px;
+                                         box-shadow: 0px 0px 30px 0px rgb(0 0 0 / 50%);
+                                         height: fit-content;
+                                         padding: 30px;">
+                        <MudDateRangePicker Label="Date Range for Spending and Incomings"
+                                            DateRange="_dateRange"
+                                            DateRangeChanged="@(async value => { _dateRange = value; await LoadSpendingsAndIncomingsAsync(_cts.Token); })" 
+                                            Disabled="_processing"/>
+                    </MudContainer>
+                </MudItem>
+                <MudItem xs="12"
+                         md="6">
+                    <MudGrid>
+                        @foreach (var spending in _spendings.GroupBy(s => s.SpendingDate.Date).Select(g => new { Date = g.Key, Spendings = g }))
+                        {
+                            <MudItem xs="12">
+                                <MudContainer Style="background-color: var(--mud-palette-surface); 
+                                                     -ms-border-radius: 10px;
+                                                     border-radius: 10px;
+                                                     box-shadow: 0px 0px 30px 0px rgb(0 0 0 / 50%);
+                                                     height: fit-content;
+                                                     padding: 15px;">
+                                    <MudList>
+                                        <MudListSubheader>
+                                            Spending:
+                                        </MudListSubheader>
+                                        <MudListItem Text="@spending.Date.ToLocalTime().Date.ToLongDateString()"
+                                             Style="cursor: pointer">
+                                            <NestedList>
+                                                @foreach (var s in spending.Spendings)
+                                                {
+                                                    <MudListItem Style="@GetListItemStyle(s)">
+                                                        @s.SpendingDate.TimeOfDay.ToString() @s.Amount.ToString("C2")
+                                                    </MudListItem>
+                                                }
+                                            </NestedList>
+                                        </MudListItem>
+                                    </MudList>
+                                </MudContainer>
+                            </MudItem>
+                        }
+                    </MudGrid>
+                </MudItem>
+                <MudItem xs="12"
+                         md="6">
+                    <MudGrid>
+                        @foreach (var incoming in _incomings.GroupBy(s => s.IncomingDate.Date).Select(g => new { Date = g.Key, Incoming = g }))
+                        {
+                            <MudItem xs="12">
+                                <MudContainer Style="background-color: var(--mud-palette-surface); 
+                                                     -ms-border-radius: 10px;
+                                                     border-radius: 10px;
+                                                     box-shadow: 0px 0px 30px 0px rgb(0 0 0 / 50%);
+                                                     height: fit-content;
+                                                     padding: 15px;">
+                                    <MudList>
+                                        <MudListSubheader>
+                                            Incoming:
+                                        </MudListSubheader>
+                                        <MudListItem Text="@incoming.Date.ToLocalTime().Date.ToLongDateString()"
+                                             Style="cursor: pointer">
+                                            <NestedList>
+                                                @foreach (var i in incoming.Incoming)
+                                                {
+                                                    <MudListItem Style="@GetListItemStyle(i)">
+                                                        @i.IncomingDate.TimeOfDay.ToString() @i.Amount.ToString("C2")
+                                                    </MudListItem>
+                                                }
+                                            </NestedList>
+                                        </MudListItem>
+                                    </MudList>
+                                </MudContainer>
+                            </MudItem>
+                        }
+                    </MudGrid>
+                </MudItem>
+            </MudGrid>
+        </MudItem>
+
+        <MudItem xs="12"
+                 md="6">
+            <MudContainer Style="background-color: var(--mud-palette-surface); 
+                                 -ms-border-radius: 10px;
+                                 border-radius: 10px;
+                                 box-shadow: 0px 0px 30px 0px rgb(0 0 0 / 50%);
+                                 height: fit-content;
+                                 padding: 15px 15px 15px 30px;">
+                <MudChart ChartType="ChartType.Line"
+                          ChartSeries="@_series"
+                          @bind-SelectedIndex="_selectedIndex"
+                          XAxisLabels="@_xAxisLabels"
+                          Width="100%"
+                          Height="50%"
+                          Style="max-height: 50vh"
+                          ChartOptions="@_chartOptions" />
+            </MudContainer>
+        </MudItem>
+    </MudGrid>*@
+}

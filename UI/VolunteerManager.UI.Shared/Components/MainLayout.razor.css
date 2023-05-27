@@ -1,0 +1,126 @@
+.page {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+main {
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    -o-flex: 1;
+    flex: 1;
+}
+
+.sidebar {
+     background: linear-gradient(180deg, rgb(5, 39, 103) 0%, #3a0647 70%);
+}
+
+.top-row {
+    -ms-align-items: center;
+    -o-align-items: center;
+    -webkit-align-items: center;
+    align-items: center;
+    background-color: #f7f7f7;
+    border-bottom: 1px solid #d6d5d5;
+    display: flex;
+    height: 3.5rem;
+    -o-justify-content: flex-end;
+    -webkit-justify-content: flex-end;
+    justify-content: flex-end;
+}
+
+.validation-errors .validation-message {
+    background: beige !important;
+    border: 1px solid #c4c4c4;
+    -ms-border-radius: 5px;
+    border-radius: 5px;
+    color: #ff6d41;
+    margin: 10px;
+    padding: 5px;
+}
+
+.top-row ::deep a, .top-row ::deep .btn-link {
+    margin-left: 1.5rem;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.top-row ::deep a:hover, .top-row ::deep .btn-link:hover {
+     text-decoration: underline;
+}
+
+.top-row ::deep a:first-child {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+@media (max-width: 640.98px) {
+    .top-row:not(.auth) {
+         display: none;
+    }
+
+    .top-row.auth {
+        -o-justify-content: space-between;
+        -webkit-justify-content: space-between;
+        justify-content: space-between;
+    }
+
+    .top-row ::deep a, .top-row ::deep .btn-link { margin-left: 0; }
+}
+
+@media (min-width: 641px) {
+    .page {
+         flex-direction: row;
+    }
+
+    .sidebar {
+        height: 100vh;
+        position: sticky;
+        top: 0;
+        width: 250px;
+    }
+
+    .top-row {
+        position: sticky;
+        top: 0;
+        z-index: 1;
+    }
+
+    .top-row.auth ::deep a:first-child {
+        flex: 1;
+        text-align: right;
+        width: 0;
+    }
+
+    .top-row, article {
+        padding-left: 2rem !important;
+        padding-right: 1.5rem !important;
+    }
+}
+
+.drawer-logo {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    -ms-align-items: center;
+    -o-align-items: center;
+    -webkit-align-items: center;
+    align-items: center;
+    -o-justify-content: space-between;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.drawer-logo ::deep.mud-typography {
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.currencies-container {
+    display: flex;
+    width: fit-content;
+    height: 64px;
+    max-width: 300px;
+    width: 100%
+}

@@ -1,0 +1,137 @@
+﻿@page "/auth/login"
+
+@using VolunteerManager.UI.Shared.Components
+@using Microsoft.AspNetCore.Components.Web
+@using MudBlazor
+
+<PageTitle>
+    Login
+</PageTitle>
+
+<AnimatedBackground/>
+
+<MudGrid Class="mx-auto text-center position-absolute"
+         Style="background-color: var(--mud-palette-surface); 
+                -ms-border-radius: 10px;
+                border-radius: 10px; 
+                box-shadow: 0px 0px 30px 0px rgb(0 0 0 / 50%); 
+                left: 50vw;
+                max-width: 450px; 
+                padding: 4rem 4rem 6rem; 
+                position: fixed;
+                top: 50vh;
+                -ms-transform: translate(-50%, -50%); 
+                -webkit-transform: translate(-50%, -50%);
+                transform: translate(-50%, -50%);">
+
+    <MudItem xs="12">
+        <Logo Class="d-block mx-auto mb-3 logo"/>
+    </MudItem>
+
+    <MudItem xs="12">
+
+        <MudForm @onsubmit="OnSubmitAsync"
+                 @ref="_form">
+
+            <MudGrid>
+
+                <MudItem xs="12">
+                    <div class="d-flex justify-center">
+                        <MudText>
+                            Login with your registered Email Address and Password
+                        </MudText>
+                    </div>
+                </MudItem>
+
+                <MudItem xs="12">
+                    <MudTextField T="string"
+                                  Label="Email"
+                                  Variant="Variant.Outlined"
+                                  id="email"
+                                  Name="email"
+                                  @bind-Value="@_model.Email"
+                                  For="@(() => _model.Email)"
+                                  Required="true"/>
+
+                </MudItem>
+
+                <MudItem xs="12">
+                    <MudTextField Label="Password"
+                                  Variant="Variant.Outlined"
+                                  @bind-Value="_model.Password"
+                                  For="@(() => _model.Password)"
+                                  Name="password"
+                                  InputType="@_passwordInput"
+                                  Adornment="Adornment.End"
+                                  AdornmentIcon="@_passwordInputIcon"
+                                  OnAdornmentClick="TogglePasswordVisibility"
+                                  Required="true"/>
+                </MudItem>
+
+                <MudItem Class="d-flex justify-center"
+                         xs="9">
+                    <MudButton ButtonType="ButtonType.Submit"
+                               Variant="Variant.Filled"
+                               Color="Color.Primary"
+                               Size="Size.Large"
+                               Disabled="@_processing"
+                               class="w-100">
+                        @if (_processing)
+                        {
+                            <MudProgressCircular Class="ms-n1"
+                                                 Size="Size.Small"
+                                                 Indeterminate="true"/>
+                            <MudText Class="ms-2">
+                                Signing In
+                            </MudText>
+                        }
+                        else
+                        {
+                            <MudText>
+                                Sign In
+                            </MudText>
+                        }
+                    </MudButton>
+                </MudItem>
+
+                <MudItem Class="d-flex justify-center"
+                         xs="1">
+
+                </MudItem>
+                <MudItem Class="d-flex justify-center"
+                         xs="2">
+                    <MudIconButton ButtonType="ButtonType.Button"
+                                   Variant="Variant.Filled"
+                                   Color="Color.Primary"
+                                   Size="Size.Large"
+                                   Icon="@Icons.Material.Filled.HowToReg"
+                                   class="w-100"
+                                   OnClick="@GoToSignUp">
+                    </MudIconButton>
+                </MudItem>
+
+                <MudItem Class="d-flex justify-center align-center flex-column"
+                         xs="12">
+                    <MudLink Underline="Underline.None"
+                             OnClick="ResetPasswordAsync">
+                        Forgot Password?
+                    </MudLink>
+                </MudItem>
+
+                <MudItem Class="d-flex justify-center align-center flex-column"
+                         xs="12">
+                    <MudText>
+                        Any troubles? Email us.
+                    </MudText>
+
+                    <MudLink Href="mailto:helpdesk@home-accounting.com"
+                             Underline="Underline.Always">
+                        helpdesk@home-accounting.com
+                    </MudLink>
+                </MudItem>
+            </MudGrid>
+        </MudForm>
+
+    </MudItem>
+
+</MudGrid>
