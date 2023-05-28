@@ -1,5 +1,16 @@
 import openai
 
+response = openai.Completion.create(
+  model="text-davinci-003",
+  prompt="I am a highly intelligent question answering bot. If you ask me a question that is rooted in truth, I will give you the answer. Q: What is earth",
+  temperature=0,
+  max_tokens=100,
+  top_p=1,
+  frequency_penalty=0.0,
+  presence_penalty=0.0,
+  stop=["\n"]
+)
+
 completion = openai.ChatCompletion.create(
   model="gpt-3.5-turbo",
   temperature=0.7,
