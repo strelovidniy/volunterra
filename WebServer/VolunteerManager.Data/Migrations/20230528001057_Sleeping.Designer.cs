@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VolunteerManager.Data.Context;
 
@@ -11,9 +12,11 @@ using VolunteerManager.Data.Context;
 namespace VolunteerManager.Data.Migrations
 {
     [DbContext(typeof(VolunteerManagerContext))]
-    partial class VolunteerManagerContextModelSnapshot : ModelSnapshot
+    [Migration("20230528001057_Sleeping")]
+    partial class Sleeping
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -42,7 +45,7 @@ namespace VolunteerManager.Data.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<Guid?>("OrganizationId")
+                    b.Property<Guid>("OrganizationId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("PhoneNumber")
@@ -56,18 +59,16 @@ namespace VolunteerManager.Data.Migrations
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid?>("UserId")
+                    b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
                     b.HasIndex("OrganizationId")
-                        .IsUnique()
-                        .HasFilter("[OrganizationId] IS NOT NULL");
+                        .IsUnique();
 
                     b.HasIndex("UserId")
-                        .IsUnique()
-                        .HasFilter("[UserId] IS NOT NULL");
+                        .IsUnique();
 
                     b.ToTable("ContactInfo", "dbo");
                 });
@@ -268,12 +269,14 @@ namespace VolunteerManager.Data.Migrations
                     b.HasOne("VolunteerManager.Data.Entities.Organization", "Organization")
                         .WithOne("ContactInfo")
                         .HasForeignKey("VolunteerManager.Data.Entities.ContactInfo", "OrganizationId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("VolunteerManager.Data.Entities.User", "User")
                         .WithOne("ContactInfo")
                         .HasForeignKey("VolunteerManager.Data.Entities.ContactInfo", "UserId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.Navigation("Organization");
 

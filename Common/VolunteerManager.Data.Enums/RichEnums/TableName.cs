@@ -9,6 +9,7 @@ public class TableName : RichEnum<string>
     public static TableName Organizations => new("Organizations");
 
     public static TableName OrganizationRequests => new("OrganizationRequests");
+    public static TableName OrganizationRequestReply => new("OrganizationRequestReply");
     public static TableName ContactInfo => new("ContactInfo");
 
     private TableName(string value) : base(value)

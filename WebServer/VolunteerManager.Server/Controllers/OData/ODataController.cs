@@ -79,8 +79,8 @@ public class ODataController : ODataControllerBase
 
     [HttpGet("organizationRequestsInvocations")]
     public IActionResult GetRequestsInvocations(
-        ODataQueryOptions<OrganizationInvocationReply> options,
-        [FromServices] IRepository<OrganizationInvocationReply> repository
+        ODataQueryOptions<OrganizationRequestReply> options,
+        [FromServices] IRepository<OrganizationRequestReply> repository
     )
     {
         var testData = new List<OrganizationRequestView>

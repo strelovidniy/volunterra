@@ -55,14 +55,17 @@ internal class ContactInfoConfiguration : IEntityTypeConfiguration<ContactInfo>
             .IsRequired(false);
 
         builder
-            .HasOne(cf => cf.Users)
+            .HasOne(cf => cf.User)
             .WithOne(user => user.ContactInfo!)
+            .HasForeignKey<ContactInfo>(x => x.UserId)
+            .HasPrincipalKey<User>(x => x.Id)
             .OnDelete(DeleteBehavior.Restrict);
    
         builder
             .HasOne(cf => cf.Organization)
             .WithOne(user => user.ContactInfo!)
+            .HasForeignKey<ContactInfo>(x => x.OrganizationId)
+            .HasPrincipalKey<Organization>(x => x.Id)
             .OnDelete(DeleteBehavior.Restrict);
-
     }
 }

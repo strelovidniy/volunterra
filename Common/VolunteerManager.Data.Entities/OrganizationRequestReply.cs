@@ -2,7 +2,7 @@
 using VolunteerManager.Data.Enums;
 
 namespace VolunteerManager.Data.Entities;
-public class OrganizationInvocationReply : Entity, IEntity
+public class OrganizationRequestReply : Entity, IEntity
 {
     public Guid? UserId { get; set; }
 
@@ -11,6 +11,5 @@ public class OrganizationInvocationReply : Entity, IEntity
     public Guid? OrganizationRequestId { get; set; }
 
     public OrganizationRequest? OrganizationRequest { get; set; }
-
     public UserStatus Status { get; set; }
 }
