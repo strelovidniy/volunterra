@@ -139,6 +139,36 @@ namespace VolunteerManager.Data.Migrations
                     b.ToTable("OrganizationRequests", "dbo");
                 });
 
+            modelBuilder.Entity("VolunteerManager.Data.Entities.OrganizationRequestReply", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("OrganizationRequestId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OrganizationRequestId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("OrganizationRequestReply");
+                });
+
             modelBuilder.Entity("VolunteerManager.Data.Entities.User", b =>
                 {
                     b.Property<Guid>("Id")
@@ -249,6 +279,22 @@ namespace VolunteerManager.Data.Migrations
                     b.Navigation("Organization");
                 });
 
+            modelBuilder.Entity("VolunteerManager.Data.Entities.OrganizationRequestReply", b =>
+                {
+                    b.HasOne("VolunteerManager.Data.Entities.OrganizationRequest", "OrganizationRequest")
+                        .WithMany()
+                        .HasForeignKey("OrganizationRequestId");
+
+                    b.HasOne("VolunteerManager.Data.Entities.User", "User")
+                        .WithMany("RequestReplies")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.Navigation("OrganizationRequest");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("VolunteerManager.Data.Entities.User", b =>
                 {
                     b.HasOne("VolunteerManager.Data.Entities.Organization", "Organization")
@@ -271,6 +317,8 @@ namespace VolunteerManager.Data.Migrations
             modelBuilder.Entity("VolunteerManager.Data.Entities.User", b =>
                 {
                     b.Navigation("ContactInfo");
+
+                    b.Navigation("RequestReplies");
                 });
 #pragma warning restore 612, 618
         }

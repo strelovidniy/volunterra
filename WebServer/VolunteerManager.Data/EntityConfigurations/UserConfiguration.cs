@@ -84,5 +84,10 @@ internal class UserConfiguration : IEntityTypeConfiguration<User>
             .HasForeignKey<ContactInfo>(cf => cf.Id)
             .OnDelete(DeleteBehavior.Restrict);
 
+        builder
+            .HasMany(organization => organization.RequestReplies)
+            .WithOne(user => user.User!)
+            .HasForeignKey(user => user.UserId)
+            .OnDelete(DeleteBehavior.Restrict);
     }
 }
