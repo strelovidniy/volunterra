@@ -67,4 +67,14 @@ public class OrganizationRequestsController : BaseController
 
         return Ok(response);
     }
+    
+    [HttpGet("locations")]
+    public async Task<IActionResult> GetLocationAsync(
+        CancellationToken cancellationToken = default
+    )
+    {
+        var response = await _organizationRequestService.GetLocationsAsync(cancellationToken);
+
+        return Ok(response);
+    }
 }
