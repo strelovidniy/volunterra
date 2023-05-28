@@ -14,6 +14,8 @@ internal class CreateOrganizationModelValidator : AbstractValidator<CreateOrgani
             .Cascade(CascadeMode.Stop)
             .NotEmpty()
             .WithStatusCode(StatusCode.OrganizationNameRequired)
+            .MaximumLength(250)
+            .WithStatusCode(StatusCode.OrganizationNameTooLong)
             .MustAsync(validationService.IsOrganizationNameUniqueAsync)
             .WithStatusCode(StatusCode.OrganizationNameAlreadyExists);
 

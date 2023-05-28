@@ -8,172 +8,350 @@
     Create your account
 </PageTitle>
 
-<AnimatedBackground/>
-
 @if (step == 1)
 {
-    <MudButton ButtonType="ButtonType.Submit"
-               Variant="Variant.Filled"
-               Color="Color.Primary"
-               Size="Size.Large"
-               Disabled="@_processing"
-               class="w-100"
-               OnClick="@(() => step++)">
-        Next
-    </MudButton>
-} else if (step == 2)
+    <div class="d-flex flex-row">
+        <div class="sign-up-part">
+            <div class="d-flex flex-column sign-up-part-inner">
+                <div class="d-flex flex-column sign-up-part-inner-inner">
+                    <MudHidden Breakpoint="Breakpoint.MdAndUp">
+                        <MudImage Src="images/get-started-partial.svg"
+                                  Style="height: 300px" />
+                    </MudHidden>
+                    <MudText Typo="Typo.h2"
+                             Style="font-weight: 800">
+                        Get started now
+                    </MudText>
+                    <MudText Typo="Typo.subtitle1"
+                             Style="margin-top: 15px;
+                                    margin-bottom: 75px;
+                                    font-size: 20px">
+                        choose account type to proceed
+                    </MudText>
+
+                    <MudSpacer />
+
+                    <MudButton ButtonType="ButtonType.Button"
+                               Variant="Variant.Outlined"
+                               Size="Size.Large"
+                               Disabled="@_processing"
+                               class="w-100"
+                               OnClick="@(() => step = 2)"
+                               Style="border-color: var(--mud-palette-success);
+                                      height: 50px;">
+                        Volunteer
+                    </MudButton>
+                    <MudButton ButtonType="ButtonType.Button"
+                               Variant="Variant.Outlined"
+                               Size="Size.Large"
+                               Disabled="@_processing"
+                               class="w-100"
+                               Style="border-color: var(--mud-palette-success);
+                                      height: 50px;
+                                      margin-top: 25px;"
+                               OnClick="@(() => step = 3)">
+                        Organization
+                    </MudButton>
+                    <MudSpacer />
+                    <MudText>
+                        This will affect the content you see on the platform
+                        and the way you communicate with other volunteers
+                        and organizations
+                    </MudText>
+                </div>
+            </div>
+        </div>
+        <MudHidden Breakpoint="Breakpoint.SmAndDown">
+            <div class="picture-part">
+                <MudImage Src="images/get-started-full.svg"
+                          Style="height: 100%" />
+            </div>
+        </MudHidden>
+    </div>
+}
+else if (step == 2)
 {
-    <MudButton ButtonType="ButtonType.Submit"
-               Variant="Variant.Filled"
-               Color="Color.Primary"
-               Size="Size.Large"
-               Disabled="@_processing"
-               class="w-100"
-               OnClick="@(() => step++)">
-        Next
-    </MudButton>
+    <div class="d-flex flex-row">
+        <div class="sign-up-part">
+            <div class="d-flex flex-column sign-up-part-inner">
+                <div class="d-flex flex-column sign-up-part-inner-inner">
+                    <MudHidden Breakpoint="Breakpoint.MdAndUp">
+                        <MudImage Src="images/sign-up-volunteer-partial.svg"
+                                  Style="height: 300px" />
+                    </MudHidden>
+                    <MudText Typo="Typo.h2"
+                             Style="font-weight: 800">
+                        Volunteer
+                    </MudText>
+                    <MudText Typo="Typo.subtitle1"
+                             Style="margin-top: 15px;
+                                    margin-bottom: 75px;
+                                    font-size: 20px">
+                        enter credentials to register an account
+                    </MudText>
+
+                    <MudForm @onsubmit="OnSubmitAsync"
+                    @ref="_form">
+
+                        <MudGrid>
+
+                            <MudItem xs="12">
+                                <MudTextField T="string"
+                                              Label="Email"
+                                              Variant="Variant.Outlined"
+                                              id="email"
+                                              Name="email"
+                                              @bind-Value="@_model.Email"
+                                              For="@(() => _model.Email)"
+                                              Validation="@ValidateEmailField" />
+
+                            </MudItem>
+
+                            <MudItem xs="12">
+                                <MudTextField T="string"
+                                              Label="First Name"
+                                              Variant="Variant.Outlined"
+                                              id="firstName"
+                                              Name="firstName"
+                                              @bind-Value="@_model.FirstName"
+                                              For="@(() => _model.FirstName)"
+                                              Required="true"
+                                              RequiredError="First Name is required" />
+
+                            </MudItem>
+
+                            <MudItem xs="12">
+                                <MudTextField T="string"
+                                              Label="Last Name"
+                                              Variant="Variant.Outlined"
+                                              id="lastName"
+                                              Name="lastName"
+                                              @bind-Value="@_model.LastName"
+                                              For="@(() => _model.LastName)"
+                                              Required="true"
+                                              RequiredError="Last Name is required" />
+
+                            </MudItem>
+
+                            <MudItem xs="12">
+                                <MudTextField Label="Password"
+                                              Variant="Variant.Outlined"
+                                              @bind-Value="_model.Password"
+                                              For="@(() => _model.Password)"
+                                              id="password"
+                                              Name="password"
+                                              InputType="@_passwordInput"
+                                              Adornment="Adornment.End"
+                                              AdornmentIcon="@_passwordInputIcon"
+                                              OnAdornmentClick="TogglePasswordVisibility"
+                                              Validation="ValidatePassword" />
+                            </MudItem>
+
+                            <MudItem xs="12">
+                                <MudTextField Label="Confirm Password"
+                                              Variant="Variant.Outlined"
+                                              @bind-Value="_model.ConfirmPassword"
+                                              For="@(() => _model.ConfirmPassword)"
+                                              id="confirmPassword"
+                                              Name="confirmPassword"
+                                              InputType="@_passwordInput"
+                                              Validation="ValidateConfirmPassword" />
+                            </MudItem>
+
+                            <MudItem xs="12"
+                                     Class="d-flex flex-row">
+                                <MudSpacer/>
+                            </MudItem>
+
+                            <MudItem Class="d-flex justify-center"
+                                     xs="12">
+                                <MudButton ButtonType="ButtonType.Submit"
+                                           Variant="Variant.Filled"
+                                           Color="Color.Success"
+                                           Size="Size.Large"
+                                           Disabled="@_processing"
+                                           class="w-100">
+
+                                    @if (_processing)
+                                    {
+                                        <MudProgressCircular Class="ms-n1"
+                                                             Size="Size.Small"
+                                                             Indeterminate="true" />
+                                        <MudText Class="ms-2">
+                                            Registering
+                                        </MudText>
+                                    }
+                                    else
+                                    {
+                                        <MudText>
+                                            Register
+                                        </MudText>
+                                    }
+                                </MudButton>
+                            </MudItem>
+                        </MudGrid>
+                    </MudForm>
+                </div>
+            </div>
+        </div>
+        <MudHidden Breakpoint="Breakpoint.SmAndDown">
+            <div class="picture-part">
+                <MudImage Src="images/sign-up-volunteer-full.svg"
+                          Style="height: 100%" />
+            </div>
+        </MudHidden>
+    </div>
 } else if (step == 3)
 {
-    <MudGrid Class="mx-auto text-center position-absolute"
-             Style="background-color: var(--mud-palette-surface);
-                -ms-border-radius: 10px;
-                border-radius: 10px;
-                box-shadow: 0px 0px 30px 0px rgb(0 0 0 / 50%);
-                left: 50vw;
-                max-width: 450px;
-                padding: 4rem 4rem 6rem;
-                position: fixed;
-                top: 50vh;
-                -ms-transform: translate(-50%, -50%);
-                -webkit-transform: translate(-50%, -50%);
-                transform: translate(-50%, -50%);">
+    <div class="d-flex flex-row">
+        <div class="sign-up-part">
+            <div class="d-flex flex-column sign-up-part-inner">
+                <div class="d-flex flex-column sign-up-part-inner-inner">
+                    <MudHidden Breakpoint="Breakpoint.MdAndUp">
+                        <MudImage Src="images/sign-up-organization-partial.svg"
+                                  Style="height: 300px" />
+                    </MudHidden>
+                    <MudText Typo="Typo.h2"
+                             Style="font-weight: 800">
+                        Organization
+                    </MudText>
+                    <MudText Typo="Typo.subtitle1"
+                             Style="margin-top: 15px;
+                                    margin-bottom: 75px;
+                                    font-size: 20px">
+                        enter credentials to register an account
+                    </MudText>
 
-        <MudItem xs="12"
-                 Style="padding: 0">
-            <Logo Class="d-block mx-auto mb-3 logo" />
-        </MudItem>
+                    <MudForm @onsubmit="OnSubmitExtendedAsync"
+                             @ref="_extendedForm">
 
-        <MudItem xs="12">
+                        <MudGrid>
 
-            <MudForm @onsubmit="OnSubmitAsync"
-            @ref="_form">
+                            <MudItem xs="12">
+                                <MudTextField T="string"
+                                              Label="Email"
+                                              Variant="Variant.Outlined"
+                                              id="email"
+                                              Name="email"
+                                              @bind-Value="@_extendedModel.Email"
+                                              For="@(() => _extendedModel.Email)"
+                                              Validation="@ValidateEmailField" />
 
-                <MudGrid>
+                            </MudItem>
 
-                    <MudItem xs="12"
-                             Style="padding: 0">
-                        <div class="d-flex justify-center">
-                            <MudText>
-                                Create your account
-                            </MudText>
-                        </div>
-                    </MudItem>
+                            <MudItem xs="12">
+                                <MudTextField T="string"
+                                              Label="First Name"
+                                              Variant="Variant.Outlined"
+                                              id="firstName"
+                                              Name="firstName"
+                                              @bind-Value="@_extendedModel.FirstName"
+                                              For="@(() => _extendedModel.FirstName)"
+                                              Required="true"
+                                              RequiredError="First Name is required" />
 
-                    <MudItem xs="12">
-                        <MudTextField T="string"
-                                      Label="Email"
-                                      Variant="Variant.Outlined"
-                                      id="email"
-                                      Name="email"
-                        @bind-Value="@_model.Email"
-                                      For="@(() => _model.Email)"
-                                      Validation="@ValidateEmailField" />
+                            </MudItem>
 
-                    </MudItem>
+                            <MudItem xs="12">
+                                <MudTextField T="string"
+                                              Label="Last Name"
+                                              Variant="Variant.Outlined"
+                                              id="lastName"
+                                              Name="lastName"
+                                              @bind-Value="@_extendedModel.LastName"
+                                              For="@(() => _extendedModel.LastName)"
+                                              Required="true"
+                                              RequiredError="Last Name is required" />
 
-                    <MudItem xs="12">
-                        <MudTextField T="string"
-                                      Label="First Name"
-                                      Variant="Variant.Outlined"
-                                      id="firstName"
-                                      Name="firstName"
-                        @bind-Value="@_model.FirstName"
-                                      For="@(() => _model.FirstName)"
-                                      Required="true"
-                                      RequiredError="First Name is required" />
+                            </MudItem>
 
-                    </MudItem>
+                            <MudItem xs="12">
+                                <MudTextField Label="Password"
+                                              Variant="Variant.Outlined"
+                                @bind-Value="_extendedModel.Password"
+                                              For="@(() => _extendedModel.Password)"
+                                              id="password"
+                                              Name="password"
+                                              InputType="@_passwordInput"
+                                              Adornment="Adornment.End"
+                                              AdornmentIcon="@_passwordInputIcon"
+                                              OnAdornmentClick="TogglePasswordVisibility"
+                                              Validation="ValidatePassword" />
+                            </MudItem>
 
-                    <MudItem xs="12">
-                        <MudTextField T="string"
-                                      Label="Last Name"
-                                      Variant="Variant.Outlined"
-                                      id="lastName"
-                                      Name="lastName"
-                        @bind-Value="@_model.LastName"
-                                      For="@(() => _model.LastName)"
-                                      Required="true"
-                                      RequiredError="Last Name is required" />
+                            <MudItem xs="12">
+                                <MudTextField Label="Confirm Password"
+                                              Variant="Variant.Outlined"
+                                              @bind-Value="_extendedModel.ConfirmPassword"
+                                              For="@(() => _extendedModel.ConfirmPassword)"
+                                              id="confirmPassword"
+                                              Name="confirmPassword"
+                                              InputType="@_passwordInput"
+                                              Validation="ValidateConfirmPasswordExtended" />
+                            </MudItem>
+                            
+                            <MudItem xs="12">
+                                <MudTextField Label="Organization Name"
+                                              Variant="Variant.Outlined"
+                                              @bind-Value="_extendedModel.OrganizationName"
+                                              For="@(() => _extendedModel.OrganizationName)"
+                                              id="organizationName"
+                                              Name="organizationName"
+                                              Validation="ValidateOrganizationName" />
+                            </MudItem>
 
-                    </MudItem>
+                            <MudItem xs="12">
+                                <MudTextField Label="Organization Description"
+                                              Variant="Variant.Outlined"
+                                              @bind-Value="_extendedModel.OrganizationDescription"
+                                              For="@(() => _extendedModel.OrganizationDescription)"
+                                              id="organizationDescription"
+                                              Name="organizationDescription"
+                                              Lines="4"
+                                              Validation="ValidateOrganizationDescription" />
+                            </MudItem>
 
-                    <MudItem xs="12">
-                        <MudTextField Label="Password"
-                                      Variant="Variant.Outlined"
-                        @bind-Value="_model.Password"
-                                      For="@(() => _model.Password)"
-                                      id="password"
-                                      Name="password"
-                                      InputType="@_passwordInput"
-                                      Adornment="Adornment.End"
-                                      AdornmentIcon="@_passwordInputIcon"
-                                      OnAdornmentClick="TogglePasswordVisibility"
-                                      Validation="ValidatePassword" />
-                    </MudItem>
+                            <MudItem xs="12"
+                                     Class="d-flex flex-row">
+                                <MudSpacer />
+                            </MudItem>
 
-                    <MudItem xs="12">
-                        <MudTextField Label="Confirm Password"
-                                      Variant="Variant.Outlined"
-                        @bind-Value="_model.ConfirmPassword"
-                                      For="@(() => _model.ConfirmPassword)"
-                                      id="confirmPassword"
-                                      Name="confirmPassword"
-                                      InputType="@_passwordInput"
-                                      Validation="ValidateConfirmPassword" />
-                    </MudItem>
+                            <MudItem Class="d-flex justify-center"
+                                     xs="12">
+                                <MudButton ButtonType="ButtonType.Submit"
+                                           Variant="Variant.Filled"
+                                           Color="Color.Success"
+                                           Size="Size.Large"
+                                           Disabled="@_processing"
+                                           class="w-100">
 
-                    <MudItem Class="d-flex justify-center"
-                             xs="12">
-                        <MudButton ButtonType="ButtonType.Submit"
-                                   Variant="Variant.Filled"
-                                   Color="Color.Primary"
-                                   Size="Size.Large"
-                                   Disabled="@_processing"
-                                   class="w-100">
-
-                            @if (_processing)
-                            {
-                                <MudProgressCircular Class="ms-n1"
-                                                     Size="Size.Small"
-                                                     Indeterminate="true" />
-                                <MudText Class="ms-2">
-                                    Signing Up
-                                </MudText>
-                            }
-                            else
-                            {
-                                <MudText>
-                                    Sign Up
-                                </MudText>
-                            }
-                        </MudButton>
-                    </MudItem>
-
-                    <MudItem Class="d-flex justify-center align-center flex-column"
-                             xs="12">
-                        <MudText>
-                            Any troubles? Email us.
-                        </MudText>
-
-                        <MudLink Href="mailto:helpdesk@home-accounting.com"
-                                 Underline="Underline.Always">
-                            helpdesk@home-accounting.com
-                        </MudLink>
-                    </MudItem>
-                </MudGrid>
-            </MudForm>
-
-        </MudItem>
-
-    </MudGrid>
+                                    @if (_processing)
+                                    {
+                                        <MudProgressCircular Class="ms-n1"
+                                                             Size="Size.Small"
+                                                             Indeterminate="true" />
+                                        <MudText Class="ms-2">
+                                            Registering
+                                        </MudText>
+                                    }
+                                    else
+                                    {
+                                        <MudText>
+                                            Register
+                                        </MudText>
+                                    }
+                                </MudButton>
+                            </MudItem>
+                        </MudGrid>
+                    </MudForm>
+                </div>
+            </div>
+        </div>
+        <MudHidden Breakpoint="Breakpoint.SmAndDown">
+            <div class="picture-part">
+                <MudImage Src="images/sign-up-organization-full.svg"
+                          Style="height: 100%" />
+            </div>
+        </MudHidden>
+    </div>
 }

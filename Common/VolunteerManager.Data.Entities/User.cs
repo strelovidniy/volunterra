@@ -31,7 +31,9 @@ public class User : Entity, IEntity
     public ContactInfo? ContactInfo { get; set; }
     public Guid? OrganizationId { get; set; }
     public Guid? ContactInfoId { get; set; }
-
+    public IEnumerable<OrganizationRequestReply>? RequestReplies { get; set; }
+    
+    public IEnumerable<Achievement>? Achievements { get; set; }
     public bool IsOrganizationOwner { get; set; }
 
     public bool IsOrganizationAdmin { get; set; }

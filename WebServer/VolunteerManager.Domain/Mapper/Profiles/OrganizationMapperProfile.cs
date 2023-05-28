@@ -14,5 +14,7 @@ internal class OrganizationMapperProfile : Profile
             .ConvertUsing(new CreateOrganizationModelToOrganizationConverter());
 
         CreateMap<Organization, OrganizationView>().ConvertUsing(new OrganizationToOrganizationViewConverter());
+        CreateMap<Skill, SkillView>();
+        CreateMap<Achievement, AchievementView>();
     }
 }

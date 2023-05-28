@@ -6,7 +6,7 @@ using VolunteerManager.Models.Update;
 
 namespace VolunteerManager.Domain.Validators;
 
-internal class UpdateRequestModelValidator : AbstractValidator<UpdateRequestModel>
+internal class UpdateRequestModelValidator : AbstractValidator<UpdateOrganizationRequestModel>
 {
     public UpdateRequestModelValidator(IValidationService validationService)
     {
@@ -24,9 +24,5 @@ internal class UpdateRequestModelValidator : AbstractValidator<UpdateRequestMode
             .MaximumLength(250)
             .WithStatusCode(StatusCode.RequestNameMustHaveNotMoreThan250Characters);
 
-        RuleFor(updateRequestModel => updateRequestModel.TotalAmount)
-            .Cascade(CascadeMode.Stop)
-            .NotEmpty()
-            .WithStatusCode(StatusCode.TotalAmountRequired);
     }
 }

@@ -23,11 +23,11 @@ public partial class Requests : IDisposable
 
     private bool _isPageLoading = true;
 
-    private MudTable<RequestView> _table = null!;
+    private MudTable<OrganizationRequestView> _table = null!;
 
     private bool _isLoading;
 
-    private List<RequestView> _requests = new();
+    private List<OrganizationRequestView> _requests = new();
 
     private string _searchString = string.Empty;
 
@@ -43,7 +43,7 @@ public partial class Requests : IDisposable
     private IDialogService DialogService { get; set; } = null!;
 
     [Inject]
-    private IRequestService RequestService { get; set; } = null!;
+    private IOrganizationRequestService OrganizationRequestService { get; set; } = null!;
 
     [Inject]
     private IAuthService AuthService { get; set; } = null!;
@@ -79,7 +79,7 @@ public partial class Requests : IDisposable
         }
     }
 
-    private async Task UpdateRequestDialogAsync(RequestView request)
+    private async Task UpdateRequestDialogAsync(OrganizationRequestView request)
     {
         var parameters = new DialogParameters
         {
@@ -107,7 +107,7 @@ public partial class Requests : IDisposable
     }
 
     private async Task DeleteRequestAsync(
-        RequestView request,
+        OrganizationRequestView request,
         CancellationToken cancellationToken = default
     )
     {
@@ -136,7 +136,7 @@ public partial class Requests : IDisposable
             HttpClient.OnError += OnError;
             HttpClient.OnValidationError += OnValidationError;
 
-            await RequestService.DeleteRequestAsync(request.Id, cancellationToken);
+            await OrganizationRequestService.DeleteRequestAsync(request.Id, cancellationToken);
 
             if (!isSuccess)
             {
@@ -154,12 +154,12 @@ public partial class Requests : IDisposable
         }
     }
 
-    private async Task<TableData<RequestView>> ServerReloadAsync(TableState state)
+    private async Task<TableData<OrganizationRequestView>> ServerReloadAsync(TableState state)
     {
         _isLoading = true;
 
         var builder = new ODataQueryBuilder("api/odata")
-            .For<RequestView>("requests")
+            .For<OrganizationRequestView>("requests")
             .ByList()
             .Top(state.PageSize)
             .Skip(state.PageSize * state.Page);
@@ -171,7 +171,6 @@ public partial class Requests : IDisposable
             {
                 "Description" => builder.OrderBy(o => o.Description),
                 "RequestDate" => builder.OrderBy(o => o.RequestDate),
-                "Amount" => builder.OrderBy(o => o.TotalAmount),
                 "RequestUpdatedAt" => builder.OrderBy(o => o.RequestUpdatedAt),
                 _ => builder
             },
@@ -179,7 +178,6 @@ public partial class Requests : IDisposable
             {
                 "Description" => builder.OrderByDescending(o => o.Description),
                 "RequestDate" => builder.OrderByDescending(o => o.RequestDate),
-                "Amount" => builder.OrderByDescending(o => o.TotalAmount),
                 "RequestUpdatedAt" => builder.OrderByDescending(o => o.RequestUpdatedAt),
                 _ => builder
             },
@@ -199,7 +197,7 @@ public partial class Requests : IDisposable
 
         _isLoading = false;
 
-        return new TableData<RequestView>
+        return new TableData<OrganizationRequestView>
         {
             Items = _requests,
             TotalItems = oDataResult?.Count ?? 0

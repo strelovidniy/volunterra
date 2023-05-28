@@ -4,7 +4,7 @@ using VolunteerManager.Models.Update;
 
 namespace VolunteerManager.Domain.Services.Abstraction;
 
-internal interface IOrganizationService
+public interface IOrganizationService
 {
     public Task CreateOrganizationAsync(
         CreateOrganizationModel model,

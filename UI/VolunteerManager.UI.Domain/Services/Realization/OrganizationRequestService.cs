@@ -6,26 +6,34 @@ using VolunteerManager.UI.Domain.Services.Abstraction;
 
 namespace VolunteerManager.UI.Domain.Services.Realization;
 
-internal class RequestService : IRequestService
+internal class OrganizationRequestService : IOrganizationRequestService
 {
     private readonly IVolunteerManagerHttpClient _httpClient;
 
-    public RequestService(
+    public OrganizationRequestService(
         IVolunteerManagerHttpClient httpClient
     ) => _httpClient = httpClient;
 
-    public Task CreateRequestAsync(
-        CreateRequestModel model,
+    public Task UploadImageAsync(
+        byte[] bytes,
         CancellationToken cancellationToken = default
-    ) => _httpClient
-        .PostAsync(
-            "api/v1/requests",
-            _httpClient.CreateJsonContent(model),
-            cancellationToken
-        );
+    )
+    {
+        var base64Content = Convert.ToBase64String(bytes);
+
+        var formData = new MultipartFormDataContent();
+        formData.Add(new StringContent(base64Content), "fileContent");
+
+        return _httpClient
+            .PostAsync(
+                "api/v1/organizationRequests/image",
+                formData,
+                cancellationToken
+            );
+    }
 
     public Task UpdateRequestAsync(
-        UpdateRequestModel model,
+        UpdateOrganizationRequestModel model,
         CancellationToken cancellationToken = default
     ) => _httpClient
         .PutAsync(
@@ -48,16 +56,24 @@ internal class RequestService : IRequestService
         CancellationToken cancellationToken = default
     ) => _httpClient
         .PostAsync(
-            "api/v1/requests/organization",
+            "api/v1/organizationRequests",
             _httpClient.CreateJsonContent(model),
             cancellationToken
         );
 
-    public Task<IEnumerable<RequestView>?> GetRequestsAsync(
+    public Task<IEnumerable<OrganizationRequestView>?> GetRequestsAsync(
         CancellationToken cancellationToken = default
     ) => _httpClient
-        .GetAsync<IEnumerable<RequestView>>(
+        .GetAsync<IEnumerable<OrganizationRequestView>>(
             "api/v1/requests",
+            cancellationToken
+        );
+
+    public Task<OrganizationRequestView?> GetOrganizationRequestAsync(
+        Guid organizationRequestId,
+        CancellationToken cancellationToken = default
+    ) => _httpClient.GetAsync<OrganizationRequestView>(
+            $"api/v1/request/{organizationRequestId}",
             cancellationToken
         );
 }

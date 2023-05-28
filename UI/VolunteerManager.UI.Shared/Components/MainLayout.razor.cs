@@ -14,21 +14,15 @@ public partial class MainLayout : IDisposable
 
     private UserView? _currentUser;
 
-    private bool _drawerOpen = true;
-    private bool _settingsExpanded = true;
-    private bool _adminExpanded = true;
-
     private string _theme = null!;
     private bool _isDarkMode;
     private MudThemeProvider _mudThemeProvider = null!;
 
+    private bool? _themeState;
+
     private bool _inited;
 
-    private char? _firstLetterOfName;
-
-    private string? _fullName;
-
-    private IEnumerable<RequestView> _requests = new List<RequestView>();
+    private bool _isDrawerOpen;
 
     private bool IsAuth => NavManager.Uri.Contains("/auth/");
 
@@ -46,9 +40,6 @@ public partial class MainLayout : IDisposable
 
     [Inject]
     private ILocalStorageService LocalStorageService { get; set; } = null!;
-
-    [Inject]
-    private IRequestService RequestService { get; set; } = null!;
 
     public void Dispose()
     {
@@ -113,16 +104,7 @@ public partial class MainLayout : IDisposable
             return;
         }
 
-        _requests = await RequestService.GetRequestsAsync(_cts.Token) ?? new List<RequestView>();
-
         _currentUser = await AuthService.GetCurrentUserAsync();
-
-        if (_currentUser?.FirstName.Length > 0)
-        {
-            _firstLetterOfName = _currentUser.FirstName[0];
-        }
-
-        _fullName = $@"{_currentUser?.FirstName} {_currentUser?.LastName}";
 
         GetPermissions();
 
@@ -139,13 +121,28 @@ public partial class MainLayout : IDisposable
         {
             _theme = await LocalStorageService.GetItemAsync<string>("theme") ?? "System Default";
 
-            await OnThemeChangedAsync(_theme);
+            _themeState = _theme switch
+            {
+                "System Default" => null,
+                "Dark" => false,
+                "Light" => true,
+                _ => _themeState
+            };
+
+            await OnThemeChangedAsync(_themeState);
         }
     }
 
-    private async Task OnThemeChangedAsync(string theme)
+    private async Task OnThemeChangedAsync(bool? state)
     {
-        _theme = theme;
+        _themeState = state;
+
+        _theme = _themeState switch
+        {
+            null => "System Default",
+            true => "Light",
+            false => "Dark"
+        };
 
         await LocalStorageService.SetItemAsStringAsync("theme", _theme);
 
@@ -180,7 +177,6 @@ public partial class MainLayout : IDisposable
 
         return InvokeAsync(StateHasChanged);
     }
-
 
     private async Task LogoutAsync()
     {

@@ -1,4 +1,5 @@
 ﻿using EntityFrameworkCore.RepositoryInfrastructure;
+using VolunteerManager.Data.Enums;
 
 namespace VolunteerManager.Data.Entities;
 
@@ -8,9 +9,14 @@ public class OrganizationRequest : Entity, IEntity
 
     public Organization? Organization { get; set; }
 
-    public Guid RequestId { get; set; }
-    public string Title { get; set; }
-    public string Description { get; set; }
-    public string Location { get; set; }
+    public string Title { get; set; } = null!;
 
+    public string Description { get; set; } = null!;
+
+    public string Location { get; set; } = null!;
+    public OrganizationRequestCategory OrganizationRequestCategory { get; set; }
+
+    public IEnumerable<Skill> Skills { get; set; } 
+    public IEnumerable<Achievement> Achievements { get; set; } 
+    public string? ImageDataUrl { get; set; }
 }

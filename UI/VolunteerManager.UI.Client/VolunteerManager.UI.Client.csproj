@@ -36,4 +36,8 @@
 		</Content>
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="wwwroot\css\noah-head\font\fonts\" />
+	</ItemGroup>
+
 </Project>

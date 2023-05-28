@@ -53,7 +53,7 @@ internal class AuthService : IAuthService
     )
     {
         var user = await _userRepository
-            .Query()
+            .NoTrackingQuery()
             .Include(user => user.Organization)
             .FirstOrDefaultAsync(
                 u => u.Email == model.Email,
@@ -66,6 +66,11 @@ internal class AuthService : IAuthService
             user!.PasswordHash == PasswordHasher.GetHash(model.Password),
             StatusCode.IncorrectPassword
         );
+
+        if (user.Organization is not null)
+        {
+            user.Organization.Users = new List<User>();
+        }
 
         var refreshToken = Guid.NewGuid();
         var refreshTokenExpireAt = DateTime.UtcNow.AddSeconds(_jwtSettings.SecondsToExpireRefreshToken);

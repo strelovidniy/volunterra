@@ -4,7 +4,7 @@
 @using MudBlazor
 
 <PageTitle>
-    Volunteer Manager
+    VOLUNTERRA
 </PageTitle>
 
 @if (_isPageLoading)
@@ -17,109 +17,138 @@
 }
 else
 {
-    @*<MudGrid>
-        <MudItem xs="12"
-                 md="6">
-            <MudGrid>
-                <MudItem xs="12">
-                    <MudContainer Style="background-color: var(--mud-palette-surface);
-                                         -ms-border-radius: 10px;
-                                         border-radius: 10px;
-                                         box-shadow: 0px 0px 30px 0px rgb(0 0 0 / 50%);
-                                         height: fit-content;
-                                         padding: 30px;">
-                        <MudDateRangePicker Label="Date Range for Spending and Incomings"
-                                            DateRange="_dateRange"
-                                            DateRangeChanged="@(async value => { _dateRange = value; await LoadSpendingsAndIncomingsAsync(_cts.Token); })" 
-                                            Disabled="_processing"/>
+    @if (_currentUser?.Organization == null)
+    {
+        <div class="tabs">
+            <MudTabs Elevation="0" 
+                     Rounded="true" 
+                     ApplyEffectsToContainer="true" 
+                     PanelClass="pa-6"
+                     Centered="true"
+                     Color="Color.Transparent"
+                     @bind-ActivePanelIndex="_selectedIndex">
+                <MudTabPanel Text="All"/>
+                <MudTabPanel Text="For me"/>
+            </MudTabs>
+        </div>
+        <div class="filters">
+            <MudExpansionPanel Text="Show filters"
+                               IsExpanded="true">
+                <div class="d-flex flex-row">
+                    <MudButton Color="Color.Success"
+                               Variant="Variant.Filled"
+                               Size="Size.Large"
+                               Style="width: 150px;
+                                      margin-top: 15px;">
+                        All
+                    </MudButton>
+                </div>
+                <div class="d-flex flex-row">
+                    <MudButton Color="Color.Success"
+                               Variant="Variant.Filled"
+                               Size="Size.Large"
+                               Style="width: 150px;
+                                      margin-top: 15px;">
+                        All
+                    </MudButton>
+                </div>
+            </MudExpansionPanel>
+        </div>
+    }
+    else
+    {
+        <div class="tabs">
+            <MudTabs Elevation="0"
+                     Rounded="true"
+                     ApplyEffectsToContainer="true"
+                     PanelClass="pa-6"
+                     Centered="true"
+                     Color="Color.Transparent"
+                     @bind-ActivePanelIndex="_selectedIndex">
+                <MudTabPanel Text="My Events" />
+                <MudTabPanel Text="Other organizations" />
+            </MudTabs>
+        </div>
+        @if (_selectedIndex == 0)
+        {
+            <div class="d-flex flex-row align-center justify-center">
+                <MudButton Style="border-radius: 26px;"
+                           OnClick="@(() => NavigationManager.NavigateTo("/create-new-event"))">
+                    <MudContainer Class="d-flex flex-row">
+                        <MudAvatar Color="Color.Success"
+                                   Style="margin-right: 20px;
+                                          margin-top: -4px;">
+                            <MudIcon Icon="@Icons.Material.Outlined.Add"
+                                     Style="color: white;"/>
+                        </MudAvatar>
+                        <MudText Typo="Typo.h4">
+                            Add new event
+                        </MudText>
                     </MudContainer>
-                </MudItem>
-                <MudItem xs="12"
-                         md="6">
-                    <MudGrid>
-                        @foreach (var spending in _spendings.GroupBy(s => s.SpendingDate.Date).Select(g => new { Date = g.Key, Spendings = g }))
-                        {
-                            <MudItem xs="12">
-                                <MudContainer Style="background-color: var(--mud-palette-surface); 
-                                                     -ms-border-radius: 10px;
-                                                     border-radius: 10px;
-                                                     box-shadow: 0px 0px 30px 0px rgb(0 0 0 / 50%);
-                                                     height: fit-content;
-                                                     padding: 15px;">
-                                    <MudList>
-                                        <MudListSubheader>
-                                            Spending:
-                                        </MudListSubheader>
-                                        <MudListItem Text="@spending.Date.ToLocalTime().Date.ToLongDateString()"
-                                             Style="cursor: pointer">
-                                            <NestedList>
-                                                @foreach (var s in spending.Spendings)
-                                                {
-                                                    <MudListItem Style="@GetListItemStyle(s)">
-                                                        @s.SpendingDate.TimeOfDay.ToString() @s.Amount.ToString("C2")
-                                                    </MudListItem>
-                                                }
-                                            </NestedList>
-                                        </MudListItem>
-                                    </MudList>
-                                </MudContainer>
-                            </MudItem>
-                        }
-                    </MudGrid>
-                </MudItem>
-                <MudItem xs="12"
-                         md="6">
-                    <MudGrid>
-                        @foreach (var incoming in _incomings.GroupBy(s => s.IncomingDate.Date).Select(g => new { Date = g.Key, Incoming = g }))
-                        {
-                            <MudItem xs="12">
-                                <MudContainer Style="background-color: var(--mud-palette-surface); 
-                                                     -ms-border-radius: 10px;
-                                                     border-radius: 10px;
-                                                     box-shadow: 0px 0px 30px 0px rgb(0 0 0 / 50%);
-                                                     height: fit-content;
-                                                     padding: 15px;">
-                                    <MudList>
-                                        <MudListSubheader>
-                                            Incoming:
-                                        </MudListSubheader>
-                                        <MudListItem Text="@incoming.Date.ToLocalTime().Date.ToLongDateString()"
-                                             Style="cursor: pointer">
-                                            <NestedList>
-                                                @foreach (var i in incoming.Incoming)
-                                                {
-                                                    <MudListItem Style="@GetListItemStyle(i)">
-                                                        @i.IncomingDate.TimeOfDay.ToString() @i.Amount.ToString("C2")
-                                                    </MudListItem>
-                                                }
-                                            </NestedList>
-                                        </MudListItem>
-                                    </MudList>
-                                </MudContainer>
-                            </MudItem>
-                        }
-                    </MudGrid>
-                </MudItem>
-            </MudGrid>
-        </MudItem>
+                </MudButton>
+            </div>
+        }
+    }
 
-        <MudItem xs="12"
-                 md="6">
-            <MudContainer Style="background-color: var(--mud-palette-surface); 
-                                 -ms-border-radius: 10px;
-                                 border-radius: 10px;
-                                 box-shadow: 0px 0px 30px 0px rgb(0 0 0 / 50%);
-                                 height: fit-content;
-                                 padding: 15px 15px 15px 30px;">
-                <MudChart ChartType="ChartType.Line"
-                          ChartSeries="@_series"
-                          @bind-SelectedIndex="_selectedIndex"
-                          XAxisLabels="@_xAxisLabels"
-                          Width="100%"
-                          Height="50%"
-                          Style="max-height: 50vh"
-                          ChartOptions="@_chartOptions" />
-            </MudContainer>
-        </MudItem>
-    </MudGrid>*@
+    @foreach (var item in _organizationRequests.GroupBy(x => x.Category).Select(x => new
+    {
+        x.Key,
+        x
+    }))
+    {
+        <MudExpansionPanel Text="Show filters"
+                           IsExpanded="true">
+            <TitleContent>
+                <div class="d-flex">
+                    <MudText>
+                        @item.Key
+                    </MudText>
+                </div>
+            </TitleContent>
+            <ChildContent>
+                <div class="req-items">
+                    @for (var i = 0; i < item.x.Count(); ++i)
+                    {
+                        var req = item.x.ElementAt(i);
+                        
+                        <div class="@("req-item" + (i % 3 == 0 ? " large-item" : string.Empty))"
+                             style="@($"background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url({req.ImageDataUrl});")">
+                            <MudText Typo="Typo.h3"
+                                     Style="color: white;
+                                            margin-bottom: 35px;">
+                                @req.Title
+                            </MudText>
+                            <MudText Style="font-size: 16px; 
+                                            font-weight: 400;
+                                            margin-bottom: 40px;
+                                            color: white;">
+                                @req.Location
+                            </MudText>
+                            <MudText Style="color: white">
+                                @req.Description
+                            </MudText>
+                            <div class="d-flex flex-row bottom-item-bar">
+                                <MudButton Color="Color.Success"
+                                           Variant="Variant.Filled"
+                                           Size="Size.Large"
+                                           Style="width: 250px;
+                                                  margin-top: 15px;
+                                                  color: white;
+                                                  border-radius: 10px;">
+                                    @req.RequestDate.ToLongDateString()
+                                </MudButton>
+                                <MudSpacer/>
+                                <MudIconButton Icon="@Icons.Material.Outlined.ArrowForward"
+                                               Size="Size.Large"
+                                               Style="width: 50px;
+                                                      height: 50px;
+                                                      margin-top: 15px;
+                                                      color: white;"/>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </ChildContent>
+        </MudExpansionPanel>
+    }
 }

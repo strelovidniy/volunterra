@@ -106,9 +106,21 @@ internal class UserService : IUserService
     public async Task<UserView?> GetUserAsync(
         Guid id,
         CancellationToken cancellationToken = default
-    ) => _mapper.Map<UserView>(await _userRepository
-        .Query()
-        .FirstOrDefaultAsync(user => user.Id == id, cancellationToken));
+    )
+    {
+        var user = await _userRepository
+            .NoTrackingQuery()
+            .Include(x => x.Organization)
+            .Include(x => x.Achievements)
+            .FirstOrDefaultAsync(user => user.Id == id, cancellationToken);
+
+        if (user?.Organization is not null)
+        {
+            user.Organization.Users = new List<User>();
+        }
+
+        return _mapper.Map<UserView>(user);
+    }
 
     public async Task ChangePasswordAsync(
         ChangePasswordModel changePasswordModel,

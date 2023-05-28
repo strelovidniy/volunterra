@@ -17,6 +17,7 @@ internal class UserToUserViewConverter : ITypeConverter<Data.Entities.User, User
         LastName = user.LastName,
         Status = user.Status,
         ImageDataUrl = user.ImageDataUrl,
-        Organization = context.Mapper.Map<OrganizationView>(user.Organization)
+        Organization = context.Mapper.Map<OrganizationView>(user.Organization),
+        Achievements = context.Mapper.Map<IEnumerable<AchievementView>>(user.Achievements)
     };
 }

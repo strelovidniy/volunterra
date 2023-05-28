@@ -1,0 +1,22 @@
+﻿.loader-container {
+    display: flex;
+    -o-justify-content: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -ms-align-items: center;
+    -o-align-items: center;
+    -webkit-align-items: center;
+    align-items: center;
+}
+
+.achievements-container {
+    height: 100%;
+}
+
+.tabs ::deep .mud-tabs-toolbar {
+    background-color: transparent !important;
+}
+
+.tabs {
+    height: calc(100vh - 110px);
+}

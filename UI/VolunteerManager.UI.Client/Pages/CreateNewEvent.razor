@@ -1,0 +1,139 @@
+﻿@page "/create-new-event"
+
+@using MudBlazor
+@using Microsoft.AspNetCore.Components.Web
+
+<PageTitle>
+    VOLUNTERRA
+</PageTitle>
+
+@if (_isPageLoading)
+{
+    <div class="loader-container">
+        <MudProgressCircular Color="Color.Primary" 
+                             Style="height: 10%; width: 10%;" 
+                             Indeterminate="true"/>
+    </div>
+}
+else
+{
+
+    <div class="d-flex flex-row justify-center align-center flex-1 h-100">
+        <div class="main-part">
+            <div class="d-flex flex-column main-part-inner">
+                <MudHidden Breakpoint="Breakpoint.MdAndUp">
+                    <MudImage Src="images/main-partial.svg"
+                              Style="height: 300px" />
+                </MudHidden>
+                <MudText Typo="Typo.h2"
+                         Style="font-weight: 800">
+                    Create new event
+                </MudText>
+                <MudForm @onsubmit="OnSubmitAsync"
+                @ref="_form">
+                    <MudGrid>
+                        <MudItem xs="12">
+                            <MudTextField T="string"
+                                          Label="Title"
+                                          Variant="Variant.Outlined"
+                                          id="title"
+                                          Name="title"
+                                          @bind-Value="@_model.Title"
+                                          For="@(() => _model.Title)"
+                                          Required="true" />
+
+                        </MudItem>
+
+                        <MudItem xs="12">
+                            <MudTextField Label="Description"
+                                          Variant="Variant.Outlined"
+                                          @bind-Value="_model.Description"
+                                          For="@(() => _model.Description)"
+                                          Name="description"
+                                          id="description"
+                                          Lines="8"
+                                          Required="true" />
+                        </MudItem>
+
+                        <MudItem xs="12">
+                            <MudTextField Label="Location"
+                                          Variant="Variant.Outlined"
+                                          @bind-Value="_model.Location"
+                                          For="@(() => _model.Location)"
+                                          Name="location"
+                                          id="location"
+                                          Required="true" />
+                        </MudItem>
+                        
+                        <MudItem xs="12">
+                            <MudText Typo="Typo.h6"
+                                     Style="font-weight: 600">
+                                Upload photo
+                            </MudText>
+                        </MudItem>
+                        
+                        <MudButton Style="height: 80px;
+                                          width: 80px;
+                                          border-radius: 5px;
+                                          border: 1px solid;
+                                          border-color: var(--mud-palette-success);
+                                          margin-left: 12px;">
+                            <MudAvatar Color="Color.Success"
+                                       Style="">
+                                <MudIcon Icon="@Icons.Material.Outlined.Add"
+                                         Style="color: white;"
+                                         Size="Size.Medium"/>
+                            </MudAvatar>
+                        </MudButton>
+                        
+                        <MudItem xs="12">
+                            <MudText Typo="Typo.h6"
+                                     Style="font-weight: 600">
+                                Required skills
+                            </MudText>
+                        </MudItem>
+                        <MudChipSet @bind-SelectedChips="_selectedSkills" 
+                                    MultiSelection="true">
+                            @foreach (var skill in _skills)
+                            {
+                                <MudChip Text="@skill" Color="Color.Success" />
+                            }
+                        </MudChipSet>
+                        <MudItem Class="d-flex justify-center"
+                                 xs="12">
+                            <MudButton ButtonType="ButtonType.Submit"
+                                       Variant="Variant.Filled"
+                                       Color="Color.Success"
+                                       Size="Size.Large"
+                                       Disabled="@_processing"
+                                       class="w-100"
+                                       Style="height: 60px;">
+                                @if (_processing)
+                                {
+                                    <MudProgressCircular Class="ms-n1"
+                                                         Size="Size.Small"
+                                                         Indeterminate="true" />
+                                    <MudText Class="ms-2">
+                                        Publishing
+                                    </MudText>
+                                }
+                                else
+                                {
+                                    <MudText>
+                                        Publish
+                                    </MudText>
+                                }
+                            </MudButton>
+                        </MudItem>
+                    </MudGrid>
+                </MudForm>
+            </div>
+        </div>
+        <MudHidden Breakpoint="Breakpoint.SmAndDown">
+            <div class="picture-part">
+                <MudImage Src="images/create-new-event-full.svg"
+                          Style="height: 100%" />
+            </div>
+        </MudHidden>
+    </div>
+}

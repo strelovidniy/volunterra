@@ -19,4 +19,6 @@ public class UserView
     public string? ImageDataUrl { get; set; }
 
     public OrganizationView? Organization { get; set; }
+
+    public IEnumerable<AchievementView> Achievements { get; set; } = new List<AchievementView>();
 }

@@ -22,33 +22,88 @@ namespace VolunteerManager.Data.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("VolunteerManager.Data.Entities.ContactInfo", b =>
+            modelBuilder.Entity("OrganizationRequestSkill", b =>
+                {
+                    b.Property<Guid>("OrganizationRequestsId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("SkillsId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("OrganizationRequestsId", "SkillsId");
+
+                    b.HasIndex("SkillsId");
+
+                    b.ToTable("OrganizationRequestSkill");
+                });
+
+            modelBuilder.Entity("VolunteerManager.Data.Entities.Achievement", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("City")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("LinkedInUrl")
+                    b.Property<Guid?>("OrganizationRequestId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Seniority")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OrganizationRequestId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Achievement");
+                });
+
+            modelBuilder.Entity("VolunteerManager.Data.Entities.ContactInfo", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier")
+                        .HasDefaultValueSql("NEWID()");
+
+                    b.Property<string>("City")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("GETUTCDATE()");
+
+                    b.Property<string>("LinkedInUrl")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<Guid?>("OrganizationId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("PhoneNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("Region")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
@@ -66,7 +121,7 @@ namespace VolunteerManager.Data.Migrations
                         .IsUnique()
                         .HasFilter("[UserId] IS NOT NULL");
 
-                    b.ToTable("ContactInfo");
+                    b.ToTable("ContactInfo", "dbo");
                 });
 
             modelBuilder.Entity("VolunteerManager.Data.Entities.Organization", b =>
@@ -126,6 +181,9 @@ namespace VolunteerManager.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ImageDataUrl")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Location")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -133,8 +191,8 @@ namespace VolunteerManager.Data.Migrations
                     b.Property<Guid>("OrganizationId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("RequestId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("OrganizationRequestCategory")
+                        .HasColumnType("int");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -148,6 +206,57 @@ namespace VolunteerManager.Data.Migrations
                     b.HasIndex("OrganizationId");
 
                     b.ToTable("OrganizationRequests", "dbo");
+                });
+
+            modelBuilder.Entity("VolunteerManager.Data.Entities.OrganizationRequestReply", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("OrganizationRequestId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OrganizationRequestId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("OrganizationRequestReply");
+                });
+
+            modelBuilder.Entity("VolunteerManager.Data.Entities.Skill", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Skill");
                 });
 
             modelBuilder.Entity("VolunteerManager.Data.Entities.User", b =>
@@ -230,6 +339,36 @@ namespace VolunteerManager.Data.Migrations
                     b.ToTable("Users", "dbo");
                 });
 
+            modelBuilder.Entity("OrganizationRequestSkill", b =>
+                {
+                    b.HasOne("VolunteerManager.Data.Entities.OrganizationRequest", null)
+                        .WithMany()
+                        .HasForeignKey("OrganizationRequestsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("VolunteerManager.Data.Entities.Skill", null)
+                        .WithMany()
+                        .HasForeignKey("SkillsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("VolunteerManager.Data.Entities.Achievement", b =>
+                {
+                    b.HasOne("VolunteerManager.Data.Entities.OrganizationRequest", null)
+                        .WithMany("Achievements")
+                        .HasForeignKey("OrganizationRequestId");
+
+                    b.HasOne("VolunteerManager.Data.Entities.User", "User")
+                        .WithMany("Achievements")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("VolunteerManager.Data.Entities.ContactInfo", b =>
                 {
                     b.HasOne("VolunteerManager.Data.Entities.Organization", "Organization")
@@ -237,14 +376,14 @@ namespace VolunteerManager.Data.Migrations
                         .HasForeignKey("VolunteerManager.Data.Entities.ContactInfo", "OrganizationId")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("VolunteerManager.Data.Entities.User", "Users")
+                    b.HasOne("VolunteerManager.Data.Entities.User", "User")
                         .WithOne("ContactInfo")
                         .HasForeignKey("VolunteerManager.Data.Entities.ContactInfo", "UserId")
                         .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("Organization");
 
-                    b.Navigation("Users");
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("VolunteerManager.Data.Entities.OrganizationRequest", b =>
@@ -256,6 +395,22 @@ namespace VolunteerManager.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Organization");
+                });
+
+            modelBuilder.Entity("VolunteerManager.Data.Entities.OrganizationRequestReply", b =>
+                {
+                    b.HasOne("VolunteerManager.Data.Entities.OrganizationRequest", "OrganizationRequest")
+                        .WithMany()
+                        .HasForeignKey("OrganizationRequestId");
+
+                    b.HasOne("VolunteerManager.Data.Entities.User", "User")
+                        .WithMany("RequestReplies")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.Navigation("OrganizationRequest");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("VolunteerManager.Data.Entities.User", b =>
@@ -277,9 +432,18 @@ namespace VolunteerManager.Data.Migrations
                     b.Navigation("Users");
                 });
 
+            modelBuilder.Entity("VolunteerManager.Data.Entities.OrganizationRequest", b =>
+                {
+                    b.Navigation("Achievements");
+                });
+
             modelBuilder.Entity("VolunteerManager.Data.Entities.User", b =>
                 {
+                    b.Navigation("Achievements");
+
                     b.Navigation("ContactInfo");
+
+                    b.Navigation("RequestReplies");
                 });
 #pragma warning restore 612, 618
         }
