@@ -57,7 +57,7 @@ else
                         @if (string.IsNullOrEmpty(_currentUser?.ImageDataUrl))
                         {
                             <MudAvatar Color="Color.Info">
-                                @_currentUser.FirstName.FirstOrDefault()
+                                @_currentUser?.FirstName.FirstOrDefault()
                             </MudAvatar>
                         }
                         else

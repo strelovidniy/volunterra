@@ -72,7 +72,8 @@ else
         @if (_selectedIndex == 0)
         {
             <div class="d-flex flex-row align-center justify-center">
-                <MudButton Style="border-radius: 26px;">
+                <MudButton Style="border-radius: 26px;"
+                           OnClick="@(() => NavigationManager.NavigateTo("/create-new-event"))">
                     <MudContainer Class="d-flex flex-row">
                         <MudAvatar Color="Color.Success"
                                    Style="margin-right: 20px;

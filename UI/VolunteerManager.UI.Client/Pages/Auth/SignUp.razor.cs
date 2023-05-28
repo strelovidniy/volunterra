@@ -250,11 +250,13 @@ public partial class SignUp : IDisposable
             await OrganizationService.CreateOrganizationAsync(
                 new CreateOrganizationModel
                 {
-                    Password = _model.Password,
-                    ConfirmPassword = _model.ConfirmPassword,
-                    FirstName = _model.FirstName,
-                    LastName = _model.LastName,
-                    Email = _model.Email
+                    Password = _extendedModel.Password,
+                    ConfirmPassword = _extendedModel.ConfirmPassword,
+                    FirstName = _extendedModel.FirstName,
+                    LastName = _extendedModel.LastName,
+                    Email = _extendedModel.Email,
+                    OrganizationDescription = _extendedModel.OrganizationDescription,
+                    OrganizationName = _extendedModel.OrganizationName
                 },
                 _cts.Token
             );

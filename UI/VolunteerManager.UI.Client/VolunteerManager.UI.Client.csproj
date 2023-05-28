@@ -5,7 +5,7 @@
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<ServiceWorkerAssetsManifest>service-worker-assets.js</ServiceWorkerAssetsManifest>
-		<RunAOTCompilation>true</RunAOTCompilation>
+		<!-- RunAOTCompilation -->
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -34,6 +34,10 @@
 		<Content Update="wwwroot\appsettings.json">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</Content>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="wwwroot\css\noah-head\font\fonts\" />
 	</ItemGroup>
 
 </Project>

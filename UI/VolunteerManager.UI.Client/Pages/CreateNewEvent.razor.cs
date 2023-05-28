@@ -1,16 +1,18 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
 using MudBlazor;
-using OData.QueryBuilder.Builders;
-using VolunteerManager.Data.Entities;
+using VolunteerManager.Models.Create;
 using VolunteerManager.Models.Views;
 using VolunteerManager.UI.Domain.Http.VolunteerManagerHttpClient;
 using VolunteerManager.UI.Domain.Services.Abstraction;
 
 namespace VolunteerManager.UI.Client.Pages;
 
-public partial class Index : IDisposable
+public partial class CreateNewEvent : IDisposable
 {
     private readonly CancellationTokenSource _cts = new();
+
+    private readonly CreateOrganizationRequestModel _model = new();
 
     private int _selectedIndex;
 
@@ -20,7 +22,7 @@ public partial class Index : IDisposable
 
     private UserView? _currentUser;
 
-    private List<OrganizationRequestView> _organizationRequests = new();
+    private MudForm _form = null!;
 
     [Inject]
     private IVolunteerManagerHttpClient HttpClient { get; set; } = null!;
@@ -32,7 +34,7 @@ public partial class Index : IDisposable
     private IAuthService AuthService { get; set; } = null!;
 
     [Inject]
-    private NavigationManager NavigationManager { get; set; } = null!;
+    private IJSRuntime JsRuntime { get; set; } = null!;
 
     public void Dispose()
     {
@@ -46,15 +48,33 @@ public partial class Index : IDisposable
 
         _currentUser = await AuthService.GetCurrentUserAsync(_cts.Token);
 
-        var builder = new ODataQueryBuilder("api/odata")
-            .For<OrganizationRequestReply>("organizationRequestsInvocations")
-            .ByList();
-
-        var response = await HttpClient.GetFromOdataAsync<OrganizationRequestView>(builder, _cts.Token);
-
-        _organizationRequests = response?.Value ?? _organizationRequests;
-
         _isPageLoading = false;
+    }
+
+
+    private async Task OnSubmitAsync()
+    {
+        try
+        {
+            _processing = true;
+
+            await _form.Validate();
+
+            if (!_form.IsValid)
+            {
+                Snackbar.Add(_form.Errors.FirstOrDefault(), Severity.Error);
+
+                _processing = false;
+
+                return;
+            }
+
+            _processing = false;
+        }
+        catch
+        {
+            _processing = false;
+        }
     }
 
     private void ReleaseUnmanagedResources()
@@ -76,7 +96,7 @@ public partial class Index : IDisposable
         Snackbar.Dispose();
     }
 
-    ~Index()
+    ~CreateNewEvent()
     {
         Dispose(false);
     }

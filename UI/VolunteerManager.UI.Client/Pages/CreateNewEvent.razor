@@ -1,0 +1,104 @@
+﻿@page "/create-new-event"
+
+@using MudBlazor
+@using Microsoft.AspNetCore.Components.Web
+
+<PageTitle>
+    VOLUNTERRA
+</PageTitle>
+
+@if (_isPageLoading)
+{
+    <div class="loader-container">
+        <MudProgressCircular Color="Color.Primary" 
+                             Style="height: 10%; width: 10%;" 
+                             Indeterminate="true"/>
+    </div>
+}
+else
+{
+
+    <div class="d-flex flex-row">
+        <div class="login-part">
+            <div class="d-flex flex-column login-part-inner">
+                <MudHidden Breakpoint="Breakpoint.MdAndUp">
+                    <MudImage Src="images/login-partial.svg"
+                              Style="height: 300px" />
+                </MudHidden>
+                <MudText Typo="Typo.h2"
+                         Style="font-weight: 800">
+                    Create new event
+                </MudText>
+                <MudForm @onsubmit="OnSubmitAsync"
+                @ref="_form">
+                    <MudGrid>
+                        <MudItem xs="12">
+                            <MudTextField T="string"
+                                          Label="Title"
+                                          Variant="Variant.Outlined"
+                                          id="title"
+                                          Name="title"
+                                          @bind-Value="@_model.Title"
+                                          For="@(() => _model.Title)"
+                                          Required="true" />
+
+                        </MudItem>
+
+                        <MudItem xs="12">
+                            <MudTextField Label="Description"
+                                          Variant="Variant.Outlined"
+                                          @bind-Value="_model.Description"
+                                          For="@(() => _model.Description)"
+                                          Name="description"
+                                          id="description"
+                                          Lines="8"
+                                          Required="true" />
+                        </MudItem>
+
+                        <MudItem xs="12">
+                            <MudTextField Label="Location"
+                                          Variant="Variant.Outlined"
+                                          @bind-Value="_model.Location"
+                                          For="@(() => _model.Location)"
+                                          Name="location"
+                                          id="location"
+                                          Required="true" />
+                        </MudItem>
+
+                        <MudItem Class="d-flex justify-center"
+                                 xs="12">
+                            <MudButton ButtonType="ButtonType.Submit"
+                                       Variant="Variant.Filled"
+                                       Color="Color.Success"
+                                       Size="Size.Large"
+                                       Disabled="@_processing"
+                                       class="w-100">
+                                @if (_processing)
+                                {
+                                    <MudProgressCircular Class="ms-n1"
+                                                         Size="Size.Small"
+                                                         Indeterminate="true" />
+                                    <MudText Class="ms-2">
+                                        Publishing
+                                    </MudText>
+                                }
+                                else
+                                {
+                                    <MudText>
+                                        Publish
+                                    </MudText>
+                                }
+                            </MudButton>
+                        </MudItem>
+                    </MudGrid>
+                </MudForm>
+            </div>
+        </div>
+        <MudHidden Breakpoint="Breakpoint.SmAndDown">
+            <div class="picture-part">
+                <MudImage Src="images/login-full.svg"
+                          Style="height: 100%" />
+            </div>
+        </MudHidden>
+    </div>
+}

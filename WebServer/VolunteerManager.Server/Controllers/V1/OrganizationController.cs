@@ -6,7 +6,7 @@ using VolunteerManager.Server.Controllers.Base;
 
 namespace VolunteerManager.Server.Controllers.V1;
 
-[Route("api/v1/users")]
+[Route("api/v1/organizations")]
 [ApiExplorerSettings(GroupName = "V1")]
 public class OrganizationController : BaseController
 {
