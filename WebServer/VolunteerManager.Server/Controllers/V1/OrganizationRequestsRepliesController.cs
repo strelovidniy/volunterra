@@ -18,8 +18,6 @@ public class OrganizationRequestsRepliesController : BaseController
         [FromBody] CreateOrganizationRequestReplyModel createUserModel,
         CancellationToken cancellationToken = default)
     {
-        await ValidateAsync(createUserModel, cancellationToken);
-
         await _organizationRequestReplyService.CreateOrganizationRequestReplyAsync(createUserModel, cancellationToken);
 
         return Ok();
@@ -30,8 +28,6 @@ public class OrganizationRequestsRepliesController : BaseController
         [FromBody] UpdateOrganizationRequestReplyModel updateModel,
         CancellationToken cancellationToken = default)
     {
-        await ValidateAsync(updateModel, cancellationToken);
-
         await _organizationRequestReplyService.UpdateOrganizationRequestReplyAsync(updateModel, cancellationToken);
 
         return Ok();

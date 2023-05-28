@@ -2,7 +2,7 @@
 
 namespace VolunteerManager.Models.Update;
 
-public class UpdateOrganizationRequestReplyModel : IValidatableModel
+public class UpdateOrganizationRequestReplyModel
 {
     public Guid? ReplyId { get; set; }
 
