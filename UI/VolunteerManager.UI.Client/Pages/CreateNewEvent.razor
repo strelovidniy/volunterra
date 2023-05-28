@@ -3,6 +3,7 @@
 @using Microsoft.AspNetCore.Components.Forms
 @using MudBlazor
 @using Microsoft.AspNetCore.Components.Web
+@using VolunteerManager.Data.Enums
 
 <PageTitle>
     VOLUNTERRA
@@ -32,6 +33,34 @@ else
                 </MudText>
                 <MudForm @ref="_form">
                     <MudGrid>
+                        <MudItem xs="12">
+                            <MudSelect T="OrganizationRequestCategory"
+                                       Label="Category"
+                                       Variant="Variant.Outlined"
+                                       id="category"
+                                       Name="category"
+                                       @bind-Value="@_model.Category"
+                                       For="@(() => _model.Category)"
+                                       Required="true">
+                                <MudSelectItem T="OrganizationRequestCategory"
+                                               Value="OrganizationRequestCategory.Donation">
+                                    Donation
+                                </MudSelectItem>
+                                <MudSelectItem T="OrganizationRequestCategory"
+                                               Value="OrganizationRequestCategory.Humanitarian">
+                                    Humanitarian
+                                </MudSelectItem>
+                                <MudSelectItem T="OrganizationRequestCategory"
+                                               Value="OrganizationRequestCategory.Work">
+                                    Work
+                                </MudSelectItem>
+                                <MudSelectItem T="OrganizationRequestCategory"
+                                               Value="OrganizationRequestCategory.Other">
+                                    Other
+                                </MudSelectItem>
+                            </MudSelect>
+
+                        </MudItem>
                         <MudItem xs="12">
                             <MudTextField T="string"
                                           Label="Title"

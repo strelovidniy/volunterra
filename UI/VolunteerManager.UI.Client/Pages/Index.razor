@@ -2,6 +2,7 @@
 
 @using Microsoft.AspNetCore.Components.Web
 @using MudBlazor
+@using VolunteerManager.Data.Enums
 
 <PageTitle>
     VOLUNTERRA
@@ -39,8 +40,51 @@ else
                                Variant="Variant.Filled"
                                Size="Size.Large"
                                Style="width: 150px;
-                                      margin-top: 15px;">
+                                      margin-top: 15px;
+                                      margin-right: 15px;"
+                               OnClick="@(async () => { _categoryFilter = null; await ReloadDataAsync(); })"
+                               Disabled="_processing">
                         All
+                    </MudButton>
+                    <MudButton Color="Color.Success"
+                               Variant="Variant.Outlined"
+                               Size="Size.Large"
+                               Style="width: 150px;
+                                      margin-top: 15px;
+                                      margin-right: 15px;"
+                               OnClick="@(async () => { _categoryFilter = OrganizationRequestCategory.Donation; await ReloadDataAsync(); })"
+                               Disabled="_processing">
+                        Donation
+                    </MudButton>
+                    <MudButton Color="Color.Success"
+                               Variant="Variant.Outlined"
+                               Size="Size.Large"
+                               Style="width: 150px;
+                                      margin-top: 15px;
+                                      margin-right: 15px;"
+                               OnClick="@(async () => { _categoryFilter = OrganizationRequestCategory.Humanitarian; await ReloadDataAsync(); })"
+                               Disabled="_processing">
+                        Humanitarian
+                    </MudButton>
+                    <MudButton Color="Color.Success"
+                               Variant="Variant.Outlined"
+                               Size="Size.Large"
+                               Style="width: 150px;
+                                      margin-top: 15px;
+                                      margin-right: 15px;"
+                               OnClick="@(async () => { _categoryFilter = OrganizationRequestCategory.Work; await ReloadDataAsync(); })"
+                               Disabled="_processing">
+                        Work
+                    </MudButton>
+                    <MudButton Color="Color.Success"
+                               Variant="Variant.Outlined"
+                               Size="Size.Large"
+                               Style="width: 150px;
+                                      margin-top: 15px;
+                                      margin-right: 15px;"
+                               OnClick="@(async () => { _categoryFilter = OrganizationRequestCategory.Other; await ReloadDataAsync(); })"
+                               Disabled="_processing">
+                        Other
                     </MudButton>
                 </div>
                 <div class="d-flex flex-row">
@@ -48,7 +92,10 @@ else
                                Variant="Variant.Filled"
                                Size="Size.Large"
                                Style="width: 150px;
-                                      margin-top: 15px;">
+                                      margin-top: 15px;
+                                      margin-right: 15px;"
+                               OnClick="@(async () => { _locationFilter = null; await ReloadDataAsync(); })"
+                               Disabled="_processing">
                         All
                     </MudButton>
                 </div>
@@ -112,7 +159,7 @@ else
                         var req = item.x.ElementAt(i);
                         
                         <div class="@("req-item" + (i % 3 == 0 ? " large-item" : string.Empty))"
-                             style="@($"background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url({req.ImageDataUrl});")">
+                             style="@($"background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url({GetImageUrl()});")">
                             <MudText Typo="Typo.h3"
                                      Style="color: white;
                                             margin-bottom: 35px;">
