@@ -12,54 +12,78 @@
 }
 else
 {
-<MudGrid>
-    <MudItem xs="12">
-        @if (_organizationRequest?.ImageDataUrl is not null)
-        {
-            <MudImage Src=@_organizationRequest?.ImageDataUrl Alt="Image" Elevation="0" />
-        }
-    </MudItem>
-    <MudItem xs="8">
-        <MudText Typo="Typo.h4"
-             Class="px-4 py-2">
-                @_organizationRequest?.Title
-        </MudText>
-    </MudItem>
-    <MudItem xs="4">
-        <MudText Typo="Typo.h6"
-                Class="px-4 py-2">
-            Places left
-        </MudText>
-    </MudItem>
-    <MudItem xs="12">
-        <MudText Typo="Typo.h6"
-                Class="px-4 py-2">
-            @_organizationRequest?.Location
-        </MudText>
-    </MudItem>
-    <MudItem xs="12">
-        <MudText Typo="Typo.h4"
-                Class="px-4 py-2">
-            Description
-        </MudText>
-    </MudItem>
-    <MudItem xs="12">
-        <MudText Typo="Typo.h6"
-            Class="px-4 py-2">
-            @_organizationRequest?.Description
-        </MudText>
-    </MudItem>
-    <MudItem xs="12">
-        <MudText Typo="Typo.h4"
-                Class="px-4 py-2">
-            Skills required
-        </MudText>
-    </MudItem>
-    <MudItem xs="12">
-        <MudText Typo="Typo.h4"
-                Class="px-4 py-2">
-            SKILLS HERE
-        </MudText>
-    </MudItem>
-</MudGrid>
+    <MudContainer>
+        <MudGrid>
+            <MudItem xs="12"
+                     Class="d-flex justify-center align-center">
+                @if (_organizationRequest?.ImageDataUrl is not null)
+                {
+                    <MudImage Src="@_organizationRequest?.ImageDataUrl" 
+                              Alt="Image" 
+                              Elevation="1"/>
+                }
+                else
+                {
+                    <MudImage Src="https://www.pulsecarshalton.co.uk/wp-content/uploads/2016/08/jk-placeholder-image.jpg"
+                              Alt="Image"
+                              Elevation="1" />
+                }
+            </MudItem>
+            <MudItem xs="8">
+                <MudText Typo="Typo.h5"
+                         Class="px-4 py-2">
+                    @_organizationRequest?.Title
+                </MudText>
+            </MudItem>
+            <MudItem xs="4">
+                <MudText Typo="Typo.h6"
+                         Class="px-4 py-2">
+                    Places left: @(new Random().Next(1, 10))
+                </MudText>
+            </MudItem>
+            <MudItem xs="12">
+                <MudText Class="px-4 py-2">
+                    @_organizationRequest?.Location
+                </MudText>
+            </MudItem>
+            <MudItem xs="12">
+                <MudText Typo="Typo.h5"
+                         Class="px-4 py-2">
+                    Description
+                </MudText>
+            </MudItem>
+            <MudItem xs="12">
+                <MudText Typo="Typo.h6"
+                         Class="px-4 py-2">
+                    @_organizationRequest?.Description
+                </MudText>
+            </MudItem>
+            <MudItem xs="12">
+                <MudText Typo="Typo.h5"
+                         Class="px-4 py-2">
+                    Skills required
+                </MudText>
+            </MudItem>
+            <MudItem xs="12">
+                <MudText Typo="Typo.h4"
+                         Class="px-4 py-2">
+                    SKILLS HERE
+                </MudText>
+            </MudItem>
+            <MudItem xs="12">
+                <MudButton Variant="Variant.Outlined"
+                           Color="Color.Success"
+                           Class="px-4 py-2 w-100">
+                    Ask A question
+                </MudButton>
+            </MudItem>
+            <MudItem xs="12">
+                <MudButton Variant="Variant.Filled"
+                           Color="Color.Success"
+                           Class="px-4 py-2 w-100">
+                    Apply
+                </MudButton>
+            </MudItem>
+        </MudGrid>
+    </MudContainer>
 }
