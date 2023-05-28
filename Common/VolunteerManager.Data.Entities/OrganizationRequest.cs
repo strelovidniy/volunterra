@@ -16,5 +16,7 @@ public class OrganizationRequest : Entity, IEntity
     public string Location { get; set; } = null!;
     public OrganizationRequestCategory OrganizationRequestCategory { get; set; }
 
+    public List<Skill> Skills { get; } = new();
+    
    // public string ImageData { get; set; } = null!;
 }
