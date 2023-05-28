@@ -4,7 +4,7 @@
 @using MudBlazor
 
 <PageTitle>
-    Volunteer Manager
+    VOLUNTERRA
 </PageTitle>
 
 @if (_isPageLoading)
@@ -69,5 +69,67 @@ else
                 <MudTabPanel Text="Other organizations" />
             </MudTabs>
         </div>
+    }
+
+    @foreach (var item in _organizationRequests.GroupBy(x => x.Category).Select(x => new
+    {
+        x.Key,
+        x
+    }))
+    {
+        <MudExpansionPanel Text="Show filters"
+                           IsExpanded="true">
+            <TitleContent>
+                <div class="d-flex">
+                    <MudText>
+                        @item.Key
+                    </MudText>
+                </div>
+            </TitleContent>
+            <ChildContent>
+                <div class="req-items">
+                    @for (var i = 0; i < item.x.Count(); ++i)
+                    {
+                        var req = item.x.ElementAt(i);
+                        
+                        <div class="@("req-item" + (i % 3 == 0 ? " large-item" : string.Empty))"
+                             style="@($"background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url({req.ImageDataUrl});")">
+                            <MudText Typo="Typo.h3"
+                                     Style="color: white;
+                                            margin-bottom: 35px;">
+                                @req.Title
+                            </MudText>
+                            <MudText Style="font-size: 16px; 
+                                            font-weight: 400;
+                                            margin-bottom: 40px;
+                                            color: white;">
+                                @req.Location
+                            </MudText>
+                            <MudText Style="color: white">
+                                @req.Description
+                            </MudText>
+                            <div class="d-flex flex-row bottom-item-bar">
+                                <MudButton Color="Color.Success"
+                                           Variant="Variant.Filled"
+                                           Size="Size.Large"
+                                           Style="width: 250px;
+                                                  margin-top: 15px;
+                                                  color: white;
+                                                  border-radius: 10px;">
+                                    @req.RequestDate.ToLongDateString()
+                                </MudButton>
+                                <MudSpacer/>
+                                <MudIconButton Icon="@Icons.Material.Outlined.ArrowForward"
+                                               Size="Size.Large"
+                                               Style="width: 50px;
+                                                      height: 50px;
+                                                      margin-top: 15px;
+                                                      color: white;"/>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </ChildContent>
+        </MudExpansionPanel>
     }
 }

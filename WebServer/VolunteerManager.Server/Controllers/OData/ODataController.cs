@@ -83,111 +83,166 @@ public class ODataController : ODataControllerBase
         [FromServices] IRepository<OrganizationInvocationReply> repository
     )
     {
-        var testData = new List<OrganizationRequestView>()
+        var testData = new List<OrganizationRequestView>
         {
             new()
             {
                 Id = Guid.NewGuid(),
                 Category = OrganizationRequestCategory.Humanitarian,
-                Description = "Humanitarian ipsum dolor sit amet, consectetur adipiscing elit. Donec ac est nibh. Cras rutrum, ipsum et iaculis mattis, purus tellus viverra sapien, id feugiat ante eros ac mass",
+                Description
+                    = "Humanitarian ipsum dolor sit amet, consectetur adipiscing elit. Donec ac est nibh. Cras rutrum, ipsum et iaculis mattis, purus tellus viverra sapien, id feugiat ante eros ac mass",
                 Title = "Humanitarian ipsum dolor sit amet",
                 Location = "id feugiat ante eros ac mass",
                 RequestDate = DateTime.Today,
+                ImageDataUrl
+                    = "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Patron_with_Golden_Paw_award.jpg/280px-Patron_with_Golden_Paw_award.jpg",
                 RequestUpdatedAt = DateTime.Today,
-                CreatedBy = new UserView(){Status = UserStatus.Pending }
+                CreatedBy = new UserView
+                {
+                    Status = UserStatus.Pending
+                }
             },
             new()
             {
                 Id = Guid.NewGuid(),
                 Category = OrganizationRequestCategory.Humanitarian,
-                Description = "Humanitarian ipsum dolor sit amet, consectetur adipiscing elit. Donec ac est nibh. Cras rutrum, ipsum et iaculis mattis, purus tellus viverra sapien, id feugiat ante eros ac mass",
+                Description
+                    = "Humanitarian ipsum dolor sit amet, consectetur adipiscing elit. Donec ac est nibh. Cras rutrum, ipsum et iaculis mattis, purus tellus viverra sapien, id feugiat ante eros ac mass",
                 Title = "Humanitarian ipsum dolor sit amet",
                 Location = "id feugiat ante eros ac mass",
                 RequestDate = DateTime.Today,
                 RequestUpdatedAt = DateTime.Today,
-                CreatedBy = new UserView(){Status = UserStatus.Pending }
+                ImageDataUrl
+                    = "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Patron_with_Golden_Paw_award.jpg/280px-Patron_with_Golden_Paw_award.jpg",
+                CreatedBy = new UserView
+                {
+                    Status = UserStatus.Pending
+                }
             },
             new()
             {
                 Id = Guid.NewGuid(),
                 Category = OrganizationRequestCategory.Humanitarian,
-                Description = "Humanitarian ipsum dolor sit amet, consectetur adipiscing elit. Donec ac est nibh. Cras rutrum, ipsum et iaculis mattis, purus tellus viverra sapien, id feugiat ante eros ac mass",
+                Description
+                    = "Humanitarian ipsum dolor sit amet, consectetur adipiscing elit. Donec ac est nibh. Cras rutrum, ipsum et iaculis mattis, purus tellus viverra sapien, id feugiat ante eros ac mass",
                 Title = "Humanitarian ipsum dolor sit amet",
                 Location = "id feugiat ante eros ac mass",
                 RequestDate = DateTime.Today,
                 RequestUpdatedAt = DateTime.Today,
-                CreatedBy = new UserView(){Status = UserStatus.Pending }
+                ImageDataUrl
+                    = "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Patron_with_Golden_Paw_award.jpg/280px-Patron_with_Golden_Paw_award.jpg",
+                CreatedBy = new UserView
+                {
+                    Status = UserStatus.Pending
+                }
             },
             new()
             {
                 Id = Guid.NewGuid(),
                 Category = OrganizationRequestCategory.Donation,
-                Description = "Donation ipsum dolor sit amet, consectetur adipiscing elit. Donec ac est nibh. Cras rutrum, ipsum et iaculis mattis, purus tellus viverra sapien, id feugiat ante eros ac mass",
+                Description
+                    = "Donation ipsum dolor sit amet, consectetur adipiscing elit. Donec ac est nibh. Cras rutrum, ipsum et iaculis mattis, purus tellus viverra sapien, id feugiat ante eros ac mass",
                 Title = "Donation ipsum dolor sit amet",
                 Location = "id feugiat ante eros ac mass",
                 RequestDate = DateTime.Today,
                 RequestUpdatedAt = DateTime.Today,
-                CreatedBy = new UserView(){Status = UserStatus.Pending }
+                ImageDataUrl
+                    = "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Patron_with_Golden_Paw_award.jpg/280px-Patron_with_Golden_Paw_award.jpg",
+                CreatedBy = new UserView
+                {
+                    Status = UserStatus.Pending
+                }
             },
             new()
             {
                 Id = Guid.NewGuid(),
                 Category = OrganizationRequestCategory.Donation,
-                Description = "Donation ipsum dolor sit amet, consectetur adipiscing elit. Donec ac est nibh. Cras rutrum, ipsum et iaculis mattis, purus tellus viverra sapien, id feugiat ante eros ac mass",
+                Description
+                    = "Donation ipsum dolor sit amet, consectetur adipiscing elit. Donec ac est nibh. Cras rutrum, ipsum et iaculis mattis, purus tellus viverra sapien, id feugiat ante eros ac mass",
                 Title = "Donation ipsum dolor sit amet",
                 Location = "id feugiat ante eros ac mass",
                 RequestDate = DateTime.Today,
                 RequestUpdatedAt = DateTime.Today,
-                CreatedBy = new UserView(){Status = UserStatus.Pending }
+                ImageDataUrl
+                    = "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Patron_with_Golden_Paw_award.jpg/280px-Patron_with_Golden_Paw_award.jpg",
+                CreatedBy = new UserView
+                {
+                    Status = UserStatus.Pending
+                }
             },
             new()
             {
                 Id = Guid.NewGuid(),
                 Category = OrganizationRequestCategory.Donation,
-                Description = "Donation Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac est nibh. Cras rutrum, ipsum et iaculis mattis, purus tellus viverra sapien, id feugiat ante eros ac mass",
+                Description
+                    = "Donation Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac est nibh. Cras rutrum, ipsum et iaculis mattis, purus tellus viverra sapien, id feugiat ante eros ac mass",
                 Title = "Donation Lorem ipsum dolor sit amet",
                 Location = "id feugiat ante eros ac mass",
                 RequestDate = DateTime.Today,
                 RequestUpdatedAt = DateTime.Today,
-                CreatedBy = new UserView(){Status = UserStatus.Pending }
+                ImageDataUrl
+                    = "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Patron_with_Golden_Paw_award.jpg/280px-Patron_with_Golden_Paw_award.jpg",
+                CreatedBy = new UserView
+                {
+                    Status = UserStatus.Pending
+                }
             },
             new()
             {
                 Id = Guid.NewGuid(),
                 Category = OrganizationRequestCategory.Work,
-                Description = "WORK Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac est nibh. Cras rutrum, ipsum et iaculis mattis, purus tellus viverra sapien, id feugiat ante eros ac mass",
+                Description
+                    = "WORK Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac est nibh. Cras rutrum, ipsum et iaculis mattis, purus tellus viverra sapien, id feugiat ante eros ac mass",
                 Title = "WORK Lorem ipsum dolor sit amet",
                 Location = "id feugiat ante eros ac mass",
                 RequestDate = DateTime.Today,
                 RequestUpdatedAt = DateTime.Today,
-                CreatedBy = new UserView(){Status = UserStatus.Pending }
+                ImageDataUrl
+                    = "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Patron_with_Golden_Paw_award.jpg/280px-Patron_with_Golden_Paw_award.jpg",
+                CreatedBy = new UserView
+                {
+                    Status = UserStatus.Pending
+                }
             },
             new()
             {
                 Id = Guid.NewGuid(),
                 Category = OrganizationRequestCategory.Work,
-                Description = "WORK Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac est nibh. Cras rutrum, ipsum et iaculis mattis, purus tellus viverra sapien, id feugiat ante eros ac mass",
+                Description
+                    = "WORK Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac est nibh. Cras rutrum, ipsum et iaculis mattis, purus tellus viverra sapien, id feugiat ante eros ac mass",
                 Title = "WORK Lorem ipsum dolor sit amet",
                 Location = "id feugiat ante eros ac mass",
                 RequestDate = DateTime.Today,
                 RequestUpdatedAt = DateTime.Today,
-                CreatedBy = new UserView(){Status = UserStatus.Pending }
+                ImageDataUrl
+                    = "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Patron_with_Golden_Paw_award.jpg/280px-Patron_with_Golden_Paw_award.jpg",
+                CreatedBy = new UserView
+                {
+                    Status = UserStatus.Pending
+                }
             },
             new()
             {
                 Id = Guid.NewGuid(),
                 Category = OrganizationRequestCategory.Work,
-                Description = "WORK Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac est nibh. Cras rutrum, ipsum et iaculis mattis, purus tellus viverra sapien, id feugiat ante eros ac mass",
+                Description
+                    = "WORK Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac est nibh. Cras rutrum, ipsum et iaculis mattis, purus tellus viverra sapien, id feugiat ante eros ac mass",
                 Title = "WORK Lorem ipsum dolor sit amet",
                 Location = "id feugiat ante eros ac mass",
                 RequestDate = DateTime.Today,
                 RequestUpdatedAt = DateTime.Today,
-                CreatedBy = new UserView(){Status = UserStatus.Pending }
+                ImageDataUrl
+                    = "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Patron_with_Golden_Paw_award.jpg/280px-Patron_with_Golden_Paw_award.jpg",
+                CreatedBy = new UserView
+                {
+                    Status = UserStatus.Pending
+                }
             }
         };
-        return Ok(testData);
+
+        return Ok(new ODataResponse<OrganizationRequestView>(string.Empty, testData, testData.Count));
     }
-    
+
     // [HttpGet("organizationRequestsInvocations")]
     // public IActionResult GetRequestsInvocations(
     //     ODataQueryOptions<OrganizationInvocationReply> options,
