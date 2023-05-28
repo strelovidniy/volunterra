@@ -25,9 +25,10 @@ else
                           background-color: var(--mud-palette-background);
                           padding-top: 20px">
         
-        <MudImage Src="@(_isDarkMode ? "images/logo-black.svg" : "images/logo.svg")"
+        <MudLink href="/">
+            <MudImage Src="@(_isDarkMode ? "images/logo-black.svg" : "images/logo.svg")"
                   Height="90"/>
-
+       </MudLink>
         <MudSpacer />
         
         <MudCheckBox T="bool?"
