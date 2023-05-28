@@ -89,5 +89,11 @@ internal class UserConfiguration : IEntityTypeConfiguration<User>
             .WithOne(user => user.User!)
             .HasForeignKey(user => user.UserId)
             .OnDelete(DeleteBehavior.Restrict);
+        
+        builder
+            .HasMany(organization => organization.Achievements)
+            .WithOne(user => user.User!)
+            .HasForeignKey(user => user.UserId)
+            .OnDelete(DeleteBehavior.Restrict);
     }
 }
