@@ -1,7 +1,7 @@
 ﻿using VolunteerManager.Models.Create;
 using VolunteerManager.Models.Update;
 using VolunteerManager.Models.Views;
-using VolunteerManager.UI.Domain.Http.VolunteerManagerHttpClient;
+using VolunteerManager.UI.Domain.Http.HomeAccountingHttpClient;
 using VolunteerManager.UI.Domain.Services.Abstraction;
 
 namespace VolunteerManager.UI.Domain.Services.Realization;
@@ -73,7 +73,7 @@ internal class OrganizationRequestService : IOrganizationRequestService
         Guid organizationRequestId,
         CancellationToken cancellationToken = default
     ) => _httpClient.GetAsync<OrganizationRequestView>(
-            $"api/v1/request/{organizationRequestId}",
-            cancellationToken
-        );
+        $"api/v1/organizationRequests/{organizationRequestId}",
+        cancellationToken
+    );
 }

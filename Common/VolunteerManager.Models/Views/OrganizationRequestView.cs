@@ -9,9 +9,10 @@ public class OrganizationRequestView
     public string Title { get; set; } = null!;
 
     public string Description { get; set; } = null!;
+
     public OrganizationRequestCategory Category { get; set; }
 
-    public string ImageDataUrl { get; set; }
+    public string? ImageDataUrl { get; set; }
 
     public string Location { get; set; } = null!;
 

@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using VolunteerManager.UI.Domain.Http.HomeAccountingHttpClient;
 using VolunteerManager.UI.Domain.Http.HttpClientFactory;
-using VolunteerManager.UI.Domain.Http.VolunteerManagerHttpClient;
 using VolunteerManager.UI.Domain.Services.Abstraction;
 using VolunteerManager.UI.Domain.Services.Realization;
 using VolunteerManager.UI.Domain.Settings.Abstraction;

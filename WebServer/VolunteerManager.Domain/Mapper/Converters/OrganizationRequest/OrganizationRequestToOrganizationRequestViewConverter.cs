@@ -19,6 +19,9 @@ internal class OrganizationRequestToOrganizationRequestViewConverter
         Category = organizationRequest.OrganizationRequestCategory,
         CreatedBy = context.Mapper.Map<UserView>(
             organizationRequest.Organization?.Users?.FirstOrDefault(x => x.IsOrganizationOwner)),
-        RequestReplyViews = context.Mapper.Map<List<OrganizationRequestReplyView>>(organizationRequest.RequestReplies)
+        RequestReplyViews = context.Mapper.Map<List<OrganizationRequestReplyView>>(organizationRequest.RequestReplies),
+        Title = organizationRequest.Title,
+        Description = organizationRequest.Description,
+        Id = organizationRequest.Id
     };
 }

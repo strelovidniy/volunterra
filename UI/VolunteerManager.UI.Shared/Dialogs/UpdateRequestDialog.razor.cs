@@ -3,7 +3,7 @@ using MudBlazor;
 using VolunteerManager.Models;
 using VolunteerManager.Models.Update;
 using VolunteerManager.Models.Views;
-using VolunteerManager.UI.Domain.Http.VolunteerManagerHttpClient;
+using VolunteerManager.UI.Domain.Http.HomeAccountingHttpClient;
 using VolunteerManager.UI.Domain.Services.Abstraction;
 
 namespace VolunteerManager.UI.Shared.Dialogs;

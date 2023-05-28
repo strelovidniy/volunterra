@@ -1,6 +1,6 @@
 ﻿using VolunteerManager.Models;
 using VolunteerManager.Models.Views;
-using VolunteerManager.UI.Domain.Http.VolunteerManagerHttpClient;
+using VolunteerManager.UI.Domain.Http.HomeAccountingHttpClient;
 using VolunteerManager.UI.Domain.Services.Abstraction;
 
 namespace VolunteerManager.UI.Domain.Services.Realization;

@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using VolunteerManager.Models.Views;
 
-namespace VolunteerManager.Domain.Mapper.Converters.OrganizationRequest;
+namespace VolunteerManager.Domain.Mapper.Converters.OrganizationRequestReply;
 
 internal class OrganizationRequestReplyToOrganizationRequestReplyViewConverter
     : ITypeConverter<Data.Entities.OrganizationRequestReply, OrganizationRequestReplyView>
@@ -14,6 +14,8 @@ internal class OrganizationRequestReplyToOrganizationRequestReplyViewConverter
     {
         Status = organizationRequest.Status,
         RequestDate = organizationRequest.CreatedAt,
-        RequestUpdatedAt = organizationRequest.UpdatedAt
+        RequestUpdatedAt = organizationRequest.UpdatedAt,
+        Id = organizationRequest.Id,
+        CreatedBy = context.Mapper.Map<UserView>(organizationRequest.User)
     };
 }

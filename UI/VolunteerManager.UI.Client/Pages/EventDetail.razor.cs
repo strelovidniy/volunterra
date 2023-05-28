@@ -10,20 +10,15 @@ public partial class EventDetail : IDisposable
 {
     private readonly CancellationTokenSource _cts = new();
 
-    private readonly MudForm _form = null!;
-
     private OrganizationRequestView? _organizationRequest;
-
 
     private bool _isPageLoading = true;
 
     private bool _processing;
 
     [SupplyParameterFromQuery]
+    [Parameter]
     public Guid EventId { get; set; }
-
-    [Inject]
-    private IDialogService DialogService { get; set; } = null!;
 
     [Inject]
     private ISnackbar Snackbar { get; set; } = null!;
@@ -49,6 +44,11 @@ public partial class EventDetail : IDisposable
 
         _organizationRequest = await OrganizationRequestService.GetOrganizationRequestAsync(EventId, _cts.Token);
 
+        if (_organizationRequest is null)
+        {
+            NavigationManager.NavigateTo("/");
+        }
+
         _isPageLoading = false;
     }
 
@@ -68,7 +68,6 @@ public partial class EventDetail : IDisposable
 
         _cts.Cancel();
         _cts.Dispose();
-        _form.Dispose();
         Snackbar.Dispose();
     }
 

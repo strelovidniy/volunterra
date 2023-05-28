@@ -5,7 +5,7 @@ using MudBlazor;
 using VolunteerManager.Models;
 using VolunteerManager.Models.Change;
 using VolunteerManager.Models.Views;
-using VolunteerManager.UI.Domain.Http.VolunteerManagerHttpClient;
+using VolunteerManager.UI.Domain.Http.HomeAccountingHttpClient;
 using VolunteerManager.UI.Domain.Services.Abstraction;
 using VolunteerManager.UI.Shared.Dialogs;
 
@@ -14,6 +14,8 @@ namespace VolunteerManager.UI.Client.Pages;
 public partial class Account : IDisposable
 {
     private readonly CancellationTokenSource _cts = new();
+
+    private readonly MudForm _monobankTokenForm = null!;
     private bool _isSuccessSubmit = true;
     private UserView? _user;
     private string? _monobankToken;
@@ -25,8 +27,6 @@ public partial class Account : IDisposable
     private bool _processingChangePassword;
 
     private bool _isPageLoading = true;
-
-    private readonly MudForm _monobankTokenForm = null!;
     private MudForm _changePasswordForm = null!;
 
     [Inject]

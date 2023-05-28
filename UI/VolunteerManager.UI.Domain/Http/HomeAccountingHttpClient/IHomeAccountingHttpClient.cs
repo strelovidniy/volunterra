@@ -1,8 +1,8 @@
-﻿using VolunteerManager.Models;
+﻿using OData.QueryBuilder.Conventions.AddressingEntities.Query;
+using VolunteerManager.Models;
 using VolunteerManager.UI.Domain.Models;
-using OData.QueryBuilder.Conventions.AddressingEntities.Query;
 
-namespace VolunteerManager.UI.Domain.Http.VolunteerManagerHttpClient;
+namespace VolunteerManager.UI.Domain.Http.HomeAccountingHttpClient;
 
 public interface IVolunteerManagerHttpClient
 {

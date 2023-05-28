@@ -11,12 +11,17 @@ namespace VolunteerManager.Server.Controllers.V1;
 public class OrganizationRequestsController : BaseController
 {
     private readonly IOrganizationRequestService _organizationRequestService;
-    public OrganizationRequestsController(IServiceProvider services, IOrganizationRequestService organizationRequestService) : base(services) => _organizationRequestService = organizationRequestService;
+
+    public OrganizationRequestsController(
+        IServiceProvider services,
+        IOrganizationRequestService organizationRequestService
+    ) : base(services) => _organizationRequestService = organizationRequestService;
 
     [HttpPost]
     public async Task<IActionResult> CreateOrganizationRequestAsyncAsync(
         [FromBody] CreateOrganizationRequestModel createUserModel,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
         await ValidateAsync(createUserModel, cancellationToken);
 
@@ -24,11 +29,12 @@ public class OrganizationRequestsController : BaseController
 
         return Ok();
     }
- 
+
     [HttpPost("image")]
     public async Task<IActionResult> UploadOrganizationRequestImageAsync(
         [FromForm] string fileContent,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
         var decodedContent = Convert.FromBase64String(fileContent);
 
@@ -36,7 +42,7 @@ public class OrganizationRequestsController : BaseController
 
         return Ok();
     }
-    
+
     [HttpGet("images/{imageName}")]
     public async Task<IActionResult> GetAvatarAsync(
         string imageName,
@@ -57,17 +63,17 @@ public class OrganizationRequestsController : BaseController
     }
 
     [AllowAnonymous]
-    [HttpGet("{requestId}")]
+    [HttpGet("{requestId:guid}")]
     public async Task<IActionResult> GetOrganizationRequestAsync(
         Guid requestId,
         CancellationToken cancellationToken = default
-        )
+    )
     {
         var response = await _organizationRequestService.GetOrganizationRequestAsync(requestId, cancellationToken);
 
         return Ok(response);
     }
-    
+
     [HttpGet("locations")]
     public async Task<IActionResult> GetLocationAsync(
         CancellationToken cancellationToken = default

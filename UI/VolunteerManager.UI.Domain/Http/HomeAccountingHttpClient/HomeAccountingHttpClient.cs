@@ -6,7 +6,7 @@ using VolunteerManager.Models;
 using VolunteerManager.UI.Domain.Models;
 using IHttpClientFactory = VolunteerManager.UI.Domain.Http.HttpClientFactory.IHttpClientFactory;
 
-namespace VolunteerManager.UI.Domain.Http.VolunteerManagerHttpClient;
+namespace VolunteerManager.UI.Domain.Http.HomeAccountingHttpClient;
 
 internal class VolunteerManagerHttpClient : IVolunteerManagerHttpClient
 {

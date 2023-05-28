@@ -2,7 +2,7 @@
 using MudBlazor;
 using OData.QueryBuilder.Builders;
 using VolunteerManager.Models.Views;
-using VolunteerManager.UI.Domain.Http.VolunteerManagerHttpClient;
+using VolunteerManager.UI.Domain.Http.HomeAccountingHttpClient;
 using VolunteerManager.UI.Domain.Services.Abstraction;
 
 namespace VolunteerManager.UI.Client.Pages;

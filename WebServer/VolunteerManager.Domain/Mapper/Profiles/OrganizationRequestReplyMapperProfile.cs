@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using VolunteerManager.Data.Entities;
-using VolunteerManager.Domain.Mapper.Converters.OrganizationRequest;
+using VolunteerManager.Domain.Mapper.Converters.OrganizationRequestReply;
 using VolunteerManager.Models.Create;
 using VolunteerManager.Models.Views;
 

@@ -1,6 +1,6 @@
 ﻿using VolunteerManager.Models.Create;
 using VolunteerManager.Models.Update;
-using VolunteerManager.UI.Domain.Http.VolunteerManagerHttpClient;
+using VolunteerManager.UI.Domain.Http.HomeAccountingHttpClient;
 using VolunteerManager.UI.Domain.Services.Abstraction;
 
 namespace VolunteerManager.UI.Domain.Services.Realization;
@@ -16,13 +16,13 @@ public class OrganizationRequestReplyService : IOrganizationRequestReplyService
     public Task CreateRequestReplyAsync(
         CreateOrganizationRequestReplyModel model,
         CancellationToken cancellationToken = default
-    ) => 
+    ) =>
         _httpClient
-        .PostAsync(
-            "api/v1/requestReplies",
-            _httpClient.CreateJsonContent(model),
-            cancellationToken
-        );
+            .PostAsync(
+                "api/v1/requestReplies",
+                _httpClient.CreateJsonContent(model),
+                cancellationToken
+            );
 
     public Task UpdateRequestReplyAsync(
         UpdateOrganizationRequestReplyModel model,
@@ -39,5 +39,4 @@ public class OrganizationRequestReplyService : IOrganizationRequestReplyService
             $"api/v1/requestReplies/{requestId}",
             cancellationToken
         );
-
 }

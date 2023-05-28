@@ -1,10 +1,10 @@
 ﻿using Blazor.Cropper;
-using VolunteerManager.Models;
-using VolunteerManager.UI.Domain.Http.VolunteerManagerHttpClient;
-using VolunteerManager.UI.Domain.Services.Abstraction;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using MudBlazor;
+using VolunteerManager.Models;
+using VolunteerManager.UI.Domain.Http.HomeAccountingHttpClient;
+using VolunteerManager.UI.Domain.Services.Abstraction;
 
 namespace VolunteerManager.UI.Shared.Dialogs;
 
