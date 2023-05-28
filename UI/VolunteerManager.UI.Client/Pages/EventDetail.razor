@@ -12,5 +12,51 @@
 }
 else
 {
-
+<MudGrid>
+    <MudItem xs="12">
+        <MudImage Src=@_organizationRequest.ImageDataUrl Alt="Image" Elevation="0"/>
+    </MudItem>
+    <MudItem xs="8">
+        <MudText Typo="Typo.h4"
+             Class="px-4 py-2">
+                @_organizationRequest.Title
+        </MudText>
+    </MudItem>
+    <MudItem xs="4">
+        <MudText Typo="Typo.h6"
+                Class="px-4 py-2">
+            Places left
+        </MudText>
+    </MudItem>
+    <MudItem xs="12">
+        <MudText Typo="Typo.h6"
+                Class="px-4 py-2">
+            @_organizationRequest.Location
+        </MudText>
+    </MudItem>
+    <MudItem xs="12">
+        <MudText Typo="Typo.h4"
+                Class="px-4 py-2">
+            Description
+        </MudText>
+    </MudItem>
+    <MudItem xs="12">
+        <MudText Typo="Typo.h6"
+            Class="px-4 py-2">
+            @_organizationRequest.Description
+        </MudText>
+    </MudItem>
+    <MudItem xs="12">
+        <MudText Typo="Typo.h4"
+                Class="px-4 py-2">
+            Skills required
+        </MudText>
+    </MudItem>
+    <MudItem xs="12">
+        <MudText Typo="Typo.h4"
+                Class="px-4 py-2">
+            SKILLS HERE
+        </MudText>
+    </MudItem>
+</MudGrid>
 }

@@ -297,4 +297,22 @@ public class ODataController : ODataControllerBase
         ),
         (int) (options.Request.ODataFeature().TotalCount ?? 0)
     ));
+    
+    [HttpGet("achievements")]
+    public IActionResult GetAchievements(
+        ODataQueryOptions<Achievement> options,
+        [FromServices] IRepository<Achievement> repository
+    ) => Ok(new ODataResponse<AchievementView>(
+        options.Context.ToString() ?? string.Empty,
+        _mapper.Map<List<AchievementView>>(
+            options
+                .ApplyTo(
+                    repository
+                        .Query()
+                )
+                .Cast<Achievement>()
+                .ToList()
+        ),
+        (int) (options.Request.ODataFeature().TotalCount ?? 0)
+    ));
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using VolunteerManager.Domain.Services.Abstraction;
 using VolunteerManager.Models.Create;
 using VolunteerManager.Server.Controllers.Base;
@@ -23,5 +24,16 @@ public class OrganizationRequestsController : BaseController
 
         return Ok();
     }
- 
+
+    [AllowAnonymous]
+    [HttpGet("{requestId}")]
+    public async Task<IActionResult> GetOrganizationRequestAsync(
+        Guid requestId,
+        CancellationToken cancellationToken = default
+        )
+    {
+        var request = await _organizationRequestService.GetOrganizationRequestAsync(requestId, cancellationToken);
+
+        return Ok();
+    }
 }

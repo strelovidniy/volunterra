@@ -47,7 +47,7 @@ public partial class EventDetail : IDisposable
     {
         _isPageLoading = true;
 
-        //_organizationRequest = await OrganizationRequestService.GetRequestAsync(EventId, _cts.Token);
+        _organizationRequest = await OrganizationRequestService.GetOrganizationRequestAsync(EventId, _cts.Token);
 
         _isPageLoading = false;
     }

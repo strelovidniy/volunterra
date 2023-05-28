@@ -29,4 +29,9 @@ public interface IOrganizationRequestService
     public Task<IEnumerable<OrganizationRequestView>?> GetRequestsAsync(
         CancellationToken cancellationToken = default
     );
+
+    public Task<OrganizationRequestView?> GetOrganizationRequestAsync(
+        Guid organizationRequestId,
+        CancellationToken cancellationToken = default
+    );
 }
