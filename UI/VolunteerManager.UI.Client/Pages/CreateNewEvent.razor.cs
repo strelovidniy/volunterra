@@ -26,7 +26,7 @@ public partial class CreateNewEvent : IDisposable
 
     private MudForm _form = null!;
 
-    private List<string> _selectedSkills = new();
+    private MudChip[] _selectedSkills = Array.Empty<MudChip>();
     private List<string> _skills = new();
 
     [Inject]
@@ -80,7 +80,7 @@ public partial class CreateNewEvent : IDisposable
             {
                 Snackbar.Add(_form.Errors.FirstOrDefault(), Severity.Error);
 
-                _model.Skills = _selectedSkills;
+                _model.Skills = _selectedSkills.Select(x => x.Text).ToList();
 
                 await OrganizationRequestService.CreateOrganizationRequestAsync(_model);
 
