@@ -18,5 +18,5 @@ public class OrganizationRequest : Entity, IEntity
 
     public IEnumerable<Skill> Skills { get; set; } 
     public IEnumerable<Achievement> Achievements { get; set; } 
-   // public string ImageData { get; set; } = null!;
+    public string? ImageDataUrl { get; set; }
 }

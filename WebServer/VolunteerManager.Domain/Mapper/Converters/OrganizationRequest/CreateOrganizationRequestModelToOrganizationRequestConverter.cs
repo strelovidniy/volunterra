@@ -16,6 +16,7 @@ internal class CreateOrganizationRequestModelToOrganizationRequestConverter
         Description = createOrganizationRequestModel.Description,
         Location = createOrganizationRequestModel.Location,
         OrganizationRequestCategory = createOrganizationRequestModel.Category,
+        ImageDataUrl = createOrganizationRequestModel.ImageDataUrl,
         Title = createOrganizationRequestModel.Title
     };
 }

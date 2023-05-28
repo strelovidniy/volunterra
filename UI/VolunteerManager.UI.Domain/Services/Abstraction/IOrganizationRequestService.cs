@@ -6,11 +6,6 @@ namespace VolunteerManager.UI.Domain.Services.Abstraction;
 
 public interface IOrganizationRequestService
 {
-    public Task CreateRequestAsync(
-        CreateOrganizationRequestModel model,
-        CancellationToken cancellationToken = default
-    );
-
     public Task UpdateRequestAsync(
         UpdateOrganizationRequestModel model,
         CancellationToken cancellationToken = default
@@ -27,6 +22,11 @@ public interface IOrganizationRequestService
     );
 
     public Task<IEnumerable<OrganizationRequestView>?> GetRequestsAsync(
+        CancellationToken cancellationToken = default
+    );
+
+    public Task UploadImageAsync(
+        byte[] bytes,
         CancellationToken cancellationToken = default
     );
 

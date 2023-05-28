@@ -90,7 +90,7 @@ public partial class AddRequestDialog : IDisposable
             return;
         }
 
-        await RequestService.CreateRequestAsync(_model, _cts.Token);
+        await RequestService.CreateOrganizationRequestAsync(_model, _cts.Token);
 
         if (_isSuccessSubmit)
         {

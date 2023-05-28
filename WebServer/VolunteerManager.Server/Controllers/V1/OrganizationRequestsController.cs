@@ -24,6 +24,37 @@ public class OrganizationRequestsController : BaseController
 
         return Ok();
     }
+ 
+    [HttpPost("image")]
+    public async Task<IActionResult> UploadOrganizationRequestImageAsync(
+        [FromForm] string fileContent,
+        CancellationToken cancellationToken = default)
+    {
+        var decodedContent = Convert.FromBase64String(fileContent);
+
+        await _organizationRequestService.UploadRequestImageAsync(decodedContent, cancellationToken);
+
+        return Ok();
+    }
+    
+    [HttpGet("images/{imageName}")]
+    public async Task<IActionResult> GetAvatarAsync(
+        string imageName,
+        CancellationToken cancellationToken = default
+    )
+    {
+        var image = await System.IO.File.ReadAllBytesAsync(
+            Path.Combine(
+                Directory.GetCurrentDirectory(),
+                "Files",
+                "Requests",
+                imageName
+            ),
+            cancellationToken
+        );
+
+        return File(image, "image/png");
+    }
 
     [AllowAnonymous]
     [HttpGet("{requestId}")]
@@ -32,8 +63,8 @@ public class OrganizationRequestsController : BaseController
         CancellationToken cancellationToken = default
         )
     {
-        var request = await _organizationRequestService.GetOrganizationRequestAsync(requestId, cancellationToken);
+        var response = await _organizationRequestService.GetOrganizationRequestAsync(requestId, cancellationToken);
 
-        return Ok();
+        return Ok(response);
     }
 }

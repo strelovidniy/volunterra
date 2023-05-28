@@ -9,6 +9,11 @@ public interface IOrganizationRequestService
         CreateOrganizationRequestModel model,
         CancellationToken cancellationToken = default
     );
+    
+    public Task UploadRequestImageAsync(
+        byte[] avatar,
+        CancellationToken cancellationToken = default
+    );
 
     public Task<OrganizationRequestView?> GetOrganizationRequestAsync(
         Guid organizationRequestId,
