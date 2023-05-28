@@ -41,17 +41,20 @@ public class OrganizationRequestService : IOrganizationRequestService
 
     public async Task CreateOrganizationRequestAsync(
         CreateOrganizationRequestModel model,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
-        var aaa = _mapper.Map<OrganizationRequest>(model);
+        var organizationRequest = _mapper.Map<OrganizationRequest>(model);
+
         await _organizationRequestRepository.AddAsync(
-          aaa,
+            organizationRequest,
             cancellationToken
         );
 
         await _organizationRequestRepository.SaveChangesAsync(cancellationToken);
 
-        var organization = await _organizationRepository.Query().FirstOrDefaultAsync(x=>x.Id == aaa.OrganizationId, cancellationToken: cancellationToken);
+        var organization = await _organizationRepository.Query()
+            .FirstOrDefaultAsync(x => x.Id == organizationRequest.OrganizationId, cancellationToken);
 
         if (organization == null)
         {
@@ -95,11 +98,14 @@ public class OrganizationRequestService : IOrganizationRequestService
         await _organizationRequestRepository.SaveChangesAsync(cancellationToken);
     }
 
-    public async Task<OrganizationRequestView?> GetOrganizationRequestAsync(Guid organizationRequestId, CancellationToken cancellationToken = default)
+    public async Task<OrganizationRequestView?> GetOrganizationRequestAsync(
+        Guid organizationRequestId,
+        CancellationToken cancellationToken = default
+    )
     {
         var organizationRequest = await _organizationRequestRepository
             .Query()
-            .FirstOrDefaultAsync(x => x.Id == organizationRequestId, cancellationToken: cancellationToken);
+            .FirstOrDefaultAsync(x => x.Id == organizationRequestId, cancellationToken);
 
         if (organizationRequest == null)
         {

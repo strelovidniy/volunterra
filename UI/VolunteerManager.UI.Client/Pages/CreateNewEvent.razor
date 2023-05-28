@@ -1,5 +1,6 @@
 ﻿@page "/create-new-event"
 
+@using Microsoft.AspNetCore.Components.Forms
 @using MudBlazor
 @using Microsoft.AspNetCore.Components.Web
 
@@ -71,21 +72,24 @@ else
                             </MudText>
                         </MudItem>
                         
-                        <MudButton Style="height: 80px;
-                                          width: 80px;
-                                          border-radius: 5px;
-                                          border: 1px solid;
-                                          border-color: var(--mud-palette-success);
-                                          margin-left: 12px;"
-                                   ButtonType="ButtonType.Button">
-                            <MudAvatar Color="Color.Success"
-                                       Style="">
-                                <MudIcon Icon="@Icons.Material.Outlined.Add"
-                                         Style="color: white;"
-                                         Size="Size.Medium"/>
-                            </MudAvatar>
-                        </MudButton>
-                        
+                        <MudFileUpload T="IBrowserFile" Accept=".jpeg,.png,.jpg,.gif">
+                            <ButtonTemplate>
+                                <MudButton Style="height: 80px;
+                                                  width: 80px;
+                                                  border-radius: 5px;
+                                                  border: 1px solid;
+                                                  border-color: var(--mud-palette-success);
+                                                  margin-left: 12px;">
+                                    <MudAvatar Color="Color.Success"
+                                               Style="">
+                                        <MudIcon Icon="@Icons.Material.Outlined.Add"
+                                                 Style="color: white;"
+                                                 Size="Size.Medium"/>
+                                    </MudAvatar>
+                                </MudButton>
+                            </ButtonTemplate>
+                        </MudFileUpload>
+
                         <MudItem xs="12">
                             <MudText Typo="Typo.h6"
                                      Style="font-weight: 600">
@@ -114,13 +118,14 @@ else
                                     <MudProgressCircular Class="ms-n1"
                                                          Size="Size.Small"
                                                          Indeterminate="true" />
-                                    <MudText Class="ms-2">
+                                    <MudText Class="ms-2"
+                                             Typo="Typo.h6">
                                         Publishing
                                     </MudText>
                                 }
                                 else
                                 {
-                                    <MudText>
+                                    <MudText Typo="Typo.h6">
                                         Publish
                                     </MudText>
                                 }
