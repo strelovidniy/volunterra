@@ -1,0 +1,43 @@
+﻿.loader-container {
+    display: flex;
+    -o-justify-content: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -ms-align-items: center;
+    -o-align-items: center;
+    -webkit-align-items: center;
+    align-items: center;
+}
+
+.main-part {
+    flex: 55;
+    padding: 10px;
+    margin-left: 100px;
+}
+
+.main-part-inner {
+    margin: 0px auto 50px;
+    min-width: 380px;
+    width: fit-content;
+}
+
+.picture-part {
+    flex: 73;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@media(max-width: 959px) {
+    .main-part {
+        flex: 1;
+        width: 100vw;
+    }
+
+    .main-part-inner {
+        margin: 10px;
+        min-width: 0;
+        width: auto;
+    }
+}

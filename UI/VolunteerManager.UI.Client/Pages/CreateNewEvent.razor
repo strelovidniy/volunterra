@@ -18,11 +18,11 @@
 else
 {
 
-    <div class="d-flex flex-row">
-        <div class="login-part">
-            <div class="d-flex flex-column login-part-inner">
+    <div class="d-flex flex-row justify-center align-center flex-1 h-100">
+        <div class="main-part">
+            <div class="d-flex flex-column main-part-inner">
                 <MudHidden Breakpoint="Breakpoint.MdAndUp">
-                    <MudImage Src="images/login-partial.svg"
+                    <MudImage Src="images/main-partial.svg"
                               Style="height: 300px" />
                 </MudHidden>
                 <MudText Typo="Typo.h2"
@@ -64,7 +64,43 @@ else
                                           id="location"
                                           Required="true" />
                         </MudItem>
-
+                        
+                        <MudItem xs="12">
+                            <MudText Typo="Typo.h6"
+                                     Style="font-weight: 600">
+                                Upload photo
+                            </MudText>
+                        </MudItem>
+                        
+                        <MudButton Style="height: 80px;
+                                          width: 80px;
+                                          border-radius: 5px;
+                                          border: 1px solid;
+                                          border-color: var(--mud-palette-success);
+                                          margin-left: 12px;">
+                            <MudAvatar Color="Color.Success"
+                                       Style="">
+                                <MudIcon Icon="@Icons.Material.Outlined.Add"
+                                         Style="color: white;"
+                                         Size="Size.Medium"/>
+                            </MudAvatar>
+                        </MudButton>
+                        
+                        <MudItem xs="12">
+                            <MudText Typo="Typo.h6"
+                                     Style="font-weight: 600">
+                                Required skills
+                            </MudText>
+                        </MudItem>
+                        <MudChipSet @bind-SelectedChips="_selectedSkills" 
+                                    MultiSelection="true">
+                            @foreach (var skill in _skills)
+                            {
+                                <MudChip Color="Color.Success">
+                                    @skill
+                                </MudChip>
+                            }
+                        </MudChipSet>
                         <MudItem Class="d-flex justify-center"
                                  xs="12">
                             <MudButton ButtonType="ButtonType.Submit"
@@ -72,7 +108,8 @@ else
                                        Color="Color.Success"
                                        Size="Size.Large"
                                        Disabled="@_processing"
-                                       class="w-100">
+                                       class="w-100"
+                                       Style="height: 60px;">
                                 @if (_processing)
                                 {
                                     <MudProgressCircular Class="ms-n1"
