@@ -3,7 +3,6 @@ import os
 
 from flask import Flask, render_template
 from routes.chat_gpt_bp import chat_gpt_bp
-from routes.image_generation_bp import image_generation_bp
 
 openai.api_key = os.getenv('OPENAI_API_KEY')
 

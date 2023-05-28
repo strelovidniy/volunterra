@@ -93,10 +93,13 @@ else
         <MudAppBar Elevation="0"
                    Style="height: 110px; background-color: var(--mud-palette-background); padding-top: 20px">
 
-            <MudLink href="/">
-                <MudImage Src="@(_isDarkMode ? "images/logo-black.svg" : "images/logo.svg")"
-                  Height="90"/>
-       </MudLink>
+            <MudHidden Breakpoint="Breakpoint.MdAndUp"
+                       Invert="true">
+                <MudLink href="/">
+                    <MudImage Src="@(_isDarkMode ? "images/logo-black.svg" : "images/logo.svg")"
+                              Height="90"/>
+                </MudLink>
+            </MudHidden>
             <MudSpacer/>
 
             <MudCheckBox T="bool?"
