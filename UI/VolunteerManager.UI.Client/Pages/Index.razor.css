@@ -30,3 +30,34 @@
     font-weight: 700;
     font-size: 24px;
 }
+
+.req-items {
+    display: flex;
+    flex-direction: row;
+    -ms-flex-wrap: wrap;
+    -o-flex-wrap: wrap;
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+
+.req-item {
+    margin: 15px;
+    border-radius: 15px;
+    background-color: grey;
+    max-width: 45%;
+    height: 450px;
+    padding: 30px;
+    position: relative;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.bottom-item-bar {
+    position: absolute;
+    bottom: 30px;
+    left: 30px;
+    display: flex;
+    flex: 1;
+    width: calc(100% - 60px);
+}

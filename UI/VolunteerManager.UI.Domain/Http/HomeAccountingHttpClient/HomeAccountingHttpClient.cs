@@ -1,9 +1,9 @@
 ﻿using System.Net;
 using System.Text;
-using VolunteerManager.Models;
-using VolunteerManager.UI.Domain.Models;
 using Newtonsoft.Json;
 using OData.QueryBuilder.Conventions.AddressingEntities.Query;
+using VolunteerManager.Models;
+using VolunteerManager.UI.Domain.Models;
 using IHttpClientFactory = VolunteerManager.UI.Domain.Http.HttpClientFactory.IHttpClientFactory;
 
 namespace VolunteerManager.UI.Domain.Http.VolunteerManagerHttpClient;
@@ -619,7 +619,7 @@ internal class VolunteerManagerHttpClient : IVolunteerManagerHttpClient
         }
         catch (Exception ex)
         {
-            OnError.Invoke(ex);
+            OnError?.Invoke(ex);
 
             return default;
         }

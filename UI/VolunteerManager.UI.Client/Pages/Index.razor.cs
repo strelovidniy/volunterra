@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using MudBlazor;
+using OData.QueryBuilder.Builders;
+using VolunteerManager.Data.Entities;
 using VolunteerManager.Models.Views;
 using VolunteerManager.UI.Domain.Http.VolunteerManagerHttpClient;
 using VolunteerManager.UI.Domain.Services.Abstraction;
@@ -51,6 +53,8 @@ public partial class Index : IDisposable
         DateTime.Now.Date.AddDays(1).AddMilliseconds(-1)
     );
 
+    private List<OrganizationRequestView> _organizationRequests = new();
+
     [Inject]
     private IVolunteerManagerHttpClient HttpClient { get; set; } = null!;
 
@@ -82,6 +86,14 @@ public partial class Index : IDisposable
         //await LoadSpendingsAndIncomingsAsync(_cts.Token);
 
         _currentUser = await AuthService.GetCurrentUserAsync(_cts.Token);
+
+        var builder = new ODataQueryBuilder("api/odata")
+            .For<OrganizationRequestReply>("organizationRequestsInvocations")
+            .ByList();
+
+        var response = await HttpClient.GetFromOdataAsync<OrganizationRequestView>(builder, _cts.Token);
+
+        _organizationRequests = response?.Value ?? _organizationRequests;
 
         _isPageLoading = false;
     }
