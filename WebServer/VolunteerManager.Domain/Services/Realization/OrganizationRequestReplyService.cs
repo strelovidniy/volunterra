@@ -40,7 +40,7 @@ public class OrganizationRequestReplyService : IOrganizationRequestReplyService
         var requestReply = await _organizationRequestReplyRepository
             .Query()
             .FirstOrDefaultAsync(
-                x => x.Id == model.OrganizationRequestId,
+                x => x.Id == model.ReplyId,
                 cancellationToken
             );
 
