@@ -1,5 +1,5 @@
-using VolunteerManager.Server.DependencyInjection;
 using Serilog;
+using VolunteerManager.Server.DependencyInjection;
 
 try
 {

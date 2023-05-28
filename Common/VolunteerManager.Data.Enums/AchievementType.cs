@@ -10,5 +10,5 @@ public enum AchievementType
     TimeManagement = 5,
     TimeMagi = 6,
     MelankaPodolyak = 7,
-    TimePatron= 8
+    TimePatron = 8
 }

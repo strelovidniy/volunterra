@@ -1,5 +1,4 @@
 ﻿using EntityFrameworkCore.RepositoryInfrastructure;
-using VolunteerManager.Data.Enums;
 
 namespace VolunteerManager.Data.Entities;
 

@@ -9,7 +9,7 @@ public interface IOrganizationRequestService
         CreateOrganizationRequestModel model,
         CancellationToken cancellationToken = default
     );
-    
+
     public Task UploadRequestImageAsync(
         byte[] avatar,
         CancellationToken cancellationToken = default
@@ -19,7 +19,7 @@ public interface IOrganizationRequestService
         Guid organizationRequestId,
         CancellationToken cancellationToken = default
     );
-    
+
     public Task<List<string>> GetLocationsAsync(
         CancellationToken cancellationToken = default
     );

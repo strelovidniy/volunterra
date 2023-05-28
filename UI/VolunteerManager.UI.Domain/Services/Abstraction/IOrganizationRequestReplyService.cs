@@ -1,6 +1,5 @@
 ﻿using VolunteerManager.Models.Create;
 using VolunteerManager.Models.Update;
-using VolunteerManager.Models.Views;
 
 namespace VolunteerManager.UI.Domain.Services.Abstraction;
 

@@ -118,7 +118,7 @@ public class OrganizationRequestService : IOrganizationRequestService
     public async Task<List<string>> GetLocationsAsync(CancellationToken cancellationToken = default)
     {
         var organizationResponse = await _organizationRequestRepository
-            .Query().Select(x => x.Location).DistinctBy(x => x).ToListAsync(cancellationToken: cancellationToken);
+            .Query().Select(x => x.Location).DistinctBy(x => x).ToListAsync(cancellationToken);
 
         return organizationResponse;
     }

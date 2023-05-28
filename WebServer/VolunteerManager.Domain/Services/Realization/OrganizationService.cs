@@ -44,7 +44,8 @@ public class OrganizationService : IOrganizationService
 
     public async Task CreateOrganizationAsync(
         CreateOrganizationModel model,
-        CancellationToken cancellationToken = default) 
+        CancellationToken cancellationToken = default
+    )
     {
         await _organizationRepository.AddAsync(
             _mapper.Map<Organization>(model),

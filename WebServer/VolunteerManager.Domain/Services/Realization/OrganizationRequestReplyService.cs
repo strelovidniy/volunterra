@@ -15,7 +15,8 @@ public class OrganizationRequestReplyService : IOrganizationRequestReplyService
 
     public OrganizationRequestReplyService(
         IRepository<OrganizationRequestReply> organizationRequestRepository,
-        IMapper mapper)
+        IMapper mapper
+    )
     {
         _organizationRequestReplyRepository = organizationRequestRepository;
         _mapper = mapper;
@@ -23,12 +24,14 @@ public class OrganizationRequestReplyService : IOrganizationRequestReplyService
 
     public async Task CreateOrganizationRequestReplyAsync(
         CreateOrganizationRequestReplyModel model,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
         await _organizationRequestReplyRepository.AddAsync(
             _mapper.Map<OrganizationRequestReply>(model),
             cancellationToken
         );
+
         await _organizationRequestReplyRepository.SaveChangesAsync(cancellationToken);
     }
 

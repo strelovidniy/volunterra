@@ -1,7 +1,7 @@
 using System.Security.Claims;
+using Microsoft.AspNetCore.Http;
 using VolunteerManager.Data.Enums;
 using VolunteerManager.Domain.Exceptions;
-using Microsoft.AspNetCore.Http;
 
 namespace VolunteerManager.Domain.Extensions;
 

@@ -21,7 +21,7 @@ internal class SkillsConfiguration : IEntityTypeConfiguration<Skill>
             .Property(user => user.Id)
             .HasDefaultValueSql(DefaultSqlValue.NewGuid)
             .IsRequired();
-        
+
         builder
             .HasMany(e => e.OrganizationRequests)
             .WithMany(e => e.Skills);

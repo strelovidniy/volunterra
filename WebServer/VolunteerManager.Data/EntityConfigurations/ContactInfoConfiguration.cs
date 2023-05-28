@@ -38,17 +38,17 @@ internal class ContactInfoConfiguration : IEntityTypeConfiguration<ContactInfo>
             .Property(cf => cf.LinkedInUrl)
             .HasMaxLength(255)
             .IsRequired(false);
-        
+
         builder
             .Property(cf => cf.PhoneNumber)
             .HasMaxLength(255)
             .IsRequired(false);
-        
+
         builder
             .Property(cf => cf.Region)
             .HasMaxLength(255)
             .IsRequired(false);
-        
+
         builder
             .Property(cf => cf.City)
             .HasMaxLength(255)
@@ -60,7 +60,7 @@ internal class ContactInfoConfiguration : IEntityTypeConfiguration<ContactInfo>
             .HasForeignKey<ContactInfo>(x => x.UserId)
             .HasPrincipalKey<User>(x => x.Id)
             .OnDelete(DeleteBehavior.Restrict);
-   
+
         builder
             .HasOne(cf => cf.Organization)
             .WithOne(user => user.ContactInfo!)

@@ -14,10 +14,11 @@ public class OrganizationRequest : Entity, IEntity
     public string Description { get; set; } = null!;
 
     public string Location { get; set; } = null!;
+
     public OrganizationRequestCategory OrganizationRequestCategory { get; set; }
 
-    public IEnumerable<Skill> Skills { get; set; } 
-    
+    public IEnumerable<Skill> Skills { get; set; }
+
     public IEnumerable<OrganizationRequestReply> RequestReplies { get; set; }
 
     public string? ImageDataUrl { get; set; }

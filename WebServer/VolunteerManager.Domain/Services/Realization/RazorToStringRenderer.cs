@@ -1,8 +1,4 @@
-﻿using VolunteerManager.Data.Enums.RichEnums;
-using VolunteerManager.Domain.Models.ViewModels;
-using VolunteerManager.Domain.Services.Abstraction;
-using VolunteerManager.Domain.Settings.Abstraction;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Abstractions;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
@@ -12,6 +8,10 @@ using Microsoft.AspNetCore.Mvc.ViewEngines;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Logging;
+using VolunteerManager.Data.Enums.RichEnums;
+using VolunteerManager.Domain.Models.ViewModels;
+using VolunteerManager.Domain.Services.Abstraction;
+using VolunteerManager.Domain.Settings.Abstraction;
 
 namespace VolunteerManager.Domain.Services.Realization;
 

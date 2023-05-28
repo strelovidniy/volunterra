@@ -1,8 +1,8 @@
 ﻿using FluentValidation;
-using VolunteerManager.Domain.Extensions;
-using VolunteerManager.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using VolunteerManager.Domain.Extensions;
+using VolunteerManager.Models;
 
 namespace VolunteerManager.Server.Controllers.Base;
 

@@ -38,6 +38,5 @@ internal class OrganizationRequestConfiguration : IEntityTypeConfiguration<Organ
             .WithOne(x => x.OrganizationRequest)
             .HasForeignKey(x => x.OrganizationRequestId)
             .OnDelete(DeleteBehavior.Restrict);
-
     }
 }

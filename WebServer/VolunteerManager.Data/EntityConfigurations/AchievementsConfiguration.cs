@@ -29,13 +29,13 @@ internal class AchievementsConfiguration : IEntityTypeConfiguration<Achievement>
             .HasMaxLength(50)
             .HasDefaultValue(AchievementType.Beginner)
             .IsRequired();
-        
+
         builder
             .Property(user => user.Title)
             .HasConversion<string>()
             .HasMaxLength(500)
             .IsRequired();
-        
+
         builder
             .Property(user => user.Seniority)
             .HasConversion<string>()

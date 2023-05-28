@@ -1,13 +1,13 @@
 ﻿using System.Net;
 using System.Net.Mail;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using VolunteerManager.Data.Enums;
 using VolunteerManager.Data.Enums.RichEnums;
 using VolunteerManager.Domain.Exceptions;
 using VolunteerManager.Domain.Models.ViewModels;
 using VolunteerManager.Domain.Services.Abstraction;
 using VolunteerManager.Domain.Settings.Abstraction;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
 
 namespace VolunteerManager.Domain.Services.Realization;
 

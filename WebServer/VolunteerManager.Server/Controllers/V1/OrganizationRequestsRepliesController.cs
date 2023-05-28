@@ -11,32 +11,39 @@ namespace VolunteerManager.Server.Controllers.V1;
 public class OrganizationRequestsRepliesController : BaseController
 {
     private readonly IOrganizationRequestReplyService _organizationRequestReplyService;
-    public OrganizationRequestsRepliesController(IServiceProvider services, IOrganizationRequestReplyService organizationRequestReplyService) : base(services) => _organizationRequestReplyService = organizationRequestReplyService;
+
+    public OrganizationRequestsRepliesController(
+        IServiceProvider services,
+        IOrganizationRequestReplyService organizationRequestReplyService
+    ) : base(services) => _organizationRequestReplyService = organizationRequestReplyService;
 
     [HttpPost]
     public async Task<IActionResult> CreateOrganizationRequestAsyncAsync(
         [FromBody] CreateOrganizationRequestReplyModel createUserModel,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
         await _organizationRequestReplyService.CreateOrganizationRequestReplyAsync(createUserModel, cancellationToken);
 
         return Ok();
     }
-    
+
     [HttpPut]
     public async Task<IActionResult> UpdateOrganizationRequestAsyncAsync(
         [FromBody] UpdateOrganizationRequestReplyModel updateModel,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
         await _organizationRequestReplyService.UpdateOrganizationRequestReplyAsync(updateModel, cancellationToken);
 
         return Ok();
     }
-    
+
     [HttpDelete]
     public async Task<IActionResult> DeleteOrganizationRequestAsyncAsync(
         [FromQuery] Guid requestId,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
         await _organizationRequestReplyService.DeleteOrganizationRequestReplyAsync(requestId, cancellationToken);
 

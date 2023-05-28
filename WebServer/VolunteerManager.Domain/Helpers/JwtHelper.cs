@@ -1,6 +1,6 @@
-﻿using VolunteerManager.Domain.Extensions;
+﻿using Microsoft.IdentityModel.Tokens;
+using VolunteerManager.Domain.Extensions;
 using VolunteerManager.Domain.Settings.Abstraction;
-using Microsoft.IdentityModel.Tokens;
 
 namespace VolunteerManager.Domain.Helpers;
 

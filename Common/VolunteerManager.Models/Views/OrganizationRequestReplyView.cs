@@ -11,6 +11,6 @@ public class OrganizationRequestReplyView
     public DateTime RequestDate { get; set; }
 
     public DateTime? RequestUpdatedAt { get; set; }
-    
+
     public UserView? CreatedBy { get; set; }
 }

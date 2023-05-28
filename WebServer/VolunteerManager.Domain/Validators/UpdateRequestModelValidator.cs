@@ -23,6 +23,5 @@ internal class UpdateRequestModelValidator : AbstractValidator<UpdateOrganizatio
             .WithStatusCode(StatusCode.RequestNameRequired)
             .MaximumLength(250)
             .WithStatusCode(StatusCode.RequestNameMustHaveNotMoreThan250Characters);
-
     }
 }

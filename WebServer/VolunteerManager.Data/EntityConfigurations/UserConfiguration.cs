@@ -77,7 +77,7 @@ internal class UserConfiguration : IEntityTypeConfiguration<User>
             .HasMaxLength(50)
             .HasDefaultValue(UserStatus.Pending)
             .IsRequired();
-        
+
         builder
             .HasOne(organization => organization.ContactInfo)
             .WithOne(cf => cf.User)
@@ -89,7 +89,7 @@ internal class UserConfiguration : IEntityTypeConfiguration<User>
             .WithOne(user => user.User!)
             .HasForeignKey(user => user.UserId)
             .OnDelete(DeleteBehavior.Restrict);
-        
+
         builder
             .HasMany(organization => organization.Achievements)
             .WithOne(user => user.User!)

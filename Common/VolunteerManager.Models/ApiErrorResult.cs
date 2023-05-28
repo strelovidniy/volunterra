@@ -1,5 +1,5 @@
-﻿using VolunteerManager.Data.Enums;
-using Humanizer;
+﻿using Humanizer;
+using VolunteerManager.Data.Enums;
 
 namespace VolunteerManager.Models;
 

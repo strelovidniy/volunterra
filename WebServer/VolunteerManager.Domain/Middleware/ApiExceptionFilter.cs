@@ -1,11 +1,11 @@
 ﻿using FluentValidation;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.Extensions.Logging;
 using VolunteerManager.Data.Enums;
 using VolunteerManager.Data.Enums.RichEnums;
 using VolunteerManager.Domain.Exceptions;
 using VolunteerManager.Models;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Filters;
-using Microsoft.Extensions.Logging;
 
 namespace VolunteerManager.Domain.Middleware;
 
