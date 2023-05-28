@@ -108,6 +108,7 @@ internal class UserService : IUserService
         CancellationToken cancellationToken = default
     ) => _mapper.Map<UserView>(await _userRepository
         .Query()
+        .Include(x=>x.Organization)
         .FirstOrDefaultAsync(user => user.Id == id, cancellationToken));
 
     public async Task ChangePasswordAsync(
