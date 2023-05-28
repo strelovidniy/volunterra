@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using MudBlazor;
+using OData.QueryBuilder.Builders;
+using VolunteerManager.Data.Entities;
 using VolunteerManager.Models.Create;
 using VolunteerManager.Models.Views;
 using VolunteerManager.UI.Domain.Http.VolunteerManagerHttpClient;
@@ -24,6 +26,9 @@ public partial class CreateNewEvent : IDisposable
 
     private MudForm _form = null!;
 
+    private List<string> _selectedSkills = new();
+    private List<string> _skills = new();
+
     [Inject]
     private IVolunteerManagerHttpClient HttpClient { get; set; } = null!;
 
@@ -36,6 +41,9 @@ public partial class CreateNewEvent : IDisposable
     [Inject]
     private IJSRuntime JsRuntime { get; set; } = null!;
 
+    [Inject]
+    private IOrganizationRequestService OrganizationRequestService { get; set; } = null!;
+
     public void Dispose()
     {
         Dispose(true);
@@ -47,6 +55,14 @@ public partial class CreateNewEvent : IDisposable
         _isPageLoading = true;
 
         _currentUser = await AuthService.GetCurrentUserAsync(_cts.Token);
+
+        var builder = new ODataQueryBuilder("api/odata")
+            .For<Skill>("skills")
+            .ByList();
+
+        var response = await HttpClient.GetFromOdataAsync<SkillView>(builder, _cts.Token);
+
+        _skills = response?.Value?.Select(x => x.Name).ToList() ?? _skills;
 
         _isPageLoading = false;
     }
@@ -63,6 +79,10 @@ public partial class CreateNewEvent : IDisposable
             if (!_form.IsValid)
             {
                 Snackbar.Add(_form.Errors.FirstOrDefault(), Severity.Error);
+
+                _model.Skills = _selectedSkills;
+
+                await OrganizationRequestService.CreateOrganizationRequestAsync(_model);
 
                 _processing = false;
 
