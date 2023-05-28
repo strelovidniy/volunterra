@@ -96,9 +96,7 @@ else
                                     MultiSelection="true">
                             @foreach (var skill in _skills)
                             {
-                                <MudChip Color="Color.Success">
-                                    @skill
-                                </MudChip>
+                                <MudChip Text="@skill" Color="Color.Success" />
                             }
                         </MudChipSet>
                         <MudItem Class="d-flex justify-center"
