@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Components;
-using Microsoft.JSInterop;
 using MudBlazor;
 using OData.QueryBuilder.Builders;
 using VolunteerManager.Data.Entities;
@@ -39,10 +38,10 @@ public partial class CreateNewEvent : IDisposable
     private IAuthService AuthService { get; set; } = null!;
 
     [Inject]
-    private IJSRuntime JsRuntime { get; set; } = null!;
+    private IOrganizationRequestService OrganizationRequestService { get; set; } = null!;
 
     [Inject]
-    private IOrganizationRequestService OrganizationRequestService { get; set; } = null!;
+    private NavigationManager NavigationManager { get; set; } = null!;
 
     public void Dispose()
     {
@@ -85,9 +84,19 @@ public partial class CreateNewEvent : IDisposable
                 return;
             }
 
+            if (_currentUser?.Organization?.Id == null)
+            {
+                _processing = false;
+
+                return;
+            }
+
             _model.Skills = _selectedSkills.Select(x => x.Text).ToList();
+            _model.OrganizationId = _currentUser.Organization.Id;
 
             await OrganizationRequestService.CreateOrganizationRequestAsync(_model);
+
+            NavigationManager.NavigateTo("/");
 
             _processing = false;
         }

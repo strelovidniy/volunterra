@@ -4,88 +4,16 @@
 @using MudBlazor
 @using Microsoft.AspNetCore.Components.Forms
 
-<PageTitle>Account</PageTitle>
+<PageTitle>
+    Account
+</PageTitle>
 
 <MudGrid>
-    @*<MudItem xs="12"
-             md="6"
-             lg="4">
-        <MudContainer Style="background-color: var(--mud-palette-surface);
-                             -ms-border-radius: 10px;
-                             border-radius: 10px;
-                             box-shadow: 0px 0px 30px 0px rgb(0 0 0 / 50%);
-                             height: fit-content;
-                             padding: 30px;">
-            <MudGrid>
-                <MudItem xs="12">
-                    <MudText>
-                        Press <strong>Generate Token</strong> button then authenticate via Monobank, copy key and paste into <strong>Monobank Token</strong> field
-                    </MudText>
-                </MudItem>
-                <MudItem xs="8"
-                         Style="display: flex; 
-                                -ms-align-items: center; 
-                                -o-align-items: center; 
-                                -webkit-align-items: center;
-                                align-items: center;
-                                -o-justify-content: center;
-                                -webkit-justify-content: center; 
-                                justify-content: center;">
-                    <MudForm @ref="_monobankTokenForm"
-                             Class="w-100">
-                        <MudTextField T="string"
-                                      InputType="InputType.Text"
-                                      Label="Monobank Token"
-                                      Variant="Variant.Outlined"
-                                      Class="w-100"
-                                      @bind-Value="_monobankToken"
-                                      Validation="ValidateMonobankTokenInput"/>
-                    </MudForm>
-                    
-                </MudItem>
-                <MudItem xs="4">
-                    <MudGrid>
-                        <MudItem xs="12">
-                            <MudButton Variant="Variant.Filled"
-                                       Color="Color.Primary"
-                                       Href="https://api.monobank.ua/"
-                                       Target="_blank">
-                                Generate Token
-                            </MudButton>
-                        </MudItem>
-                        <MudItem xs="12">
-                            <MudButton Variant="Variant.Filled"
-                                       Color="Color.Success"
-                                       Disabled="@(_processingMonobankToken || _initialMonobankToken == _monobankToken)"
-                                       OnClick="@(() => SubmitMonobankTokenAsync(_cts.Token))">
-                                @if (_processingMonobankToken)
-                                {
-                                    <MudProgressCircular Class="ms-n1"
-                                                         Size="Size.Small"
-                                                         Indeterminate="true" />
-                                    <MudText Class="ms-2">
-                                        Submitting
-                                    </MudText>
-                                }
-                                else
-                                {
-                                    <MudText>
-                                        Submit
-                                    </MudText>
-                                }
-                            </MudButton>
-                        </MudItem>
-                    </MudGrid>
-                </MudItem>
-            </MudGrid>
-        </MudContainer>
-    </MudItem>*@
     <MudItem xs="12"
              md="4">
         <MudContainer Style="background-color: var(--mud-palette-surface);
                              -ms-border-radius: 10px;
                              border-radius: 10px; 
-                             box-shadow: 0px 0px 30px 0px rgb(0 0 0 / 50%);
                              height: fit-content;
                              padding: 30px;">
             <MudGrid>
@@ -131,7 +59,6 @@
         <MudContainer Style="background-color: var(--mud-palette-surface); 
                              -ms-border-radius: 10px; 
                              border-radius: 10px;
-                             box-shadow: 0px 0px 30px 0px rgb(0 0 0 / 50%);
                              height: fit-content;
                              padding: 30px;">
             <MudForm @ref="_changePasswordForm">

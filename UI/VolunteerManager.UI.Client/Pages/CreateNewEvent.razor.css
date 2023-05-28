@@ -33,6 +33,7 @@
     .main-part {
         flex: 1;
         width: 100vw;
+        margin-left: 0;
     }
 
     .main-part-inner {
