@@ -69,6 +69,24 @@ else
                 <MudTabPanel Text="Other organizations" />
             </MudTabs>
         </div>
+        @if (_selectedIndex == 0)
+        {
+            <div class="d-flex flex-row align-center justify-center">
+                <MudButton Style="border-radius: 26px;">
+                    <MudContainer Class="d-flex flex-row">
+                        <MudAvatar Color="Color.Success"
+                                   Style="margin-right: 20px;
+                                          margin-top: -4px;">
+                            <MudIcon Icon="@Icons.Material.Outlined.Add"
+                                     Style="color: white;"/>
+                        </MudAvatar>
+                        <MudText Typo="Typo.h4">
+                            Add new event
+                        </MudText>
+                    </MudContainer>
+                </MudButton>
+            </div>
+        }
     }
 
     @foreach (var item in _organizationRequests.GroupBy(x => x.Category).Select(x => new
