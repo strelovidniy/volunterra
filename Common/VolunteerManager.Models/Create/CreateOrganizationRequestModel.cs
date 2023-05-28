@@ -14,7 +14,7 @@ public class CreateOrganizationRequestModel : IValidatableModel
 
     public OrganizationRequestCategory Category { get; set; }
 
-    public string ImageDataUrl { get; set; } = null!;
+    public string? ImageDataUrl { get; set; }
 
     public IEnumerable<string> Skills { get; set; } = null!;
 }

@@ -80,14 +80,14 @@ public partial class CreateNewEvent : IDisposable
             {
                 Snackbar.Add(_form.Errors.FirstOrDefault(), Severity.Error);
 
-                _model.Skills = _selectedSkills.Select(x => x.Text).ToList();
-
-                await OrganizationRequestService.CreateOrganizationRequestAsync(_model);
-
                 _processing = false;
 
                 return;
             }
+
+            _model.Skills = _selectedSkills.Select(x => x.Text).ToList();
+
+            await OrganizationRequestService.CreateOrganizationRequestAsync(_model);
 
             _processing = false;
         }
