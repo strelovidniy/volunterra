@@ -19,4 +19,8 @@ public interface IOrganizationRequestService
         Guid organizationRequestId,
         CancellationToken cancellationToken = default
     );
+    
+    public Task<List<string>> GetLocationsAsync(
+        CancellationToken cancellationToken = default
+    );
 }
