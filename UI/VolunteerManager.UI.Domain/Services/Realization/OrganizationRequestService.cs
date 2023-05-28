@@ -61,4 +61,12 @@ internal class OrganizationRequestService : IOrganizationRequestService
             "api/v1/requests",
             cancellationToken
         );
+
+    public Task<OrganizationRequestView?> GetOrganizationRequestAsync(
+        Guid organizationRequestId,
+        CancellationToken cancellationToken = default
+    ) => _httpClient.GetAsync<OrganizationRequestView>(
+            $"api/v1/request/{organizationRequestId}",
+            cancellationToken
+        );
 }

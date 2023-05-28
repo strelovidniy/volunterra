@@ -6,6 +6,7 @@ using VolunteerManager.Data.Enums.RichEnums;
 using VolunteerManager.Domain.Models.ViewModels;
 using VolunteerManager.Domain.Services.Abstraction;
 using VolunteerManager.Models.Create;
+using VolunteerManager.Models.Views;
 
 namespace VolunteerManager.Domain.Services.Realization;
 
@@ -54,5 +55,19 @@ public class OrganizationRequestService : IOrganizationRequestService
             new NewApplicantEmailViewModel("https://volunteer-manager.azurewebsites.net"),
             cancellationToken: cancellationToken
         );
+    }
+
+    public async Task<OrganizationRequestView?> GetOrganizationRequestAsync(Guid organizationRequestId, CancellationToken cancellationToken = default)
+    {
+        var organizationRequest = await _organizationRepository
+            .Query()
+            .FirstOrDefaultAsync(x => x.Id == organizationRequestId, cancellationToken: cancellationToken);
+
+        if (organizationRequest == null)
+        {
+            throw new ArgumentException();
+        }
+
+        return _mapper.Map<OrganizationRequestView>(organizationRequest);
     }
 }
