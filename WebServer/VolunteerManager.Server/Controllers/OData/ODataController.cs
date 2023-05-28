@@ -77,190 +77,190 @@ public class ODataController : ODataControllerBase
         (int) (options.Request.ODataFeature().TotalCount ?? 0)
     ));
 
+    // [HttpGet("organizationRequestsInvocations")]
+    // public IActionResult GetRequestsInvocations(
+    //     ODataQueryOptions<OrganizationRequestReply> options,
+    //     [FromServices] IRepository<OrganizationRequestReply> repository
+    // )
+    // {
+    //     var testData = new List<OrganizationRequestView>
+    //     {
+    //         new()
+    //         {
+    //             Id = Guid.NewGuid(),
+    //             Category = OrganizationRequestCategory.Humanitarian,
+    //             Description
+    //                 = "Humanitarian ipsum dolor sit amet, consectetur adipiscing elit. Donec ac est nibh. Cras rutrum, ipsum et iaculis mattis, purus tellus viverra sapien, id feugiat ante eros ac mass",
+    //             Title = "Humanitarian ipsum dolor sit amet",
+    //             Location = "id feugiat ante eros ac mass",
+    //             RequestDate = DateTime.Today,
+    //             ImageDataUrl
+    //                 = "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Patron_with_Golden_Paw_award.jpg/280px-Patron_with_Golden_Paw_award.jpg",
+    //             RequestUpdatedAt = DateTime.Today,
+    //             CreatedBy = new UserView
+    //             {
+    //                 Status = UserStatus.Pending
+    //             }
+    //         },
+    //         new()
+    //         {
+    //             Id = Guid.NewGuid(),
+    //             Category = OrganizationRequestCategory.Humanitarian,
+    //             Description
+    //                 = "Humanitarian ipsum dolor sit amet, consectetur adipiscing elit. Donec ac est nibh. Cras rutrum, ipsum et iaculis mattis, purus tellus viverra sapien, id feugiat ante eros ac mass",
+    //             Title = "Humanitarian ipsum dolor sit amet",
+    //             Location = "id feugiat ante eros ac mass",
+    //             RequestDate = DateTime.Today,
+    //             RequestUpdatedAt = DateTime.Today,
+    //             ImageDataUrl
+    //                 = "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Patron_with_Golden_Paw_award.jpg/280px-Patron_with_Golden_Paw_award.jpg",
+    //             CreatedBy = new UserView
+    //             {
+    //                 Status = UserStatus.Pending
+    //             }
+    //         },
+    //         new()
+    //         {
+    //             Id = Guid.NewGuid(),
+    //             Category = OrganizationRequestCategory.Humanitarian,
+    //             Description
+    //                 = "Humanitarian ipsum dolor sit amet, consectetur adipiscing elit. Donec ac est nibh. Cras rutrum, ipsum et iaculis mattis, purus tellus viverra sapien, id feugiat ante eros ac mass",
+    //             Title = "Humanitarian ipsum dolor sit amet",
+    //             Location = "id feugiat ante eros ac mass",
+    //             RequestDate = DateTime.Today,
+    //             RequestUpdatedAt = DateTime.Today,
+    //             ImageDataUrl
+    //                 = "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Patron_with_Golden_Paw_award.jpg/280px-Patron_with_Golden_Paw_award.jpg",
+    //             CreatedBy = new UserView
+    //             {
+    //                 Status = UserStatus.Pending
+    //             }
+    //         },
+    //         new()
+    //         {
+    //             Id = Guid.NewGuid(),
+    //             Category = OrganizationRequestCategory.Donation,
+    //             Description
+    //                 = "Donation ipsum dolor sit amet, consectetur adipiscing elit. Donec ac est nibh. Cras rutrum, ipsum et iaculis mattis, purus tellus viverra sapien, id feugiat ante eros ac mass",
+    //             Title = "Donation ipsum dolor sit amet",
+    //             Location = "id feugiat ante eros ac mass",
+    //             RequestDate = DateTime.Today,
+    //             RequestUpdatedAt = DateTime.Today,
+    //             ImageDataUrl
+    //                 = "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Patron_with_Golden_Paw_award.jpg/280px-Patron_with_Golden_Paw_award.jpg",
+    //             CreatedBy = new UserView
+    //             {
+    //                 Status = UserStatus.Pending
+    //             }
+    //         },
+    //         new()
+    //         {
+    //             Id = Guid.NewGuid(),
+    //             Category = OrganizationRequestCategory.Donation,
+    //             Description
+    //                 = "Donation ipsum dolor sit amet, consectetur adipiscing elit. Donec ac est nibh. Cras rutrum, ipsum et iaculis mattis, purus tellus viverra sapien, id feugiat ante eros ac mass",
+    //             Title = "Donation ipsum dolor sit amet",
+    //             Location = "id feugiat ante eros ac mass",
+    //             RequestDate = DateTime.Today,
+    //             RequestUpdatedAt = DateTime.Today,
+    //             ImageDataUrl
+    //                 = "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Patron_with_Golden_Paw_award.jpg/280px-Patron_with_Golden_Paw_award.jpg",
+    //             CreatedBy = new UserView
+    //             {
+    //                 Status = UserStatus.Pending
+    //             }
+    //         },
+    //         new()
+    //         {
+    //             Id = Guid.NewGuid(),
+    //             Category = OrganizationRequestCategory.Donation,
+    //             Description
+    //                 = "Donation Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac est nibh. Cras rutrum, ipsum et iaculis mattis, purus tellus viverra sapien, id feugiat ante eros ac mass",
+    //             Title = "Donation Lorem ipsum dolor sit amet",
+    //             Location = "id feugiat ante eros ac mass",
+    //             RequestDate = DateTime.Today,
+    //             RequestUpdatedAt = DateTime.Today,
+    //             ImageDataUrl
+    //                 = "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Patron_with_Golden_Paw_award.jpg/280px-Patron_with_Golden_Paw_award.jpg",
+    //             CreatedBy = new UserView
+    //             {
+    //                 Status = UserStatus.Pending
+    //             }
+    //         },
+    //         new()
+    //         {
+    //             Id = Guid.NewGuid(),
+    //             Category = OrganizationRequestCategory.Work,
+    //             Description
+    //                 = "WORK Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac est nibh. Cras rutrum, ipsum et iaculis mattis, purus tellus viverra sapien, id feugiat ante eros ac mass",
+    //             Title = "WORK Lorem ipsum dolor sit amet",
+    //             Location = "id feugiat ante eros ac mass",
+    //             RequestDate = DateTime.Today,
+    //             RequestUpdatedAt = DateTime.Today,
+    //             ImageDataUrl
+    //                 = "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Patron_with_Golden_Paw_award.jpg/280px-Patron_with_Golden_Paw_award.jpg",
+    //             CreatedBy = new UserView
+    //             {
+    //                 Status = UserStatus.Pending
+    //             }
+    //         },
+    //         new()
+    //         {
+    //             Id = Guid.NewGuid(),
+    //             Category = OrganizationRequestCategory.Work,
+    //             Description
+    //                 = "WORK Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac est nibh. Cras rutrum, ipsum et iaculis mattis, purus tellus viverra sapien, id feugiat ante eros ac mass",
+    //             Title = "WORK Lorem ipsum dolor sit amet",
+    //             Location = "id feugiat ante eros ac mass",
+    //             RequestDate = DateTime.Today,
+    //             RequestUpdatedAt = DateTime.Today,
+    //             ImageDataUrl
+    //                 = "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Patron_with_Golden_Paw_award.jpg/280px-Patron_with_Golden_Paw_award.jpg",
+    //             CreatedBy = new UserView
+    //             {
+    //                 Status = UserStatus.Pending
+    //             }
+    //         },
+    //         new()
+    //         {
+    //             Id = Guid.NewGuid(),
+    //             Category = OrganizationRequestCategory.Work,
+    //             Description
+    //                 = "WORK Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac est nibh. Cras rutrum, ipsum et iaculis mattis, purus tellus viverra sapien, id feugiat ante eros ac mass",
+    //             Title = "WORK Lorem ipsum dolor sit amet",
+    //             Location = "id feugiat ante eros ac mass",
+    //             RequestDate = DateTime.Today,
+    //             RequestUpdatedAt = DateTime.Today,
+    //             ImageDataUrl
+    //                 = "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Patron_with_Golden_Paw_award.jpg/280px-Patron_with_Golden_Paw_award.jpg",
+    //             CreatedBy = new UserView
+    //             {
+    //                 Status = UserStatus.Pending
+    //             }
+    //         }
+    //     };
+    //
+    //     return Ok(new ODataResponse<OrganizationRequestView>(string.Empty, testData, testData.Count));
+    // }
+
     [HttpGet("organizationRequestsInvocations")]
     public IActionResult GetRequestsInvocations(
         ODataQueryOptions<OrganizationRequestReply> options,
         [FromServices] IRepository<OrganizationRequestReply> repository
-    )
-    {
-        var testData = new List<OrganizationRequestView>
-        {
-            new()
-            {
-                Id = Guid.NewGuid(),
-                Category = OrganizationRequestCategory.Humanitarian,
-                Description
-                    = "Humanitarian ipsum dolor sit amet, consectetur adipiscing elit. Donec ac est nibh. Cras rutrum, ipsum et iaculis mattis, purus tellus viverra sapien, id feugiat ante eros ac mass",
-                Title = "Humanitarian ipsum dolor sit amet",
-                Location = "id feugiat ante eros ac mass",
-                RequestDate = DateTime.Today,
-                ImageDataUrl
-                    = "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Patron_with_Golden_Paw_award.jpg/280px-Patron_with_Golden_Paw_award.jpg",
-                RequestUpdatedAt = DateTime.Today,
-                CreatedBy = new UserView
-                {
-                    Status = UserStatus.Pending
-                }
-            },
-            new()
-            {
-                Id = Guid.NewGuid(),
-                Category = OrganizationRequestCategory.Humanitarian,
-                Description
-                    = "Humanitarian ipsum dolor sit amet, consectetur adipiscing elit. Donec ac est nibh. Cras rutrum, ipsum et iaculis mattis, purus tellus viverra sapien, id feugiat ante eros ac mass",
-                Title = "Humanitarian ipsum dolor sit amet",
-                Location = "id feugiat ante eros ac mass",
-                RequestDate = DateTime.Today,
-                RequestUpdatedAt = DateTime.Today,
-                ImageDataUrl
-                    = "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Patron_with_Golden_Paw_award.jpg/280px-Patron_with_Golden_Paw_award.jpg",
-                CreatedBy = new UserView
-                {
-                    Status = UserStatus.Pending
-                }
-            },
-            new()
-            {
-                Id = Guid.NewGuid(),
-                Category = OrganizationRequestCategory.Humanitarian,
-                Description
-                    = "Humanitarian ipsum dolor sit amet, consectetur adipiscing elit. Donec ac est nibh. Cras rutrum, ipsum et iaculis mattis, purus tellus viverra sapien, id feugiat ante eros ac mass",
-                Title = "Humanitarian ipsum dolor sit amet",
-                Location = "id feugiat ante eros ac mass",
-                RequestDate = DateTime.Today,
-                RequestUpdatedAt = DateTime.Today,
-                ImageDataUrl
-                    = "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Patron_with_Golden_Paw_award.jpg/280px-Patron_with_Golden_Paw_award.jpg",
-                CreatedBy = new UserView
-                {
-                    Status = UserStatus.Pending
-                }
-            },
-            new()
-            {
-                Id = Guid.NewGuid(),
-                Category = OrganizationRequestCategory.Donation,
-                Description
-                    = "Donation ipsum dolor sit amet, consectetur adipiscing elit. Donec ac est nibh. Cras rutrum, ipsum et iaculis mattis, purus tellus viverra sapien, id feugiat ante eros ac mass",
-                Title = "Donation ipsum dolor sit amet",
-                Location = "id feugiat ante eros ac mass",
-                RequestDate = DateTime.Today,
-                RequestUpdatedAt = DateTime.Today,
-                ImageDataUrl
-                    = "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Patron_with_Golden_Paw_award.jpg/280px-Patron_with_Golden_Paw_award.jpg",
-                CreatedBy = new UserView
-                {
-                    Status = UserStatus.Pending
-                }
-            },
-            new()
-            {
-                Id = Guid.NewGuid(),
-                Category = OrganizationRequestCategory.Donation,
-                Description
-                    = "Donation ipsum dolor sit amet, consectetur adipiscing elit. Donec ac est nibh. Cras rutrum, ipsum et iaculis mattis, purus tellus viverra sapien, id feugiat ante eros ac mass",
-                Title = "Donation ipsum dolor sit amet",
-                Location = "id feugiat ante eros ac mass",
-                RequestDate = DateTime.Today,
-                RequestUpdatedAt = DateTime.Today,
-                ImageDataUrl
-                    = "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Patron_with_Golden_Paw_award.jpg/280px-Patron_with_Golden_Paw_award.jpg",
-                CreatedBy = new UserView
-                {
-                    Status = UserStatus.Pending
-                }
-            },
-            new()
-            {
-                Id = Guid.NewGuid(),
-                Category = OrganizationRequestCategory.Donation,
-                Description
-                    = "Donation Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac est nibh. Cras rutrum, ipsum et iaculis mattis, purus tellus viverra sapien, id feugiat ante eros ac mass",
-                Title = "Donation Lorem ipsum dolor sit amet",
-                Location = "id feugiat ante eros ac mass",
-                RequestDate = DateTime.Today,
-                RequestUpdatedAt = DateTime.Today,
-                ImageDataUrl
-                    = "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Patron_with_Golden_Paw_award.jpg/280px-Patron_with_Golden_Paw_award.jpg",
-                CreatedBy = new UserView
-                {
-                    Status = UserStatus.Pending
-                }
-            },
-            new()
-            {
-                Id = Guid.NewGuid(),
-                Category = OrganizationRequestCategory.Work,
-                Description
-                    = "WORK Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac est nibh. Cras rutrum, ipsum et iaculis mattis, purus tellus viverra sapien, id feugiat ante eros ac mass",
-                Title = "WORK Lorem ipsum dolor sit amet",
-                Location = "id feugiat ante eros ac mass",
-                RequestDate = DateTime.Today,
-                RequestUpdatedAt = DateTime.Today,
-                ImageDataUrl
-                    = "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Patron_with_Golden_Paw_award.jpg/280px-Patron_with_Golden_Paw_award.jpg",
-                CreatedBy = new UserView
-                {
-                    Status = UserStatus.Pending
-                }
-            },
-            new()
-            {
-                Id = Guid.NewGuid(),
-                Category = OrganizationRequestCategory.Work,
-                Description
-                    = "WORK Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac est nibh. Cras rutrum, ipsum et iaculis mattis, purus tellus viverra sapien, id feugiat ante eros ac mass",
-                Title = "WORK Lorem ipsum dolor sit amet",
-                Location = "id feugiat ante eros ac mass",
-                RequestDate = DateTime.Today,
-                RequestUpdatedAt = DateTime.Today,
-                ImageDataUrl
-                    = "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Patron_with_Golden_Paw_award.jpg/280px-Patron_with_Golden_Paw_award.jpg",
-                CreatedBy = new UserView
-                {
-                    Status = UserStatus.Pending
-                }
-            },
-            new()
-            {
-                Id = Guid.NewGuid(),
-                Category = OrganizationRequestCategory.Work,
-                Description
-                    = "WORK Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ac est nibh. Cras rutrum, ipsum et iaculis mattis, purus tellus viverra sapien, id feugiat ante eros ac mass",
-                Title = "WORK Lorem ipsum dolor sit amet",
-                Location = "id feugiat ante eros ac mass",
-                RequestDate = DateTime.Today,
-                RequestUpdatedAt = DateTime.Today,
-                ImageDataUrl
-                    = "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Patron_with_Golden_Paw_award.jpg/280px-Patron_with_Golden_Paw_award.jpg",
-                CreatedBy = new UserView
-                {
-                    Status = UserStatus.Pending
-                }
-            }
-        };
-
-        return Ok(new ODataResponse<OrganizationRequestView>(string.Empty, testData, testData.Count));
-    }
-
-    // [HttpGet("organizationRequestsInvocations")]
-    // public IActionResult GetRequestsInvocations(
-    //     ODataQueryOptions<OrganizationInvocationReply> options,
-    //     [FromServices] IRepository<OrganizationInvocationReply> repository
-    // ) => Ok(new ODataResponse<OrganizationRequestView>(
-    //     options.Context.ToString() ?? string.Empty,
-    //     _mapper
-    //         .Map<List<OrganizationRequestView>>(
-    //             options
-    //                 .ApplyTo(
-    //                     repository
-    //                         .Query()
-    //                 )
-    //                 .Cast<OrganizationInvocationReply>()
-    //                 .ToList()
-    //         ),
-    //     (int) (options.Request.ODataFeature().TotalCount ?? 0)
-    // ));
+    ) => Ok(new ODataResponse<OrganizationRequestReplyView>(
+        options.Context.ToString() ?? string.Empty,
+        _mapper
+            .Map<List<OrganizationRequestReplyView>>(
+                options
+                    .ApplyTo(
+                        repository
+                            .Query()
+                    )
+                    .Cast<OrganizationRequestReply>()
+                    .ToList()
+            ),
+        (int) (options.Request.ODataFeature().TotalCount ?? 0)
+    ));
 
     [HttpGet("organization")]
     public IActionResult GetOrganizations(
