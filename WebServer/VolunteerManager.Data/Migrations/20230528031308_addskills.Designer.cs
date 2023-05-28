@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VolunteerManager.Data.Context;
 
@@ -11,9 +12,11 @@ using VolunteerManager.Data.Context;
 namespace VolunteerManager.Data.Migrations
 {
     [DbContext(typeof(VolunteerManagerContext))]
-    partial class VolunteerManagerContextModelSnapshot : ModelSnapshot
+    [Migration("20230528031308_addskills")]
+    partial class addskills
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

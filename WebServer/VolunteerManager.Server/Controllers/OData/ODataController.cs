@@ -279,4 +279,22 @@ public class ODataController : ODataControllerBase
         ),
         (int) (options.Request.ODataFeature().TotalCount ?? 0)
     ));
+    
+    [HttpGet("skills")]
+    public IActionResult GetSkills(
+        ODataQueryOptions<Skill> options,
+        [FromServices] IRepository<Skill> repository
+    ) => Ok(new ODataResponse<SkillView>(
+        options.Context.ToString() ?? string.Empty,
+        _mapper.Map<List<SkillView>>(
+            options
+                .ApplyTo(
+                    repository
+                        .Query()
+                )
+                .Cast<Skill>()
+                .ToList()
+        ),
+        (int) (options.Request.ODataFeature().TotalCount ?? 0)
+    ));
 }

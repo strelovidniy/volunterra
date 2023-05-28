@@ -33,5 +33,6 @@ public static class DataDependencyInjectionExtension
         .AddRepository<Organization>()
         .AddRepository<OrganizationRequest>()
         .AddRepository<OrganizationRequestReply>()
+        .AddRepository<Skill>()
         .Build();
 }
