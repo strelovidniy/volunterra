@@ -80,7 +80,7 @@ internal class UserConfiguration : IEntityTypeConfiguration<User>
         
         builder
             .HasOne(organization => organization.ContactInfo)
-            .WithOne(cf => cf.Users)
+            .WithOne(cf => cf.User)
             .HasForeignKey<ContactInfo>(cf => cf.Id)
             .OnDelete(DeleteBehavior.Restrict);
 

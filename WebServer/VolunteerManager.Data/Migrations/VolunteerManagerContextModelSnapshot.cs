@@ -42,6 +42,9 @@ namespace VolunteerManager.Data.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
+                    b.Property<Guid?>("OrganizationId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("PhoneNumber")
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
@@ -53,7 +56,18 @@ namespace VolunteerManager.Data.Migrations
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
 
+                    b.Property<Guid?>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("OrganizationId")
+                        .IsUnique()
+                        .HasFilter("[OrganizationId] IS NOT NULL");
+
+                    b.HasIndex("UserId")
+                        .IsUnique()
+                        .HasFilter("[UserId] IS NOT NULL");
 
                     b.ToTable("ContactInfo", "dbo");
                 });
@@ -253,19 +267,17 @@ namespace VolunteerManager.Data.Migrations
                 {
                     b.HasOne("VolunteerManager.Data.Entities.Organization", "Organization")
                         .WithOne("ContactInfo")
-                        .HasForeignKey("VolunteerManager.Data.Entities.ContactInfo", "Id")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .HasForeignKey("VolunteerManager.Data.Entities.ContactInfo", "OrganizationId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("VolunteerManager.Data.Entities.User", "Users")
+                    b.HasOne("VolunteerManager.Data.Entities.User", "User")
                         .WithOne("ContactInfo")
-                        .HasForeignKey("VolunteerManager.Data.Entities.ContactInfo", "Id")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .HasForeignKey("VolunteerManager.Data.Entities.ContactInfo", "UserId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("Organization");
 
-                    b.Navigation("Users");
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("VolunteerManager.Data.Entities.OrganizationRequest", b =>
