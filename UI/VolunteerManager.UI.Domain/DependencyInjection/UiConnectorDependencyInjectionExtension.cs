@@ -27,7 +27,8 @@ public static class UiConnectorDependencyInjectionExtension
         .AddTransient<IUserService, UserService>()
         .AddTransient<IAuthService, AuthService>()
         .AddTransient<IOrganizationService, OrganizationService>()
-        .AddTransient<IOrganizationRequestService, OrganizationRequestService>();
+        .AddTransient<IOrganizationRequestService, OrganizationRequestService>()
+        .AddTransient<IOrganizationRequestReplyService, OrganizationRequestReplyService>();
 
     private static IServiceCollection AddSettings(
         this IServiceCollection services,

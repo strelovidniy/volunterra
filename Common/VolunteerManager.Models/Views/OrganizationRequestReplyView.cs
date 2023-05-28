@@ -1,10 +1,12 @@
-﻿namespace VolunteerManager.Models.Views;
+﻿using VolunteerManager.Data.Enums;
 
-public class OrganizationRequestInvocationView
+namespace VolunteerManager.Models.Views;
+
+public class OrganizationRequestReplyView
 {
     public Guid Id { get; set; }
 
-    public string Title { get; set; } = null!;
+    public UserStatus Status { get; set; }
 
     public DateTime RequestDate { get; set; }
 

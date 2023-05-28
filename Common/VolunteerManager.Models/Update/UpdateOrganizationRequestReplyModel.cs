@@ -1,8 +1,8 @@
 ﻿using VolunteerManager.Data.Enums;
 
-namespace VolunteerManager.Models.Create;
+namespace VolunteerManager.Models.Update;
 
-public class CreateOrganizationInvocationReplyModel : IValidatableModel
+public class UpdateOrganizationRequestReplyModel : IValidatableModel
 {
     public Guid? UserId { get; set; }
 
