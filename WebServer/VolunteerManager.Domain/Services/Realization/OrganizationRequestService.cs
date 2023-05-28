@@ -99,6 +99,7 @@ public class OrganizationRequestService : IOrganizationRequestService
     {
         var organizationRequest = await _organizationRequestRepository
             .Query()
+            .Include(x=>x.RequestReplies)
             .FirstOrDefaultAsync(x => x.Id == organizationRequestId, cancellationToken: cancellationToken);
 
         if (organizationRequest == null)

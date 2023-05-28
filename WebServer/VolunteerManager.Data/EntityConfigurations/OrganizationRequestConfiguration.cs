@@ -32,5 +32,12 @@ internal class OrganizationRequestConfiguration : IEntityTypeConfiguration<Organ
         builder
             .Property(organizationRequest => organizationRequest.OrganizationId)
             .IsRequired();
+
+        builder
+            .HasMany(x => x.RequestReplies)
+            .WithOne(x => x.OrganizationRequest)
+            .HasForeignKey(x => x.OrganizationRequestId)
+            .OnDelete(DeleteBehavior.Restrict);
+
     }
 }

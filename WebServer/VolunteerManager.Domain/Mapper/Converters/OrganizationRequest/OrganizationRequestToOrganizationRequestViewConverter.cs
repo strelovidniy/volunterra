@@ -12,5 +12,13 @@ internal class OrganizationRequestToOrganizationRequestViewConverter
         ResolutionContext context
     ) => new()
     {
+        RequestDate = organizationRequest.CreatedAt,
+        RequestUpdatedAt = organizationRequest.UpdatedAt,
+        Location = organizationRequest.Location,
+        ImageDataUrl = organizationRequest.ImageDataUrl,
+        Category = organizationRequest.OrganizationRequestCategory,
+        CreatedBy = context.Mapper.Map<UserView>(
+            organizationRequest.Organization?.Users?.FirstOrDefault(x => x.IsOrganizationOwner)),
+        RequestReplyViews = context.Mapper.Map<List<OrganizationRequestReplyView>>(organizationRequest.RequestReplies)
     };
 }

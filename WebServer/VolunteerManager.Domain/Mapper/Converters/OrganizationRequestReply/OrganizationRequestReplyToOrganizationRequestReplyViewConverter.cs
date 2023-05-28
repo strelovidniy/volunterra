@@ -12,6 +12,8 @@ internal class OrganizationRequestReplyToOrganizationRequestReplyViewConverter
         ResolutionContext context
     ) => new()
     {
-        Status = organizationRequestView.Status
+        Status = organizationRequest.Status,
+        RequestDate = organizationRequest.CreatedAt,
+        RequestUpdatedAt = organizationRequest.UpdatedAt
     };
 }

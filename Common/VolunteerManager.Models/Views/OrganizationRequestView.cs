@@ -11,13 +11,15 @@ public class OrganizationRequestView
     public string Description { get; set; } = null!;
     public OrganizationRequestCategory Category { get; set; }
 
-    public string ImageDataUrl { get; set; } = null!;
+    public string ImageDataUrl { get; set; }
 
     public string Location { get; set; } = null!;
 
     public DateTime RequestDate { get; set; }
 
     public DateTime? RequestUpdatedAt { get; set; }
+
+    public List<OrganizationRequestReplyView> RequestReplyViews { get; set; }
 
     public UserView? CreatedBy { get; set; }
 }

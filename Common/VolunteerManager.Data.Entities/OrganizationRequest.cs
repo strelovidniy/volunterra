@@ -17,6 +17,8 @@ public class OrganizationRequest : Entity, IEntity
     public OrganizationRequestCategory OrganizationRequestCategory { get; set; }
 
     public IEnumerable<Skill> Skills { get; set; } 
-    public IEnumerable<Achievement> Achievements { get; set; } 
+    
+    public IEnumerable<OrganizationRequestReply> RequestReplies { get; set; }
+
     public string? ImageDataUrl { get; set; }
 }
