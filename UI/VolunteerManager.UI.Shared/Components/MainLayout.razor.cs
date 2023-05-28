@@ -22,6 +22,8 @@ public partial class MainLayout : IDisposable
 
     private bool _inited;
 
+    private bool _isDrawerOpen;
+
     private bool IsAuth => NavManager.Uri.Contains("/auth/");
 
     [Inject]

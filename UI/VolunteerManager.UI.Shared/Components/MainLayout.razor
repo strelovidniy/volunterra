@@ -20,37 +20,105 @@ else if (IsAuth)
 else
 {
     <MudLayout>
+        <MudDrawer Class="h-100 mx-auto"
+                   Style="background-color: var(--mud-palette-surface);
+                          padding: 35px;"
+                   @bind-Open="@_isDrawerOpen"
+                   Anchor="Anchor.Right"
+                   Elevation="2"
+                   Width="300px"
+                   Variant="@DrawerVariant.Temporary">
+            <MudGrid>
+                <MudItem xs="12"
+                         Class="d-flex flex-row">
+                    <MudIconButton Icon="@Icons.Material.Rounded.Close"
+                                   Size="Size.Large"
+                                   Style="color: var(--mud-palette-text-primary);
+                                          font-weight: 700;
+                                          margin-left: -35px;
+                                          margin-top: -35px;"
+                                   OnClick="@(() => _isDrawerOpen = !_isDrawerOpen)" />
+                </MudItem>
+                <MudItem xs="12"
+                         Class="d-flex flex-row">
+                    <MudSpacer/>
+                    <MudLink href="/account"
+                             OnClick="@(() => _isDrawerOpen = !_isDrawerOpen)"
+                             Underline="Underline.None">
+                        <MudText Typo="Typo.h4"
+                                 Style="color: var(--mud-palette-text-primary);
+                                        font-weight: 700;">
+                            Profile
+                        </MudText>
+                    </MudLink>
+                </MudItem>
+                <MudItem xs="12"
+                         Class="d-flex flex-row">
+                    <MudSpacer />
+                    <MudLink href="/achievements"
+                             OnClick="@(() => _isDrawerOpen = !_isDrawerOpen)"
+                             Underline="Underline.None">
+                        <MudText Typo="Typo.h4"
+                                 Style="color: var(--mud-palette-text-primary);
+                                        font-weight: 700;">
+                            Achievements
+                        </MudText>
+                    </MudLink>
+                </MudItem>
+                <MudItem xs="12"
+                         Class="d-flex flex-row">
+                    <MudSpacer />
+                    <MudLink href="/settings"
+                             OnClick="@(() => _isDrawerOpen = !_isDrawerOpen)"
+                             Underline="Underline.None">
+                        <MudText Typo="Typo.h4"
+                                 Style="color: var(--mud-palette-text-primary);
+                                        font-weight: 700;">
+                            Settings
+                        </MudText>
+                    </MudLink>
+                </MudItem>
+            </MudGrid>
+            <MudLink OnClick="LogoutAsync"
+                     Underline="Underline.None"
+                     Style="margin-top: auto;
+                            margin-left: auto">
+                <MudText Typo="Typo.h4"
+                         Color="Color.Error"
+                         Style="font-weight: 700;">
+                    Logout
+                </MudText>
+            </MudLink>
+        </MudDrawer>
         <MudAppBar Elevation="0"
-                   Style="height: 110px;
-                          background-color: var(--mud-palette-background);
-                          padding-top: 20px">
-        
-        <MudLink href="/">
-            <MudImage Src="@(_isDarkMode ? "images/logo-black.svg" : "images/logo.svg")"
+                   Style="height: 110px; background-color: var(--mud-palette-background); padding-top: 20px">
+
+            <MudLink href="/">
+                <MudImage Src="@(_isDarkMode ? "images/logo-black.svg" : "images/logo.svg")"
                   Height="90"/>
        </MudLink>
-        <MudSpacer />
-        
-        <MudCheckBox T="bool?"
-                     TriState="true"
-                     CheckedIcon="@Icons.Material.Filled.LightMode"
-                     UnCheckedColor="Color.Surface"
-                     Color="Color.Info"
-                     IndeterminateIcon="@Icons.Material.Filled.AutoAwesome"
-                     UncheckedIcon="@Icons.Material.Filled.DarkMode"
-                     Checked="_themeState"
-                     CheckedChanged="OnThemeChangedAsync"
-                     Style="margin-right: 15px;">
+            <MudSpacer/>
 
-        </MudCheckBox>
+            <MudCheckBox T="bool?"
+                         TriState="true"
+                         CheckedIcon="@Icons.Material.Filled.LightMode"
+                         UnCheckedColor="Color.Surface"
+                         Color="Color.Info"
+                         IndeterminateIcon="@Icons.Material.Filled.AutoAwesome"
+                         UncheckedIcon="@Icons.Material.Filled.DarkMode"
+                         Checked="_themeState"
+                         CheckedChanged="OnThemeChangedAsync"
+                         Style="margin-right: 15px;">
 
-        
-        <MudIconButton Icon="@Icons.Material.Outlined.Notifications"
-                       Color="Color.Info"
-                       Size="Size.Large"
-                       Style="margin-right: 15px;"/>
+            </MudCheckBox>
 
-        <MudMenu Direction="Direction.Left"
+
+            <MudIconButton Icon="@Icons.Material.Outlined.Notifications"
+                           Color="Color.Info"
+                           Size="Size.Large"
+                           Style="margin-right: 15px;"/>
+
+            <MudMenu Direction="Direction.Left"
                      OffsetX="true"
                      Dense="true">
                 <ActivatorContent>
@@ -67,18 +135,16 @@ else
                                        Style="height: 50px; width: 50px;">
                             </MudAvatar>
                         }
-        
-                        <MudText Style="font-size: 18px;
-                                        color: var(--mud-palette-text-primary);
-                                        margin-left: 20px">
+
+                        <MudText Style="font-size: 18px; color: var(--mud-palette-text-primary); margin-left: 20px">
                             @_currentUser?.FullName
                         </MudText>
                     </div>
                 </ActivatorContent>
                 <ChildContent>
                     <UserCard Class="mt-n2"
-                              CurrentUser="@_currentUser" />
-                    <MudDivider Class="mb-2" />
+                              CurrentUser="@_currentUser"/>
+                    <MudDivider Class="mb-2"/>
 
                     <MudButton ButtonType="ButtonType.Submit"
                                Variant="Variant.Filled"
@@ -91,12 +157,12 @@ else
 
                 </ChildContent>
             </MudMenu>
-        <MudIconButton Icon="@Icons.Material.Outlined.Menu"
-                       Size="Size.Large"
-                       Style="margin-left: 50px;
-                              color: var(--mud-palette-text-primary);"/>
-        
-    </MudAppBar>
+            <MudIconButton Icon="@Icons.Material.Outlined.Menu"
+                           Size="Size.Large"
+                           Style="margin-left: 50px; color: var(--mud-palette-text-primary);"
+                           OnClick="@(() => _isDrawerOpen = !_isDrawerOpen)" />
+
+        </MudAppBar>
         <div class="main-content">
             @Body
         </div>
