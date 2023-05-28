@@ -1,5 +1,6 @@
 ﻿@page "/create-new-event"
 
+@using Microsoft.AspNetCore.Components.Forms
 @using MudBlazor
 @using Microsoft.AspNetCore.Components.Web
 
@@ -29,8 +30,7 @@ else
                          Style="font-weight: 800">
                     Create new event
                 </MudText>
-                <MudForm @onsubmit="OnSubmitAsync"
-                @ref="_form">
+                <MudForm @ref="_form">
                     <MudGrid>
                         <MudItem xs="12">
                             <MudTextField T="string"
@@ -72,20 +72,24 @@ else
                             </MudText>
                         </MudItem>
                         
-                        <MudButton Style="height: 80px;
-                                          width: 80px;
-                                          border-radius: 5px;
-                                          border: 1px solid;
-                                          border-color: var(--mud-palette-success);
-                                          margin-left: 12px;">
-                            <MudAvatar Color="Color.Success"
-                                       Style="">
-                                <MudIcon Icon="@Icons.Material.Outlined.Add"
-                                         Style="color: white;"
-                                         Size="Size.Medium"/>
-                            </MudAvatar>
-                        </MudButton>
-                        
+                        <MudFileUpload T="IBrowserFile" Accept=".jpeg,.png,.jpg,.gif">
+                            <ButtonTemplate>
+                                <MudButton Style="height: 80px;
+                                                  width: 80px;
+                                                  border-radius: 5px;
+                                                  border: 1px solid;
+                                                  border-color: var(--mud-palette-success);
+                                                  margin-left: 12px;">
+                                    <MudAvatar Color="Color.Success"
+                                               Style="">
+                                        <MudIcon Icon="@Icons.Material.Outlined.Add"
+                                                 Style="color: white;"
+                                                 Size="Size.Medium"/>
+                                    </MudAvatar>
+                                </MudButton>
+                            </ButtonTemplate>
+                        </MudFileUpload>
+
                         <MudItem xs="12">
                             <MudText Typo="Typo.h6"
                                      Style="font-weight: 600">
@@ -101,25 +105,27 @@ else
                         </MudChipSet>
                         <MudItem Class="d-flex justify-center"
                                  xs="12">
-                            <MudButton ButtonType="ButtonType.Submit"
+                            <MudButton ButtonType="ButtonType.Button"
                                        Variant="Variant.Filled"
                                        Color="Color.Success"
                                        Size="Size.Large"
                                        Disabled="@_processing"
                                        class="w-100"
-                                       Style="height: 60px;">
+                                       Style="height: 60px;"
+                                       OnClick="@OnSubmitAsync">
                                 @if (_processing)
                                 {
                                     <MudProgressCircular Class="ms-n1"
                                                          Size="Size.Small"
                                                          Indeterminate="true" />
-                                    <MudText Class="ms-2">
+                                    <MudText Class="ms-2"
+                                             Typo="Typo.h6">
                                         Publishing
                                     </MudText>
                                 }
                                 else
                                 {
-                                    <MudText>
+                                    <MudText Typo="Typo.h6">
                                         Publish
                                     </MudText>
                                 }

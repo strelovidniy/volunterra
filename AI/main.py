@@ -3,14 +3,13 @@ import os
 
 from flask import Flask, render_template
 from routes.chat_gpt_bp import chat_gpt_bp
-#from routes.image_generation_bp import image_generation_bp
+from routes.image_generation_bp import image_generation_bp
 
 openai.api_key = os.getenv('OPENAI_API_KEY')
 
 app = Flask(__name__)
 
 app.register_blueprint(chat_gpt_bp, url_prefix='/chat_gpt')
-#app.register_blueprint(image_generation_bp, url_prefix='image_generation')
 
 @app.route('/')
 def index():
