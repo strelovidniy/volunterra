@@ -13,6 +13,6 @@ internal class CreateOrganizationRequestReplyModelToOrganizationRequestReplyConv
         ResolutionContext context
     ) => new()
     {
-        Status = destination.Status
+        Status = source.Status
     };
 }
